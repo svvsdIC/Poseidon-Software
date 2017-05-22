@@ -1,7 +1,8 @@
 # vim backup files #
 ####################
 *~
- 
+*.swp
+
 # Compiled source #
 ###################
 *.com
