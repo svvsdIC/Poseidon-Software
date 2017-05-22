@@ -2,7 +2,7 @@ const Promise       = require( 'bluebird' );
 const fs            = Promise.promisifyAll( require('fs') );
 const path          = require('path');
 const spawn         = require('child_process').spawn;
-const SerialBridge  = require('TridentSerialBridge.js');
+const SerialBridge  = require('SerialBridge.js');
 
 var Periodic        = require( 'Periodic' );
 var logger          = require('AppFramework.js').logger;
@@ -10,19 +10,22 @@ var logger          = require('AppFramework.js').logger;
 var debug = {};
 
 // I2C setup
-var i2c       = require('i2c');
-var lm75Address = 0x48;
-var i2c1  = new i2c( lm75Address, { device: '/dev/i2c-1' } );
-
+//b0be
+//var i2c       = require('i2c');
+//var lm75Address = 0x48;
+//var i2c1  = new i2c( lm75Address, { device: '/dev/i2c-1' } );
+//
 // Promisify the I2C read operation
-var i2c1ReadAsync = Promise.promisify( i2c1.read, { context: i2c1 } );
+//var i2c1ReadAsync = Promise.promisify( i2c1.read, { context: i2c1 } );
 
 var SetupBoardInterface = function(board) 
 {
     logger.debug( "Creating bridge" );
 
     // Decorate the MCU interface with board specific properties
-    board.bridge = new SerialBridge( '/dev/ttyAMA0', 500000 );
+    console.log(`b0be: starting /dev/ttyS0`);
+    board.bridge = new SerialBridge( '/dev/ttyS0', 115200 );
+    console.log(`b0be: started /dev/ttyS0`);
 
     board.statusdata = {};
 
@@ -33,24 +36,25 @@ var SetupBoardInterface = function(board)
     // ------------------------------------------------
 
     // Create periodic function for reading LM75 temperature (underneath the RPI)
-    board.readLM75Temp = new Periodic( 1000, "timeout", () =>
-    {
-      // Read two bytes to get the temperature bits
-      return i2c1ReadAsync( 2 )
-        .then( (result) =>
-        {
-          // First byte is temperature in C, first bit of second byte is equal to 0.5C
-          let temp = result[ 0 ] + ( ( ( result[ 1 ] & 0x80 ) >> 7 ) * 0.5 );
-
-          // Emit on cockpit bus
-          board.cockpit.emit( "board.temp.lm75", { value: temp } );
-        })
-        .catch( (err) =>
-        {
-          console.error( "Error reading LM75. Stopping task: " + err.message );
-          board.readLM75Temp.stop();
-        });
-    });
+//b0be    
+//    board.readLM75Temp = new Periodic( 1000, "timeout", () =>
+//    {
+//      // Read two bytes to get the temperature bits
+//      return i2c1ReadAsync( 2 )
+//        .then( (result) =>
+//        {
+//          // First byte is temperature in C, first bit of second byte is equal to 0.5C
+//          let temp = result[ 0 ] + ( ( ( result[ 1 ] & 0x80 ) >> 7 ) * 0.5 );
+//
+//          // Emit on cockpit bus
+//          board.cockpit.emit( "board.temp.lm75", { value: temp } );
+//        })
+//        .catch( (err) =>
+//        {
+//          console.error( "Error reading LM75. Stopping task: " + err.message );
+//          board.readLM75Temp.stop();
+//        });
+//    });
 
     // Setup bridge interface event handlers
     board.bridge.on('serial-recieved', function(data) 
@@ -80,7 +84,7 @@ var SetupBoardInterface = function(board)
     board.fsm._e_init();
 
     // Start periodic tasks
-    board.readLM75Temp.start();
+//b0be    board.readLM75Temp.start();
 
     logger.debug( "Done" );
 };

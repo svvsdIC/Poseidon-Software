@@ -45,11 +45,17 @@ class BoardInterface
 
     console.log('BOARD: Loading board info from EEPROM...');
 
-    return fs.readFileAsync( path.resolve( '/sys/class/i2c-adapter/i2c-1/1-0054/eeprom' ) )
-      .then( (data) => 
-      {
-        return self.eepromParser.parse( data ).data;
-      })
+//b0be changes
+
+    //var eepromFileName = __dirname + '/boards/' + self.board.info.boardId + '/b0be-eeprom.json'; 
+    var eepromFileName = __dirname + '/boards/rev10/b0be-eeprom.json'; 
+    console.log(`b0be-eepromFileName: ${eepromFileName}`);
+    return fs.readFileAsync(path.resolve(eepromFileName ) )
+//    return fs.readFileAsync( path.resolve( '/sys/class/i2c-adapter/i2c-1/1-0054/eeprom' ) )
+//      .then( (data) => 
+//      {
+//        return self.eepromParser.parse( data ).data;
+//      })
       .then(JSON.parse)
       .then( (info) =>
       {
@@ -93,4 +99,4 @@ class BoardInterface
   };
 }
 
-module.exports = new BoardInterface();
+module.exports = new BoardInterface() 
