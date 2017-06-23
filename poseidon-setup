@@ -1,0 +1,24 @@
+echo cd ~
+cd ~
+#echo git clone https://github.com/svvsdic/raspberrypi
+#     git clone https://github.com/svvsdic/raspberrypi
+echo cd ~/raspberrypi
+     cd ~/raspberrypi
+echo npm run deploy:prod
+     npm run deploy:prod
+echo cd ~/raspberrypi/src
+     cd ~/raspberrypi/src
+echo npm install pino pino-arborsculpture
+     npm install pino pino-arborsculpture
+echo cd ~/raspberrypi/src/plugins/mjpeg-video
+     cd ~/raspberrypi/src/plugins/mjpeg-video
+echo npm install mjpeg-video-server
+     npm install mjpeg-video-server
+echo cd ~/raspberrypi/src/plugins/notifications
+     cd ~/raspberrypi/src/plugins/notifications
+echo npm install nedb
+     npm install nedb
+echo cd ~/raspberrypi/src/plugins/peer-view
+     cd ~/raspberrypi/src/plugins/peer-view
+echo npm install simple-peer
+     npm install simple-peer msgpack-lite
