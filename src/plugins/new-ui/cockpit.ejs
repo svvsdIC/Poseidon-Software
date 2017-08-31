@@ -1,5 +1,4 @@
 <link rel="import" href="components/polymer/polymer.html">
-
 <link rel="import" href="components/new-ui/time.html">
 <link rel="import" href="components/new-ui/time-slim.html">
 <link rel="import" href="components/new-ui/compass.html">
@@ -23,18 +22,25 @@
     #time-item[short-layout] {
         display: none;
     }
-    
+
     fieldset {
         display: block;
         margin-left: 1.0em;
         margin-right: 1.0em;
         border: 2px solid white;
+	padding: 0.2em;
     }
-    
+
+    .widget {
+	font-size: 1.1vw;
+        color: black;
+        text-align: center;
+	}
+
     legend {
         display: table;
         min-width: 0px;
-        max-width: 70%;
+        max-width: 80%;
         position: relative;
         margin-bottom: 0em;
         padding: .35em .35em;
@@ -43,16 +49,43 @@
         text-align: center;
         border-bottom: 0px;
     }
+
+    .cam {
+	background-color: black;
+	position: absolute;
+	top: 5px;
+	width: 100%;
+	height:100%;
+    }
+    #cam1 {
+	left: 0px;
+	}
+    #cam2 {
+	right: 0px;
+	}
+
 </style>
-<!--iron-media-query query="(max-height: 600px)" query-matches="{{short}}"></iron-media-query-->
 
 <div id="UI" class="full-height">
     <div id="newuiBody" class="full-height">
         <div id="newuiContainer">
         </div>
         <div id="mainContent" class="full-height">
+        <attitude-indicator id="horizon" style='position:absolute; top:0px; left:0px; z-index:33; width:100%; height:100%' event-emitter="{{cockpitEventEmitter}}"></attitude-indicator>
 
-            <div id="newuiVideo" class="full-height">
+	<div class="cam" id="cam1"><img src="http://192.168.0.55:7300/stream/video.mjpeg" />
+	<!-- div class="cam" id="cam2">
+	<object id="DHiMPlayer0" style="width:100%;height:100%;" type="application/x-shockwave-flash" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+          <param name="movie" value="http://192.168.0.11/swfs/StrobeMediaPlayback.swf">
+          <param name="quality" value="high">
+          <param name="bgcolor" value="#000000">
+          <param name="allowfullscreen" value="true">
+          <param name="flashvars" value="&amp;src=rtmp://192.168.0.11:1935/flash/11:admin:icart&amp;autoPlay=true&amp;autoHideControlBar=true&amp;streamType=live">
+          <embed id="DHiMPlayer0" style="width:100%;height:100%;" src="http://192.168.0.11/swfs/StrobeMediaPlayback.swf" quality="high" bgcolor="#000000" allowfullscreen="true" pluginspage="http://www.adobe.com/go/getflashplayer" flashvars="&amp;src=rtmp://192.168.0.11:1935/flash/11:admin:icart&amp;autoPlay=true&amp;autoHideControlBar=true&amp;streamType=live" type="application/x-shockwave-flash">
+        </object>
+	</div -->
+
+         <!-- div id="newuiVideo" class="full-height">
                 <orov-video id="camera1" border='1' style='width: 100%; height:100%; position:relative' location='forward' event-emitter="{{cockpitEventEmitter}}">
                     <div id='twitchembed' style='position:absolute; top:0px; left:0px; z-index:33;'></div>
                     <orov-twitch-stream-status style='position:absolute; top:0px; left:0px; z-index:33;' event-emitter="{{cockpitEventEmitter}}"></orov-twitch-stream-status>
@@ -62,17 +95,21 @@
                         <orov-newui-power-slim id="power-item-collapsed" style="margin:5px" event-emitter="{{cockpitEventEmitter}}"></orov-newui-power-slim>
                     </div>
                 </orov-video>
-            </div>
+            </div -->
             <div id="newuiControlpad">
+                <fieldset>
+                    <legend>Button clicks</legend>
+                    <orov-buttoncount class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-buttoncount>
+                </fieldset>
                 <fieldset>
                     <legend>{{__('Heading')}}</legend>
                     <orov-newui-compass class="center" heading="0" event-emitter="{{cockpitEventEmitter}}"></orov-newui-compass>
                 </fieldset>
-                <fieldset style="padding-bottom: 2em">
+                <fieldset>
                     <legend>{{__('Depth')}}</legend>
                     <orov-newui-depth id="newui-depth" style="margin-top: 2.0em;" class="center control" event-emitter="{{cockpitEventEmitter}}"></orov-newui-depth>
                 </fieldset>
-                <fieldset style="padding-bottom: 1.2em">
+                <fieldset>
                     <legend>{{__('Throttle')}}</legend>
                     <orov-newui-throttle id="newui-throttle" class="center control" event-emitter="{{cockpitEventEmitter}}"></orov-newui-throttle>
                 </fieldset>
@@ -88,11 +125,8 @@
                     <legend>{{__('Time')}}</legend>
                     <orov-newui-time event-emitter="{{cockpitEventEmitter}}"></orov-newui-time>
                 </fieldset>
-
             </div>
         </div>
-
     </div>
-
 </div>
-<!--Placeholder for the UI plugin-->
+

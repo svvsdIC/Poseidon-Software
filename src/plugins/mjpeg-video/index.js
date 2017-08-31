@@ -27,50 +27,51 @@
 
             this.settings   = {};
             this.camera     = null;
-
+            var resolvedPath = process.cwd() + '/node_modules/raspberry-pi-mjpeg-server/raspberry-pi-mjpeg-server';
             this.supervisorLaunchOptions = 
             [
                 "nice",
                 "-1",
                 "node",
-                require.resolve( 'mjpeg-video-server' ),
+                resolvedPath,    
                 "-p",
                 defaults.port,
-                "-c",
-                "/etc/openrov/STAR_openrov_net.chained.crt",
-                "-k",
-                "/etc/openrov/star_openrov_net.key",
+//                "-c",
+//                "/etc/openrov/STAR_openrov_net.chained.crt",
+//                "-k",
+//                "/etc/openrov/star_openrov_net.key",
+                
             ];
 
             // Handle mock options
-            if( process.env.USE_MOCK === 'true' ) 
-            {
-                if( process.env.MOCK_VIDEO_TYPE === "MJPEG" )
-                {
-                    logger.info( "Using MJPEG video format in Mock Mode.");
-
-                    this.supervisorLaunchOptions.push( '-m' );
-                    this.supervisorLaunchOptions.push( 'true' );
-
-                    if( process.env.MOCK_VIDEO_HARDWARE === 'false' )
-                    {
-                        logger.info( "Using actual MJPEG video source.");
-
-                        this.supervisorLaunchOptions.push( '-h' );
-                        this.supervisorLaunchOptions.push( 'true' );
-                    }
-                    else
-                    {
-                        logger.info( "Using mocked MJPEG video source.");
-                    }
-                }
-                else
-                {
-                    this.disabled = true;
-                    return;
-                }
-            }
-
+//            if( process.env.USE_MOCK === 'true' ) 
+//            {
+//                if( process.env.MOCK_VIDEO_TYPE === "MJPEG" )
+//                {
+//                    logger.info( "Using MJPEG video format in Mock Mode.");
+//
+//                    this.supervisorLaunchOptions.push( '-m' );
+//                    this.supervisorLaunchOptions.push( 'true' );
+//
+//                    if( process.env.MOCK_VIDEO_HARDWARE === 'false' )
+//                    {
+//                        logger.info( "Using actual MJPEG video source.");
+//
+//                        this.supervisorLaunchOptions.push( '-h' );
+//                        this.supervisorLaunchOptions.push( 'true' );
+//                    }
+//                   else
+//                    {
+//                        logger.info( "Using mocked MJPEG video source.");
+//                    }
+//                }
+//                else
+//                {
+//                    this.disabled = true;
+//                    return;
+//                }
+//            }
+//
             this.supervisor = io.connect( 'http://localhost:' + defaults.port,
             {
                 path: defaults.wspath,

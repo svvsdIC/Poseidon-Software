@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-buttoncount">
+  <template>
+    <div>
+      <p style="color:white;">Presses:<br />
+        <span color="white">{{count}}</span> clicks
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-buttoncount",
+         properties: {
+          count: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.button.value', function( message )
+          {
+            self.count = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>
