@@ -2,17 +2,17 @@
 {
     const Listener = require( 'Listener' );
 
-    class Button
+    class pH_sensor
     {
         constructor(name, deps)
         {
 		var os = require('os');
 		var addresses = [];
 		var interfaces = os.networkInterfaces();
-		console.log(`B0be button: eth0[0]: ${interfaces['eth0'][0]['address']}`);
-		console.log(`B0be button: eth0[1]: ${interfaces['eth0'][1]['address']}`);
+		//console.log(`B0be button: eth0[0]: ${interfaces['eth0'][0]['address']}`);
+		//console.log(`B0be button: eth0[1]: ${interfaces['eth0'][1]['address']}`);
 	
-			    deps.logger.debug('Button plugin loaded!');
+			    deps.logger.debug('pH_sensor plugin loaded!');
 
             this.globalBus  = deps.globalEventLoop;   // This is the server-side messaging bus. The MCU sends messages to server plugins over this
             this.cockpitBus = deps.cockpit;           // This is the server<->client messaging bus. This is how the server talks to the browser
@@ -27,12 +27,12 @@
                 mcuStatus: new Listener( self.globalBus, 'mcu.status', false, function( data )
                 {
                     // Check for the example field name in the MCU's status update
-                    if( 'bctr' in data )
+                    if( 'pH' in data )
                     {
                         // Get the message that the MCU sent to us
-                        var message = data.bctr;
+                        var message = data.pH;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
-                        self.cockpitBus.emit( 'plugin.button.value', message );
+                        self.cockpitBus.emit( 'plugin.pH_sensor.value', message );
                     }
                 })
             }
@@ -43,7 +43,7 @@
         {
           // Enable the listeners!
           this.listeners.mcuStatus.enable();
-          console.log("button started!!");
+          console.log("pH_sensor started!!");
         }
 
         // This is called when the plugin is disabled
@@ -56,6 +56,6 @@
 
     module.exports = function(name, deps)
     {
-        return new Button(name, deps);
+        return new pH_sensor(name, deps);
     };
 }());

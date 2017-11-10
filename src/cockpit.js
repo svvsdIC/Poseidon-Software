@@ -153,6 +153,7 @@ var deps = {
     pathInfo: pathInfo,
     logger: logger
   };
+
 var numConnections = 0;
 var socketConnectToken = null;
 // Handle socket.io events

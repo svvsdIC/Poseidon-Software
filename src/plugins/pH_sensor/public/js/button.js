@@ -1,14 +1,14 @@
 (function(window)
 {
-    console.log(`B0be window =  ${Object.keys(window)}`);
+    //console.log(`B0be window =  ${Object.keys(window)}`);
     'use strict';
-    class Button
+    class pH_sensor
     {
         constructor( cockpit )
         {
-            console.log('Button Plugin running');
-            console.log('B0be: Button Plugin running');
-	    console.log(`B0be clientButton cockpit.rov.withHistory = ${Object.keys(cockpit.rov.withHistory)}`);
+            console.log('pH_sensor Plugin running');
+            console.log('BEN: pH_sensor Plugin running');
+	    console.log(`BEN clientButton cockpit.rov.withHistory = ${Object.keys(cockpit.rov.withHistory)}`);
             var self = this;
             self.cockpit = cockpit;
 
@@ -28,8 +28,8 @@
         getTelemetryDefinitions()
         {
             return [{
-                name: 'button.value',
-                description: 'The message sent from the example module in the MCU'
+                name: 'pH_sensor.value',
+                description: 'The pH_sensor value'
             }]
         };
 
@@ -40,17 +40,17 @@
             var self = this;
 
             // Listen for response messages from the Node plugin
-            this.cockpit.rov.withHistory.on('plugin.button.value', function( message )
+            this.cockpit.rov.withHistory.on('plugin.pH_sensor.value', function( message )
             {
-                //console.log( "New count is : " + message );
-                self.cockpit.emit('plugin.button.value', message);
+                //console.log( "PH : " + message );
+                self.cockpit.emit('plugin.pH_sensor.value', message);
             });
         };
     };
 
     // Add plugin to the window object and add it to the plugins list
     var plugins = namespace('plugins');
-    plugins.Button = Button;
-    window.Cockpit.plugins.push( plugins.Button );
+    plugins.pH_sensor = pH_sensor;
+    window.Cockpit.plugins.push( plugins.pH_sensor );
 
 }(window));

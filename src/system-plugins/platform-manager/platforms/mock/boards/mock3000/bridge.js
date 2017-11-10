@@ -15,12 +15,12 @@ function decode( intIn )
     return ( intIn * 0.001 );
 }
 
-function mapTo(value, in_min, in_max, out_min, out_max) 
+function mapTo(value, in_min, in_max, out_min, out_max)
 {
   return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 };
 
-function Bridge() 
+function Bridge()
 {
   var DISABLED      = 'DISABLED';
   var bridge        = new EventEmitter();
@@ -28,7 +28,7 @@ function Bridge()
   var emitRawSerial = false;
 
   // Controllerboard State
-  var cb = 
+  var cb =
   {
     time:         0,
     timeDelta_ms: 1000,
@@ -44,7 +44,7 @@ function Bridge()
   }
 
   // IMU State
-  var imu = 
+  var imu =
   {
     time:         0,
     timeDelta_ms: 10,
@@ -83,31 +83,31 @@ function Bridge()
 
   // -----------------------------------------
   // Bridge Methods
-  bridge.write = function( command ) 
+  bridge.write = function( command )
   {
     var commandParts  = command.split(/\(|\)/);
     var commandText   = commandParts[0];
     var parameters    = commandParts[ 1 ].split( ',' );
 
     // Simulate the receipt of the above command
-    switch (commandText) 
+    switch (commandText)
     {
-      case 'version': 
+      case 'version':
       {
         bridge.emitStatus('ver:<<{{10024121ae3fa7fc60a5945be1e155520fb929dd}}>>');
         debug('ver:<<{{10024121ae3fa7fc60a5945be1e155520fb929dd}}>>');
-        
+
         break;
       }
 
-      case 'wake': 
+      case 'wake':
       {
         bridge.emitStatus('awake:;');
-        
+
         break;
       }
 
-      case 'ex_hello': 
+      case 'ex_hello':
       {
         var helloGoodbye = parseInt( parameters[0] );
 
@@ -119,7 +119,7 @@ function Bridge()
         {
           bridge.emitStatus('example:Goodbye!;');
         }
-        
+
         break;
       }
 
@@ -178,14 +178,14 @@ function Bridge()
           break;
       }
 
-      case 'ping': 
+      case 'ping':
       {
         bridge.emitStatus(`pong:${parameters[0]}`);
         trace(`pong:${parameters[0]}`);
         break;
-      }      
+      }
 
-      case 'lights_tpow': 
+      case 'lights_tpow':
       {
         // Ack command
         var power = parseInt( parameters[0] );
@@ -200,7 +200,7 @@ function Bridge()
         break;
       }
 
-      case 'elights_tpow': 
+      case 'elights_tpow':
       {
         // Ack command
         var power = parseInt( parameters[0] );
@@ -215,7 +215,7 @@ function Bridge()
         break;
       }
 
-      case 'camServ_tpos': 
+      case 'camServ_tpos':
       {
         // Ack command
 
@@ -231,44 +231,44 @@ function Bridge()
         break;
       }
 
-      case 'camServ_inv': 
+      case 'camServ_inv':
       {
         // Ack command
         bridge.emitStatus('camServ_inv:' + parameters[0] );
         break;
       }
 
-      case 'camServ_spd': 
+      case 'camServ_spd':
       {
         // Ack command
         var speed = parseInt( parameters[0] );
         bridge.emitStatus('camServ_spd:' + speed );
         break;
       }
-      
-      case 'eligt': 
+
+      case 'eligt':
       {
         bridge.emitStatus('LIGPE:' + parameters[0] / 100);
         debug('External light status: ' + parameters[0] / 100);
         break;
       }
 
-      case 'escp': 
+      case 'escp':
       {
         bridge.emitStatus('ESCP:' + parameters[0]);
         debug('ESC status: ' + parameters[0]);
         break;
       }
 
-      case 'claser': 
+      case 'claser':
       {
-        if (bridge.laserEnabled) 
+        if (bridge.laserEnabled)
         {
           bridge.laserEnabled = false;
           bridge.emitStatus('claser:0');
           debug('Laser status: 0');
-        } 
-        else 
+        }
+        else
         {
           bridge.laserEnabled = true;
           bridge.emitStatus('claser:255');
@@ -278,11 +278,11 @@ function Bridge()
         break;
       }
 
-      case 'holdDepth_on': 
+      case 'holdDepth_on':
       {
         var targetDepth = 0;
 
-        if (!bridge.depthHoldEnabled) 
+        if (!bridge.depthHoldEnabled)
         {
           targetDepth = depthSensor.depth;
           bridge.depthHoldEnabled = true;
@@ -293,7 +293,7 @@ function Bridge()
         break;
       }
 
-      case 'holdDepth_off': 
+      case 'holdDepth_off':
       {
         targetDepth = -500;
         bridge.depthHoldEnabled = false;
@@ -302,7 +302,7 @@ function Bridge()
         break;
       }
 
-      case 'holdHeading_on': 
+      case 'holdHeading_on':
       {
         var targetHeading = 0;
         targetHeading = imu.yaw;
@@ -312,7 +312,7 @@ function Bridge()
         break;
       }
 
-      case 'holdHeading_off': 
+      case 'holdHeading_off':
       {
         var targetHeading = 0;
         targetHeading = -500;
@@ -323,19 +323,19 @@ function Bridge()
       }
 
       // Passthrough tests
-      case 'example_to_foo': 
+      case 'example_to_foo':
       {
         bridge.emitStatus('example_foo:' + parameters[0]);
         break;
       }
 
-      case 'example_to_bar': 
+      case 'example_to_bar':
       {
         bridge.emitStatus('example_bar:' + parameters[0]);
         break;
       }
 
-      default: 
+      default:
       {
         debug('Unsupported command: ' + commandText);
       }
@@ -345,28 +345,28 @@ function Bridge()
     bridge.emitStatus('cmd:' + command);
   };
 
-  bridge.emitStatus = function (status) 
+  bridge.emitStatus = function (status)
   {
     var txtStatus = reader.parseStatus(status);
     bridge.emit('status', txtStatus);
 
-    if (emitRawSerial) 
+    if (emitRawSerial)
     {
       bridge.emit('serial-recieved', status);
     }
   };
 
-  bridge.startRawSerialData = function startRawSerialData() 
+  bridge.startRawSerialData = function startRawSerialData()
   {
     emitRawSerial = true;
   };
 
-  bridge.stopRawSerialData = function stopRawSerialData() 
+  bridge.stopRawSerialData = function stopRawSerialData()
   {
     emitRawSerial = false;
   };
 
-  bridge.connect = function () 
+  bridge.connect = function ()
   {
     debug('!Serial port opened');
 
@@ -374,9 +374,10 @@ function Bridge()
     bridge.imuInterval    = setInterval( bridge.updateIMU,          imu.timeDelta_ms );
     bridge.depthInterval  = setInterval( bridge.updateDepthSensor,  depthSensor.timeDelta_ms );
     bridge.cbInterval     = setInterval( bridge.updateCB,           cb.timeDelta_ms );
+    bridge.otherInterval = setInterval(bridge.updateOther, 300);
   };
 
-  bridge.close = function () 
+  bridge.close = function ()
   {
     debug('!Serial port closed');
 
@@ -384,14 +385,15 @@ function Bridge()
     clearInterval( bridge.imuInterval );
     clearInterval( bridge.depthInterval );
     clearInterval( bridge.cbInterval );
+    clearInterval(bridge.otherInterval);
   };
 
   function normalizeAngle360( a )
   {
     return ((a > 360.0) ? (a - 360.0) : ((a < 0.0) ? (a + 360.0) : a));
-  } 
+  }
 
-  function normalizeAngle180( a ) 
+  function normalizeAngle180( a )
   {
     return ((a > 180.0) ? (a - 360.0) : ((a < -180.0) ? (a + 360.0) : a));
   };
@@ -406,7 +408,7 @@ function Bridge()
 
     // Generate roll -90:90 degrees
     imu.roll = 90 * Math.sin( imu.time * ( Math.PI / 30000 ) );
-    
+
     // Generate yaw between -120:120 degrees
     var baseYaw = 120 * Math.sin( imu.time * ( Math.PI / 10000 ) );
 
@@ -436,10 +438,18 @@ function Bridge()
       // MAG mode
       result += 'imu_y:' + encode( imu.yaw ) + ';';
     }
-//BEN
-    result += 'bctr:' + imu.time + ';';
     // Emit status update
     bridge.emit( 'status', reader.parseStatus( result ) );
+  }
+
+  bridge.updateOther = function()
+  {
+    //BEN
+    var val = imu.time;
+    var result = "";
+    result += 'bctr:' + val + ';';
+    result += 'pH:' + (Math.round(Math.abs(14 * Math.sin(val * (Math.PI / 10000))) * 1000) / 1000) + ';';
+    bridge.emit('status', reader.parseStatus(result));
   }
 
   bridge.updateDepthSensor = function()
@@ -449,8 +459,7 @@ function Bridge()
 
     // Generate depth from -10:10 meters
     depthSensor.depth = 10 * Math.sin( depthSensor.time * ( Math.PI / 20000 ) );
-    //BEN  depthSensor.depth = 7;
- 
+
     // Generate temperature from 15:25 degrees
     depthSensor.temperature = 20 + ( 5 * Math.sin( depthSensor.time * ( Math.PI / 40000 ) ) );
 
@@ -525,7 +534,7 @@ function Bridge()
 
   // Listen for firmware settings updates
   // TODO: Has this been deprecated for TSET?
-  reader.on('firmwareSettingsReported', function (settings) 
+  reader.on('firmwareSettingsReported', function (settings)
   {
     bridge.emit('firmwareSettingsReported', settings);
   });
@@ -534,18 +543,18 @@ function Bridge()
 }
 
 // Helper class for parsing status messages
-var StatusReader = function() 
+var StatusReader = function()
 {
   var reader    = new EventEmitter();
   var currTemp  = 20;
   var currDepth = 0;
 
-  var processSettings = function processSettings(parts) 
+  var processSettings = function processSettings(parts)
   {
     var setparts = parts.split(',');
     var settingsCollection = {};
 
-    for (var s = 0; s < setparts.length; s++) 
+    for (var s = 0; s < setparts.length; s++)
     {
       var lastParts = setparts[s].split('|');
       settingsCollection[lastParts[0]] = lastParts[1];
@@ -555,34 +564,34 @@ var StatusReader = function()
     return settingsCollection;
   };
 
-  var processItemsInStatus = function processItemsInStatus(status) 
+  var processItemsInStatus = function processItemsInStatus(status)
   {
-    if ('iout' in status) 
+    if ('iout' in status)
     {
       status.iout = parseFloat(status.iout);
     }
 
-    if ('btti' in status) 
+    if ('btti' in status)
     {
       status.btti = parseFloat(status.btti);
     }
 
-    if ('vout' in status) 
+    if ('vout' in status)
     {
       status.vout = parseFloat(status.vout);
     }
   };
 
-  reader.parseStatus = function parseStatus(rawStatus) 
+  reader.parseStatus = function parseStatus(rawStatus)
   {
     var parts = rawStatus.split(';');
     var status = {};
 
-    for (var i = 0; i < parts.length; i++) 
+    for (var i = 0; i < parts.length; i++)
     {
       var subParts = parts[i].split(':');
 
-      switch (subParts[0]) 
+      switch (subParts[0])
       {
         case '*settings':
           status.settings = processSettings(subParts[1]);
