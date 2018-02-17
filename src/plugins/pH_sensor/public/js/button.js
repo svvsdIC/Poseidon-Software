@@ -1,6 +1,5 @@
 (function(window)
 {
-    //console.log(`B0be window =  ${Object.keys(window)}`);
     'use strict';
     class pH_sensor
     {
@@ -8,7 +7,6 @@
         {
             console.log('pH_sensor Plugin running');
             console.log('BEN: pH_sensor Plugin running');
-	    console.log(`BEN clientButton cockpit.rov.withHistory = ${Object.keys(cockpit.rov.withHistory)}`);
             var self = this;
             self.cockpit = cockpit;
 
@@ -42,7 +40,6 @@
             // Listen for response messages from the Node plugin
             this.cockpit.rov.withHistory.on('plugin.pH_sensor.value', function( message )
             {
-                //console.log( "PH : " + message );
                 self.cockpit.emit('plugin.pH_sensor.value', message);
             });
         };

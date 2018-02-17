@@ -9,8 +9,6 @@
 		var os = require('os');
 		var addresses = [];
 		var interfaces = os.networkInterfaces();
-		//console.log(`B0be button: eth0[0]: ${interfaces['eth0'][0]['address']}`);
-		//console.log(`B0be button: eth0[1]: ${interfaces['eth0'][1]['address']}`);
 	
 			    deps.logger.debug('pH_sensor plugin loaded!');
 
@@ -32,7 +30,10 @@
                         // Get the message that the MCU sent to us
                         var message = data.pH;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
-                        self.cockpitBus.emit( 'plugin.pH_sensor.value', message );
+			var util = require('util');
+			console.log("b0be: pH: " + util.inspect(data));
+			console.log("b0be: pH message : " + util.inspect(message));
+	                self.cockpitBus.emit( 'plugin.pH_sensor.value', message );
                     }
                 })
             }
