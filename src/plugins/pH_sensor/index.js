@@ -31,8 +31,6 @@
                         var message = data.pH;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
 			var util = require('util');
-			console.log("b0be: pH: " + util.inspect(data));
-			console.log("b0be: pH message : " + util.inspect(message));
 	                self.cockpitBus.emit( 'plugin.pH_sensor.value', message );
                     }
                 })

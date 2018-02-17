@@ -6,7 +6,6 @@
         constructor( cockpit )
         {
             console.log('pH_sensor Plugin running');
-            console.log('BEN: pH_sensor Plugin running');
             var self = this;
             self.cockpit = cockpit;
 
