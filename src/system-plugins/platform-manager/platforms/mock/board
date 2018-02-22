@@ -441,6 +441,8 @@ function Bridge()
     result += 'bctr:' + imu.time + ';';
     // Emit status update
     bridge.emit( 'status', reader.parseStatus( result ) );
+     result += 'ORP:' + imu.time + ';';
+
   }
 
   bridge.updateDepthSensor = function()
@@ -484,7 +486,7 @@ function Bridge()
     cb.iout = cb.bt1i + cb.bt2i;
 
      // Generate ORP from -1020:1020 mV
-    cb.ORP = ( 1020 * Math.sin( cb.time * ( Math.PI / 40000 ) ) );
+   // cb.ORP = ( 1020 * Math.sin( cb.time * ( Math.PI / 40000 ) ) );
 
     // Generate board voltage (ramps up and down between 5V and 12V)
     if( cb.brdvRampUp )

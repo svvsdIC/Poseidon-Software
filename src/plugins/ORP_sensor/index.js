@@ -27,7 +27,7 @@
                     // Check for the example field name in the MCU's status update
                     if( 'ORP' in data )
                     {
-                        // Get the message that the MCU sent to us
+                        // Get the message that the MCU sent to u
                         var message = data.ORP;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
 			var util = require('util');

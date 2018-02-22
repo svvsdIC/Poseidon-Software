@@ -448,6 +448,7 @@ function Bridge()
     var val = imu.time;
     var result = "";
     result += 'bctr:' + val + ';';
+    result += 'ORP:' + (Math.round(1020 * Math.sin(val * (Math.PI / 10000)))) + ';';
     result += 'pH:' + (Math.round(Math.abs(14 * Math.sin(val * (Math.PI / 10000))) * 1000) / 1000) + ';';
     bridge.emit('status', reader.parseStatus(result));
   }
