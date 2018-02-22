@@ -442,6 +442,7 @@ function Bridge()
     // Emit status update
     bridge.emit( 'status', reader.parseStatus( result ) );
      result += 'ORP:' + imu.time + ';';
+    result += 'disOxy:' + imu.time + ';';
 
   }
 
@@ -524,7 +525,7 @@ function Bridge()
     result += 'time:' + cb.time + ';';
     result += 'baro_p:' + cb.baro_p + ';';
     result += 'baro_t:' + cb.baro_t + ';';
-    result += 'ORP:' + cb.ORP + ';';
+   // result += 'ORP:' + cb.ORP + ';';
 
     // Emit status update
     bridge.emit( 'status', reader.parseStatus( result ) );

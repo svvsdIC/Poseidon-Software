@@ -28,7 +28,6 @@
                     if( 'disOxy' in data )
                     {
                         // Get the message that the MCU sent to us
-                        console.log('Austin:disOxy recieved in index.js')
                         var message = data.disOxy	;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
 			var util = require('util');
