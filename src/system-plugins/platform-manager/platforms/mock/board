@@ -40,7 +40,8 @@ function Bridge()
     bt1i:         0.0,
     bt2i:         0.0,
     baro_p:       0,
-    baro_t:       0.0
+    baro_t:       0.0,
+    ORP:          0,
   }
 
   // IMU State
@@ -482,6 +483,9 @@ function Bridge()
     // Get total current by adding the two tube currents
     cb.iout = cb.bt1i + cb.bt2i;
 
+     // Generate ORP from -1020:1020 mV
+    cb.ORP = ( 1020 * Math.sin( cb.time * ( Math.PI / 40000 ) ) );
+
     // Generate board voltage (ramps up and down between 5V and 12V)
     if( cb.brdvRampUp )
     {
@@ -518,6 +522,7 @@ function Bridge()
     result += 'time:' + cb.time + ';';
     result += 'baro_p:' + cb.baro_p + ';';
     result += 'baro_t:' + cb.baro_t + ';';
+    result += 'ORP:' + cb.ORP + ';';
 
     // Emit status update
     bridge.emit( 'status', reader.parseStatus( result ) );
