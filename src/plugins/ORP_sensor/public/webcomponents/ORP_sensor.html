@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-ORP_sensor">
+  <template>
+    <div>
+      <p style="color:white;">
+        <span color="white">{{ORP}}</span> mol/l
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-ORP_sensor",
+         properties: {
+          ORP: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.ORP_sensor.value', function( message )
+          {
+            self.ORP = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>
