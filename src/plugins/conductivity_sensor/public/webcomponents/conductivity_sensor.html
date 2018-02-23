@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-conductivity_sensor">
+  <template>
+    <div>
+      <p style="color:white;">
+        <span color="white">{{conductivity}}</span> mV
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-conductivity_sensor",
+         properties: {
+          conductivity: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.conductivity_sensor.value', function( message )
+          {
+            self.conductivity = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>
