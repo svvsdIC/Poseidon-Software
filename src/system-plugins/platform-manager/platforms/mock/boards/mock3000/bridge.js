@@ -449,6 +449,7 @@ function Bridge()
     var result = "";
     result += 'bctr:' + val + ';';
     result += 'ORP:' + (Math.round(1020 * Math.sin(val * (Math.PI / 10000)))) + ';';
+    result += 'conductivity:' + (Math.round(Math.abs(500000 * Math.sin(val * (Math.PI / 20000))))) + ';';
     result += 'disOxy:' + (Math.round(Math.abs(100 * Math.sin(val * (Math.PI / 20000))))) + ';';
     result += 'pH:' + (Math.round(Math.abs(14 * Math.sin(val * (Math.PI / 10000))) * 1000) / 1000) + ';';
     bridge.emit('status', reader.parseStatus(result));
