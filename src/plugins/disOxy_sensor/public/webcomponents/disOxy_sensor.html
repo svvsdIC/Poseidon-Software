@@ -1,0 +1,35 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-disOxy_sensor">
+  <template>
+    <div>
+      <p style="color:white;">
+        <span color="white">{{disOxy}}</span> % <br>
+        <span color="white">{{disOxymg}}</span> mg/L
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-disOxy_sensor",
+         properties: {
+          disOxy: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.disOxy_sensor.value', function( message )
+          {
+            self.disOxy = message;
+            self.disOxymg = (Math.round(message * (36/100) * 10) / 10);
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>

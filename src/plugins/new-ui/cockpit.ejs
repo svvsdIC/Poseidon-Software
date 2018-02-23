@@ -97,9 +97,22 @@
                 </orov-video>
             </div -->
             <div id="newuiControlpad">
+                <fieldset>
+                     <legend>Conductivity</legend>
+                     <orov-conductivity_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-conductivity_sensor>
+                </fieldset>
+
                <fieldset>
                      <legend>pH</legend>
                      <orov-pH_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-pH_sensor>
+                </fieldset>
+                <fieldset>
+                     <legend>ORP</legend>
+                     <orov-ORP_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-ORP_sensor>
+                </fieldset>
+                <fieldset>
+                     <legend>Oxy Sat</legend>
+                     <orov-disOxy_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-disOxy_sensor>
                 </fieldset>
                 <fieldset>
                     <legend>Button clicks</legend>
