@@ -10,7 +10,7 @@
 		var addresses = [];
 		var interfaces = os.networkInterfaces();
 	
-			    deps.logger.debug('pH_sensor plugin loaded!');
+		deps.logger.debug('pH_sensor plugin loaded!');
 
             this.globalBus  = deps.globalEventLoop;   // This is the server-side messaging bus. The MCU sends messages to server plugins over this
             this.cockpitBus = deps.cockpit;           // This is the server<->client messaging bus. This is how the server talks to the browser
@@ -30,8 +30,7 @@
                         // Get the message that the MCU sent to us
                         var message = data.pH;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
-			var util = require('util');
-	                self.cockpitBus.emit( 'plugin.pH_sensor.value', message );
+                        self.cockpitBus.emit( 'plugin.pH_sensor.value', message );
                     }
                 })
             }
