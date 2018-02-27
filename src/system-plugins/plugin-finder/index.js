@@ -52,7 +52,8 @@ pluginFinder.prototype.start = function start() {
             });
     });
     var infoCache={};
-    deps.cockpit.on('plugin.pluginFinder.info', function(name, callback) {
+        util = require('util');
+        deps.cockpit.on('b0be: plugin.pluginFinder.info', function(name, callback) {
         if (typeof callback !== 'function') {
             return;
         }
@@ -60,9 +61,10 @@ pluginFinder.prototype.start = function start() {
           callback(infoCache[name]);
           return;
         }
-        logger.debug('performing info for plugins');
+        console.log('b0be: system-plugins/plugin-finder/indes.js ' + util.inspect(name) );
         bower.commands.info('openrov-plugin-' + name)
             .on('end', function(result) {
+        console.log('b0be: system-plugins/plugin-finder/indes.js end' + name );
                 infoCache[name]=result;
                 callback(result);
             });
