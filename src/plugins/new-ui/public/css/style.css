@@ -46,11 +46,12 @@ a .navbar-titel {
     min-width: 80px;
     height: auto;;
     float: right;
+    margin-bottom: 100px;
 }
 
 #newuiSensorPad {
     position: fixed;
-    bottom: 0;
+    bottom: 6vh;
     left: 0;
     width: 100%;
     height: 12%;
@@ -59,7 +60,8 @@ a .navbar-titel {
 
 #sideBySideFieldset{
     display: inline-block;
-    width: 15%;
+    width: 10%;
+    margin-bottom: 100px;
 }
 
 .newui-item {
