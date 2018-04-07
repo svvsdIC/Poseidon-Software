@@ -47,6 +47,8 @@ a .navbar-titel {
     height: auto;;
     float: right;
     margin-bottom: 100px;
+    background: rgba(0,150,200, 0.35);
+
 }
 
 #newuiSensorPad {
@@ -62,6 +64,9 @@ a .navbar-titel {
     display: inline-block;
     width: 10%;
     margin-bottom: 100px;
+    padding-bottom: 20px;
+    background: rgba(0,150,200, 0.35);
+
 }
 
 .newui-item {
