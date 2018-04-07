@@ -1,14 +1,11 @@
 (function(window)
 {
-    console.log(`B0be window =  ${Object.keys(window)}`);
     'use strict';
     class Button
     {
         constructor( cockpit )
         {
             console.log('Button Plugin running');
-            console.log('B0be: Button Plugin running');
-	    console.log(`B0be clientButton cockpit.rov.withHistory = ${Object.keys(cockpit.rov.withHistory)}`);
             var self = this;
             self.cockpit = cockpit;
 

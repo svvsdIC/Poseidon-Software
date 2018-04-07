@@ -44,8 +44,22 @@ a .navbar-titel {
     right: 0;
     width: 10%;
     min-width: 80px;
-    height: auto;
+    height: auto;;
     float: right;
+}
+
+#newuiSensorPad {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 12%;
+    float: left;
+}
+
+#sideBySideFieldset{
+    display: inline-block;
+    width: 9%;
 }
 
 .newui-item {

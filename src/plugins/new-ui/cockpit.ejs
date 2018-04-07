@@ -73,7 +73,7 @@
         <div id="mainContent" class="full-height">
         <attitude-indicator id="horizon" style='position:absolute; top:0px; left:0px; z-index:33; width:100%; height:100%' event-emitter="{{cockpitEventEmitter}}"></attitude-indicator>
 
-	<div class="cam" id="cam"><img src="http://192.168.1.3:7070/stream/video.mjpeg" />
+	<div class="cam" id="cam"><img src="http://192.168.1.6:7070/stream/video.mjpeg" />
 	<!-- div class="cam" id="cam2">
 	<object id="DHiMPlayer0" style="width:100%;height:100%;" type="application/x-shockwave-flash" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
           <param name="movie" value="http://192.168.0.11/swfs/StrobeMediaPlayback.swf">
@@ -98,27 +98,6 @@
             </div -->
             <div id="newuiControlpad">
                 <fieldset>
-                     <legend>Conductivity</legend>
-                     <orov-conductivity_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-conductivity_sensor>
-                </fieldset>
-
-               <fieldset>
-                     <legend>pH</legend>
-                     <orov-pH_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-pH_sensor>
-                </fieldset>
-                <fieldset>
-                     <legend>ORP</legend>
-                     <orov-ORP_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-ORP_sensor>
-                </fieldset>
-                <fieldset>
-                     <legend>Oxy Sat</legend>
-                     <orov-disOxy_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-disOxy_sensor>
-                </fieldset>
-                <fieldset>
-                    <legend>Button clicks</legend>
-                    <orov-buttoncount class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-buttoncount>
-                </fieldset>
-                <fieldset>
                     <legend>{{__('Heading')}}</legend>
                     <orov-newui-compass class="center" heading="0" event-emitter="{{cockpitEventEmitter}}"></orov-newui-compass>
                 </fieldset>
@@ -142,6 +121,45 @@
                     <legend>{{__('Time')}}</legend>
                     <orov-newui-time event-emitter="{{cockpitEventEmitter}}"></orov-newui-time>
                 </fieldset>
+            </div>
+	    <div id='newuiSensorPad'>            
+		    <div id="sideBySideFieldset"> 
+			    <fieldset>
+				<legend>pH</legend>
+				<orov-pH_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-pH_sensor>
+			    </fieldset>
+		    </div><!--
+		    --> <div id="sideBySideFieldset"> 
+			<fieldset>
+			     <legend>Conductivity</legend>
+			     <orov-conductivity_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-conductivity_sensor>
+			</fieldset>
+		    </div><!--
+		    --> <div id="sideBySideFieldset"> 
+
+		       <fieldset>
+			     <legend>pH</legend>
+			     <orov-pH_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-pH_sensor>
+			</fieldset>
+		    </div><!--
+		    --> <div id="sideBySideFieldset"> 
+			<fieldset>
+			     <legend>ORP</legend>
+			     <orov-ORP_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-ORP_sensor>
+			</fieldset>
+		    </div><!--
+		    --> <div id="sideBySideFieldset"> 
+			<fieldset>
+			     <legend>Oxy Sat</legend>
+			     <orov-disOxy_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-disOxy_sensor>
+			</fieldset>
+		    </div><!--
+		    --> <div id="sideBySideFieldset"> 
+			<fieldset>
+			    <legend>Button clicks</legend>
+			    <orov-buttoncount class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-buttoncount>
+			</fieldset>
+			</div>
             </div>
         </div>
     </div>
