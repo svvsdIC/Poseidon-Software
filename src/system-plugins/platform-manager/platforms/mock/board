@@ -438,12 +438,12 @@ function Bridge()
     }
 //BEN
     result += 'bctr:' + imu.time + ';';
-    // Emit status update
-    bridge.emit( 'status', reader.parseStatus( result ) );
     result += 'ORP:' + imu.time + ';';
     result += 'disOxy:' + imu.time + ';';
     result += 'conductivity:' + imu.time + ';';
-
+    result += 'luminosity:' + imu.time + ';';
+    // Emit status update
+    bridge.emit( 'status', reader.parseStatus( result ) );
   }
 
   bridge.updateDepthSensor = function()
