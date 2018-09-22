@@ -23,9 +23,9 @@ var SetupBoardInterface = function(board)
     logger.debug( "Creating bridge" );
 
     // Decorate the MCU interface with board specific properties
-    console.log(`b0be: starting /dev/ttyS0`);
-    board.bridge = new SerialBridge( '/dev/ttyS0', 115200 );
-    console.log(`b0be: started /dev/ttyS0`);
+    console.log(`b0be: starting /dev/ttyUSB0`);
+    board.bridge = new SerialBridge( '/dev/ttyUSB0', 115200 );
+    console.log(`b0be: started /dev/ttyUSB0`);
 
     board.statusdata = {};
 

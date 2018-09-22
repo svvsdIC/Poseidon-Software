@@ -30,7 +30,7 @@
                         // Get the message that the MCU sent to u
                         var message = data.ORP;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
-			var util = require('util');
+		        var util = require('util');
 	                self.cockpitBus.emit( 'plugin.ORP_sensor.value', message );
                     }
                 })

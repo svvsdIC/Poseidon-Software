@@ -9,10 +9,10 @@
 		var os = require('os');
 		var addresses = [];
 		var interfaces = os.networkInterfaces();
-		console.log(`B0be button: eth0[0]: ${interfaces['eth0'][0]['address']}`);
-		console.log(`B0be button: eth0[1]: ${interfaces['eth0'][1]['address']}`);
+		console.log(`B0be waterTemperature: eth0[0]: ${interfaces['eth0'][0]['address']}`);
+		console.log(`B0be waterTemperature: eth0[1]: ${interfaces['eth0'][1]['address']}`);
 	
-			    deps.logger.debug('Button plugin loaded!');
+			    deps.logger.debug('waterTemperature plugin loaded!');
 
             this.globalBus  = deps.globalEventLoop;   // This is the server-side messaging bus. The MCU sends messages to server plugins over this
             this.cockpitBus = deps.cockpit;           // This is the server<->client messaging bus. This is how the server talks to the browser
@@ -27,10 +27,10 @@
                 mcuStatus: new Listener( self.globalBus, 'mcu.status', false, function( data )
                 {
                     // Check for the example field name in the MCU's status update
-                    if( 'bctr' in data )
+                    if( 'BCTR' in data )
                     {
                         // Get the message that the MCU sent to us
-                        var message = data.bctr;
+                        var message = data.BCTR;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
                         self.cockpitBus.emit( 'plugin.button.value', message );
                     }
