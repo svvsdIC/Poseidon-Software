@@ -1,7 +1,7 @@
 (function(window)
 {
     'use strict';
-    class Button
+    class waterTemp
     {
         constructor( cockpit )
         {
@@ -25,7 +25,7 @@
         getTelemetryDefinitions()
         {
             return [{
-                name: 'button.value',
+                name: 'waterTemp.value',
                 description: 'The message sent from the example module in the MCU'
             }]
         };
@@ -35,19 +35,19 @@
         listen()
         {
             var self = this;
-            console.log('Peter: button listening');
+            console.log('Peter: waterTemp listening');
             // Listen for response messages from the Node plugin
-            this.cockpit.rov.withHistory.on('plugin.button.value', function( message )
+            this.cockpit.rov.withHistory.on('plugin.waterTemp.value', function( message )
             {
                 //console.log( "New count is : " + message );
-                self.cockpit.emit('plugin.button.value', message);
+                self.cockpit.emit('plugin.waterTemp.value', message);
             });
         };
     };
 
     // Add plugin to the window object and add it to the plugins list
     var plugins = namespace('plugins');
-    plugins.Button = Button;
-    window.Cockpit.plugins.push( plugins.Button );
+    plugins.waterTemp = waterTemp;
+    window.Cockpit.plugins.push( plugins.waterTemp);
 
 }(window));

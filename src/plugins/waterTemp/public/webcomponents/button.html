@@ -1,18 +1,18 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../orov-behaviors/orov-behavior.html">
 
-<dom-module name="orov-buttoncount">
+<dom-module name="orov-waterTemp">
   <template>
     <div>
       <p style="color:white;">
-        <span color="white">{{count}}</span><br> farwenheight
+        <span color="white">{{count}}</span>&#186;F 
       </p>
     </div>
   </template>
   <script>
     (function() {
       Polymer({
-        is: "orov-buttoncount",
+        is: "orov-waterTemp",
          properties: {
           count: {
             type: String,
@@ -22,7 +22,7 @@
         behaviors: [namespace('behaviors').oROVStandard],
         registerEmitterHandlers: function(emitter){
           var self = this;
-          emitter.withHistory.on('plugin.button.value', function( message )
+          emitter.withHistory.on('plugin.waterTemp.value', function( message )
           {
             self.count = message;
           });

@@ -2,7 +2,7 @@
 {
     const Listener = require( 'Listener' );
 
-    class Button
+    class waterTemp
     {
         constructor(name, deps)
         {
@@ -32,7 +32,7 @@
                         // Get the message that the MCU sent to us
                         var message = data.BCTR;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
-                        self.cockpitBus.emit( 'plugin.button.value', message );
+                        self.cockpitBus.emit( 'plugin.waterTemp.value', message );
                     }
                 })
             }
@@ -43,7 +43,7 @@
         {
           // Enable the listeners!
           this.listeners.mcuStatus.enable();
-          console.log("button started!!");
+          console.log("waterTemp started!!");
         }
 
         // This is called when the plugin is disabled
@@ -56,6 +56,6 @@
 
     module.exports = function(name, deps)
     {
-        return new Button(name, deps);
+        return new waterTemp(name, deps);
     };
 }());
