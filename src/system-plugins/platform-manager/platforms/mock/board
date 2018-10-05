@@ -437,12 +437,12 @@ function Bridge()
       result += 'imu_y:' + encode( imu.yaw ) + ';';
     }
 //BEN
-    result += 'bctr:' + imu.time + ';';
     // Emit status update
-    bridge.emit( 'status', reader.parseStatus( result ) );
     result += 'ORP:' + imu.time + ';';
     result += 'disOxy:' + imu.time + ';';
     result += 'conductivity:' + imu.time + ';';
+    result += 'waterTemp:' + imu.time + ';';
+    bridge.emit( 'status', reader.parseStatus( result ) );
 
   }
 
