@@ -27,10 +27,10 @@
                 mcuStatus: new Listener( self.globalBus, 'mcu.status', false, function( data )
                 {
                     // Check for the example field name in the MCU's status update
-                    if( 'BCTR' in data )
+                    if( 'waterTemp' in data )
                     {
                         // Get the message that the MCU sent to us
-                        var message = data.BCTR;
+                        var message = data.waterTemp;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
                         self.cockpitBus.emit( 'plugin.waterTemp.value', message );
                     }
