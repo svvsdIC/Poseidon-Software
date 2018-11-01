@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../orov-behaviors/orov-behavior.html">
 
-<dom-module name="orov-luminosity_sensor">
+<dom-module name="orov-luminosity">
   <template>
     <div>
       <p style="color:white;">
@@ -12,7 +12,7 @@
   <script>
     (function() {
       Polymer({
-        is: "orov-luminosity_sensor",
+        is: "orov-luminosity",
          properties: {
           luminosity: {
             type: String,
@@ -22,7 +22,7 @@
         behaviors: [namespace('behaviors').oROVStandard],
         registerEmitterHandlers: function(emitter){
           var self = this;
-          emitter.withHistory.on('plugin.luminosity_sensor.value', function( message )
+          emitter.withHistory.on('plugin.luminosity.value', function( message )
           {
             self.luminosity = message;
           });

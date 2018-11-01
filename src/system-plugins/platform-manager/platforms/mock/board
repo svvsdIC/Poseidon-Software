@@ -441,7 +441,10 @@ function Bridge()
     result += 'ORP:' + imu.time + ';';
     result += 'disOxy:' + imu.time + ';';
     result += 'conductivity:' + imu.time + ';';
-    result += 'luminosity:' + imu.time + ';';
+    result += 'pH' + imu.time + ';';
+    result += 'luminosity' + imu.time + ';';
+
+
     // Emit status update
     bridge.emit( 'status', reader.parseStatus( result ) );
   }

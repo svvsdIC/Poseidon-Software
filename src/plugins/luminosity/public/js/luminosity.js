@@ -1,11 +1,11 @@
 (function(window)
 {
     'use strict';
-    class luminosity_sensor
+    class luminosity
     {
         constructor( cockpit )
         {
-            console.log('luminosity_sensor Plugin running');
+            console.log('luminosity Plugin running');
             var self = this;
             self.cockpit = cockpit;
 
@@ -25,8 +25,8 @@
         getTelemetryDefinitions()
         {
             return [{
-                name: 'luminosity_sensor.value',
-                description: 'The luminosity_sensor value'
+                name: 'luminosity.value',
+                description: 'The luminosity value'
             }]
         };
 
@@ -37,17 +37,17 @@
             var self = this;
             console.log('Austin: luminosity listening');
             // Listen for response messages from the Node plugin
-            this.cockpit.rov.withHistory.on('plugin.luminosity_sensor.value', function( message )
+            this.cockpit.rov.withHistory.on('plugin.luminosity.value', function( message )
             {
                 console.log('Austin: luminosity heard');
-                self.cockpit.emit('plugin.luminosity_sensor.value', message);
+                self.cockpit.emit('plugin.luminosity.value', message);
             });
         };
     };
 
     // Add plugin to the window object and add it to the plugins list
     var plugins = namespace('plugins');
-    plugins.'luminosity_sensor = luminosity_sensor;
-    window.Cockpit.plugins.push( plugins.luminosity_sensor );
+    plugins.'luminosity = luminosity;
+    window.Cockpit.plugins.push( plugins.luminosity);
 
 }(window));
