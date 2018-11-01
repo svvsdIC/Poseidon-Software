@@ -35,11 +35,9 @@
         listen()
         {
             var self = this;
-            console.log('Austin: conductivity listening');
             // Listen for response messages from the Node plugin
             this.cockpit.rov.withHistory.on('plugin.conductivity_sensor.value', function( message )
             {
-                console.log('Austin: conductivity heard');
                 self.cockpit.emit('plugin.conductivity_sensor.value', message);
             });
         };

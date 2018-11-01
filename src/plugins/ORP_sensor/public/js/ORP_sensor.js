@@ -35,11 +35,9 @@
         listen()
         {
             var self = this;
-            console.log('Austin: ORP listening');
             // Listen for response messages from the Node plugin
             this.cockpit.rov.withHistory.on('plugin.ORP_sensor.value', function( message )
             {
-                console.log('Austin: ORP heard');
                 self.cockpit.emit('plugin.ORP_sensor.value', message);
             });
         };

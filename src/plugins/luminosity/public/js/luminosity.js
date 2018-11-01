@@ -35,11 +35,9 @@
         listen()
         {
             var self = this;
-            console.log('Austin: luminosity listening');
             // Listen for response messages from the Node plugin
             this.cockpit.rov.withHistory.on('plugin.luminosity.value', function( message )
             {
-                console.log('Austin: luminosity heard');
                 self.cockpit.emit('plugin.luminosity.value', message);
             });
         };
@@ -47,7 +45,7 @@
 
     // Add plugin to the window object and add it to the plugins list
     var plugins = namespace('plugins');
-    plugins.'luminosity = luminosity;
+    plugins.luminosity = luminosity;
     window.Cockpit.plugins.push( plugins.luminosity);
 
 }(window));

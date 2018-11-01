@@ -35,7 +35,6 @@
         listen()
         {
             var self = this;
-            console.log('Peter: waterTemp listening');
             // Listen for response messages from the Node plugin
             this.cockpit.rov.withHistory.on('plugin.waterTemp.value', function( message )
             {
