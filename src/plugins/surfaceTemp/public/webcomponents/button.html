@@ -1,0 +1,35 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-surfaceTemp">
+  <template>
+    <div>
+      <p style="color:white;">
+        <span color="white">{{surfaceTemp}}</span> &#186;C<br> 
+        <span color="white">{{surfaceTempT}}</span> &#186;F
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-surfaceTemp",
+         properties: {
+          count: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.surfaceTemp.value', function( message )
+          {
+            self.surfaceTemp = message;
+	    self.surfaceTempT = (Math.round(message * (9/5) * 10) / 10)+32;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>
