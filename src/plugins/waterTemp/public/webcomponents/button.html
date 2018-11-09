@@ -4,9 +4,8 @@
 <dom-module name="orov-waterTemp">
   <template>
     <div>
-      <p style="color:white;">
-        <span color="white">{{count}}</span> &#186;C<br> 
-        <span color="white">{{countT}}</span> &#186;F
+      <p style="color:white; margin-top:0px;">
+        <span color="white">{{count}}</span> &#186;C &darr;<br> 
       </p>
     </div>
   </template>
@@ -26,7 +25,6 @@
           emitter.withHistory.on('plugin.waterTemp.value', function( message )
           {
             self.count = message;
-	    self.countT = (Math.round(message * (9/5) * 10) / 10)+32;
           });
         }
       });

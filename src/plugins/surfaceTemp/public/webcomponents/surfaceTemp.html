@@ -4,9 +4,8 @@
 <dom-module name="orov-surfaceTemp">
   <template>
     <div>
-      <p style="color:white;">
-        <span color="white">{{surfaceTemp}}</span> &#186;C<br> 
-        <span color="white">{{surfaceTempT}}</span> &#186;F
+      <p style="color:white;margin-bottom:0px;">
+        <span color="white">{{surfaceTemp}}</span> &#186;C &uarr;<br> 
       </p>
     </div>
   </template>
@@ -26,7 +25,6 @@
           emitter.withHistory.on('plugin.surfaceTemp.value', function( message )
           {
             self.surfaceTemp = message;
-	    self.surfaceTempT = (Math.round(message * (9/5) * 10) / 10)+32;
           });
         }
       });

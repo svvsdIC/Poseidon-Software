@@ -453,6 +453,7 @@ function Bridge()
     result += 'pH:' + (Math.round(Math.abs(14 * Math.sin(val * (Math.PI / 10000))) * 1000) / 1000) + ';';
     result += 'luminosity:' + (Math.round(Math.abs(65535 * Math.sin(val * (Math.PI / 10000))) * 10) / 10) + ';';
     result += 'waterTemp:' + (Math.round(Math.abs(100 * Math.sin(val * (Math.PI / 20000)))*10)/10) + ';';
+    result += 'surfaceTemp:' + (Math.round(Math.abs(100 * Math.sin(val * (Math.PI / 20000)))*10)/10+10) + ';';
     bridge.emit('status', reader.parseStatus(result));
   }
 
