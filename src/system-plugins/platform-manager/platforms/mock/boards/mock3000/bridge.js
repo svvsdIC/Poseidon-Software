@@ -481,7 +481,7 @@ function Bridge()
     if (subGreen.length<2) {
         subGreen = "0"+subGreen;
     }
-    result += 'surfaceColor:' + (subRed + subGreen + subBlue).toUpperCase() + ';';
+    result += 'subColor:' + (subRed + subGreen + subBlue).toUpperCase() + ';';
 
     bridge.emit('status', reader.parseStatus(result));
   }
