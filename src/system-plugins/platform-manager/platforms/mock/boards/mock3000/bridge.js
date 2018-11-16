@@ -454,6 +454,35 @@ function Bridge()
     result += 'luminosity:' + (Math.round(Math.abs(65535 * Math.sin(val * (Math.PI / 10000))) * 10) / 10) + ';';
     result += 'waterTemp:' + (Math.round(Math.abs(100 * Math.sin(val * (Math.PI / 20000)))*10)/10) + ';';
     result += 'surfaceTemp:' + (Math.round(Math.abs(100 * Math.sin(val * (Math.PI / 20000)))*10)/10+10) + ';';
+
+    var sRed = (Math.floor(Math.random()*256)).toString(16);
+    if (sRed.length<2) {
+    	sRed = "0"+sRed;
+    }
+    var sBlue = (Math.floor(Math.random()*256)).toString(16);
+    if (sBlue.length<2) {
+        sBlue = "0"+sBlue;
+    }
+    var sGreen = (Math.floor(Math.random()*256)).toString(16);
+    if (sGreen.length<2) {
+        sGreen = "0"+sGreen;
+    }
+    result += 'surfaceColor:' + (sRed + sGreen + sBlue).toUpperCase() + ';';
+
+    var subRed = (Math.floor(Math.random()*256)).toString(16);
+    if (subRed.length<2) {
+        subRed = "0"+subRed;
+    }
+    var subBlue = (Math.floor(Math.random()*256)).toString(16);
+    if (subBlue.length<2) {
+        subBlue = "0"+subBlue;
+    }
+    var subGreen = (Math.floor(Math.random()*256)).toString(16);
+    if (subGreen.length<2) {
+        subGreen = "0"+subGreen;
+    }
+    result += 'surfaceColor:' + (subRed + subGreen + subBlue).toUpperCase() + ';';
+
     bridge.emit('status', reader.parseStatus(result));
   }
 

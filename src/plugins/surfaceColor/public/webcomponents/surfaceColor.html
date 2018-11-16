@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-surfaceColor">
+  <template>
+    <div>
+      <p style="color:white">
+        #<span style="color:white">{{surfaceColor}}</span> <span style="color:#{{surfaceColor}}">&#x2B1B;</span> &uarr;<br> 
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-surfaceColor",
+         properties: {
+          surfaceColor: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.surfaceColor.value', function( message )
+          {
+            self.surfaceColor = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>

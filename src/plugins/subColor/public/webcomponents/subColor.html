@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-subColor">
+  <template>
+    <div>
+      <p style="color:white">
+        #<span style="color:white">{{subColor}}</span> <span style="color:#{{subColor}}">&#x2B1B;</span> &darr;<br> 
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-subColor",
+         properties: {
+          subColor: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.subColor.value', function( message )
+          {
+            self.subColor = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>
