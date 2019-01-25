@@ -114,15 +114,23 @@
                     <legend>{{__('Switches')}}</legend>
                     <orov-newui-switches class="center" event-emitter="{{cockpitEventEmitter}}"></orov-newui-switches>
                 </fieldset>
-                <fieldset id="power-item">
+            </div>
+
+            <div id="timeControlpad">
+                     <fieldset id="time-item" style="margin-bottom: 1em;">
+                         <legend>{{__('Time')}}</legend>
+                         <orov-newui-time event-emitter="{{cockpitEventEmitter}}"></orov-newui-time>
+                     </fieldset>
+            </div>
+
+	    <div id="batteryControlpad">
+                <fieldset id="power-item" style="margin-bottom: 1em;">
                     <legend>{{__('Battery')}}</legend>
                     <orov-newui-power id="power" event-emitter="{{cockpitEventEmitter}}"></orov-newui-power>
                 </fieldset>
-                <fieldset id="time-item">
-                    <legend>{{__('Time')}}</legend>
-                    <orov-newui-time event-emitter="{{cockpitEventEmitter}}"></orov-newui-time>
-                </fieldset>
+
             </div>
+
       <div id='newuiSensorPad'>            
              <div id="sideBySideFieldset"> 
          	    <fieldset>

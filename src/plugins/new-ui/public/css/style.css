@@ -47,8 +47,28 @@ a .navbar-titel {
     height: 100%;
     float: right;
     margin-bottom: 100px;
-    background: rgba(0,150,200, 0.35);
-    
+    background: rgba(0,150,200, 0.2);    
+}
+
+#timeControlpad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10%;
+    min-width: 80px;
+    float: left;
+    background: rgba(0,150,200, 0.2);
+}
+
+#batteryControlpad {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 10%;
+    min-width: 80px;
+
+,    float: left;
+    background: rgba(0,150,200, 0.2);
 }
 
 #newuiSensorPad {
@@ -65,7 +85,7 @@ a .navbar-titel {
     width: 10%;
     margin-bottom: 100px;
     padding-bottom: 20px;
-    background: rgba(0,150,200, 0.35);
+    background: rgba(0,150,200, 0.2);
 
 }
 
