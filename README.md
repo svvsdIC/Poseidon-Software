@@ -2,7 +2,7 @@
 Contains all Poseidon related files. Please make sure to commit to your branch rather than to master.
 
 File tree:
--Mechanical
+</n>-Mechanical
 -Electrical
 -Software
   -Lulu
