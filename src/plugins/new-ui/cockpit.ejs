@@ -74,7 +74,7 @@
         <div id="mainContent" class="full-height">
         <attitude-indicator id="horizon" style='position:absolute; top:0px; left:0px; z-index:33; width:100%; height:100%' event-emitter="{{cockpitEventEmitter}}"></attitude-indicator>
 
-	<div class="cam" id="cam"><img src="http://192.168.1.5:7070/stream/video.mjpeg" />
+	<div class="cam" id="cam"><img src="http://192.168.1.5:7070/stream/video.mjpeg" height="100%" width="1.77777*height"/>
 	<!-- div class="cam" id="cam2">
 	<object id="DHiMPlayer0" style="width:100%;height:100%;" type="application/x-shockwave-flash" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
           <param name="movie" value="http://192.168.0.11/swfs/StrobeMediaPlayback.swf">
@@ -97,6 +97,7 @@
                     </div>
                 </orov-video>
             </div -->
+	</div>
             <div id="newuiControlpad">
                 <fieldset>
                     <legend>{{__('Heading')}}</legend>
@@ -176,7 +177,6 @@
                     <orov-subColor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-subColor>
                 </fieldset>
             </div>
-                </div>
             </div>
         </div>
     </div>
