@@ -2,11 +2,11 @@
 Contains all Poseidon related files. Please make sure to commit to your branch rather than to master.
 
 File tree:
--Mechanical
--Electrical
--Software
-  -Lulu
-    -Pi
+1.Mechanical
+2.Electrical
+3.Software
+  ..*Lulu
+    ..*Pi
     -X-Mega
   -Nemo
     -Arduino
