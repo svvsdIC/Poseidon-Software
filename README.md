@@ -1,8 +1,8 @@
 # Poseidon-Master
 Contains all Poseidon related files. Please make sure to commit to your branch rather than to master.
 
-File tree:
-</n>-Mechanical
+File tree:<br/>
+-Mechanical
 -Electrical
 -Software
   -Lulu
