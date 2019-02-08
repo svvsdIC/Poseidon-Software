@@ -1,18 +1,20 @@
 # Poseidon-Master
 Contains all Poseidon related files. Please make sure to commit to your branch rather than to master.
 
-File tree:
--Mechanical
--Electrical
--Software
-  -Lulu
-    -Pi
-    -X-Mega
-  -Nemo
-    -Arduino
-    -Pi
-      -Open Rov
-    -X-Mega
--Documentation
-  -Design Documents
-  -Operational Documentation
+Note: all folders contain a README.md that can be edited by the respective teams using those folders to make them easy to navigate.
+
+File tree:<br/>
+* Mechanical<br/>
+* Electrical<br/>
+* Software<br/>
+  * Lulu<br/>
+    * Pi<br/>
+    * X-Mega<br/>
+  * Nemo<br/>
+    * Arduino<br/>
+    * Pi<br/>
+      * Open Rov<br/>
+    * X-Mega<br/>
+* Documentation<br/>
+  * Design Documents<br/>
+  * Operational Documentation<br/>
