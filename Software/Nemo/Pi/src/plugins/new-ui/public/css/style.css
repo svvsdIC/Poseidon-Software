@@ -1,0 +1,141 @@
+#mainContent {
+    width: 100%;
+}
+#newuiContainer {
+    width: 100%;
+    color: white;
+}
+
+
+#newuiTopbar {
+  width:100%;
+}
+
+.navbar-fixed-top .navbar-inner {
+    height: 30px;
+}
+
+.logo {
+    width: 140px;
+    vertical-align: middle;
+}
+
+a .navbar-titel {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.navbar .brand {
+    padding-top: 5px;
+}
+
+.navbar .brand * {
+    vertical-align: middle;
+}
+
+#newuiVideo {
+    width:90%;
+    overflow:hidden
+}
+
+#newuiControlpad {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    min-width: 80px;
+    height: 100%;
+    float: right;
+    margin-bottom: 100px;
+    background: rgba(0,150,200, 0.2);    
+}
+
+#timeControlpad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10%;
+    min-width: 80px;
+    float: left;
+    background: rgba(0,150,200, 0.2);
+}
+
+#batteryControlpad {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 10%;
+    min-width: 80px;
+
+,    float: left;
+    background: rgba(0,150,200, 0.2);
+}
+
+#newuiSensorPad {
+    position: fixed;
+    bottom: 6vh;
+    left: 0;
+    width: 100%;
+    height: 12%;
+    float: left;
+}
+
+#sideBySideFieldset{
+    display: inline-block;
+    width: 10%;
+    margin-bottom: 100px;
+    padding-bottom: 20px;
+    background: rgba(0,150,200, 0.2);
+
+}
+
+.newui-item {
+    border: 1px solid white;
+    margin: 15px;
+    text-align: center;
+}
+
+#newui-depth {
+
+}
+
+.newui-item h4 {
+    font-size: 1.1vw;
+    color: white;
+    top: -2.9vh;
+
+    background-color: black;
+    padding: 5px 10px;
+    display: inline-block;
+    /*width: 33%;*/
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#heading-item { margin-top: 5px;}
+
+.control {
+    width: 100%;
+    color: white;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#newui-compass {
+}
+
+#newui-power {
+    margin-top: 8px;
+}
+
+orov-newui-switches {
+    padding-bottom:.35em;
+    color:white;    
+}
+
+#newui-time {
+}
+
+iron-a11y-announcer {
+  display: none
+}

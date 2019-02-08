@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-surfaceTemp">
+  <template>
+    <div>
+      <p style="color:white; margin-bottom:0px;">
+        <span color="white">{{surfaceTemp}}</span> &#186;C &uarr;<br> 
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-surfaceTemp",
+         properties: {
+          surfaceTemp: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.surfaceTemp.value', function( message )
+          {
+            self.surfaceTemp = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>

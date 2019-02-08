@@ -1,0 +1,31 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../orov-behaviors/orov-behavior.html">
+<link rel="import" href="../../new-ui/compass.html">
+<dom-module id="orov-mobile-compass">
+  <style>
+    #compass-container {
+      width: 90%;
+    }
+
+    .center {
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      float: none;
+    }
+  </style>
+  <template>
+  <orov-newui-compass class="center" heading="0" event-emitter="{{eventEmitter}}"></orov-newui-compass>
+  </template>
+  <script>
+    Polymer({
+      is: 'orov-mobile-compass',
+      properties: {
+      },
+      behaviors: [namespace('behaviors').oROVStandard],
+      registerEmitterHandlers: function(emitter) {
+      },
+    });
+  </script>
+</dom-module>

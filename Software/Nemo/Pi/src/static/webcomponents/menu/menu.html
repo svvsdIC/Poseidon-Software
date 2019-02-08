@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="rov-menu">
+
+  <style type="text/css">
+
+      .nav.pull-right {
+        float: right;
+      }
+    </style>
+  <template>
+
+    <div class="navbar">
+      <ul id="menuitems" class="nav pull-right">
+        <content select="li"></content>
+        <!--<li><a href="#" id="show-settings">Settings</a></li>-->
+        <!--<li><a href="#" id="show-diagnostic">Diagnostic</a></li>-->
+      </ul>
+    </div>
+
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        is: 'rov-menu',
+        //          var self = this;
+        //          $(this.$.settings).find('.back-button').click(self.hideSettings);
+        menuitems: function () {
+          return $('#menuitems')[0];
+        }
+      });
+    }());
+  </script>
+</dom-module>

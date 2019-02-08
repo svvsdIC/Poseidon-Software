@@ -1,0 +1,104 @@
+<script src="utilities.js"></script>
+<script>
+(function (window) {
+  'use strict';
+  var behaviors = namespace('behaviors');
+  behaviors.oROVStandardImpl = {
+    properties: {
+      eventEmitter: {
+        type: Object,
+        value: function () {
+          return {
+            on: function (event, func) {
+            },
+            emit: function () {
+            },
+            off: function () {
+            },
+            withHistory: {
+              on:function(event,func) {}
+            }
+          };
+        },
+        observer: '_eventEmitterChanged'
+      },
+      _emListeners: {type: Array, value: function(){return [];}}
+    },
+    created: function () {
+    //  console.log('oROV Emitter Behavior for ', this, 'enabled!');
+    },
+    _registerTreeOfListeners: function(root,emitter){
+      if (!root){
+        return;
+      }
+      var self=this;
+      if(emitter == undefined){
+        return;
+      }
+
+      if (this.visited.includes(root)){
+      //  return;
+      }
+//      console.log("tree node:",root.localName);
+      if(root instanceof Array){
+       root.forEach(function(behavior){
+         self._registerTreeOfListeners(behavior,emitter);
+       });
+       return;        
+      }
+//      console.log("tree:",root.toString())
+//      console.log("visited:",this.visited.length);
+      this.visited.push(root);
+      if (root.behaviors!==undefined){
+       root.behaviors.forEach(function(behavior){
+         self._registerTreeOfListeners(behavior,emitter);
+       });
+      }
+      if(root.registerEmitterHandlers !== undefined){
+        root.registerEmitterHandlers.call(self,emitter);
+      }
+
+    },
+    _registerBusListeners: function() {
+      if(this.eventEmitter==undefined){
+        return;
+      }
+      var self=this;
+      this.visited=[];
+      var originalOn = this.eventEmitter.on;
+      this.eventEmitter.on = function(){
+        var event = arguments[0];
+        var fn = arguments[1];
+        self._emListeners.push({event:event,fn:fn});
+        originalOn.apply(this,arguments);
+      }
+      this._registerTreeOfListeners(this,this.eventEmitter);
+      this.eventEmitter.on=originalOn;
+    },
+    attached: function () {
+      //Added a new lifecycle event for the control:
+   //   console.log("About to registerBusListners for:",this.localName)
+      this._registerBusListeners();
+    //  console.log('OROV-BEHAVIOR: Registerd eventEmitter');
+      this.processedAttached=true;
+    },
+    detached: function (){
+      //Unregister all BusListeners
+      while(this._emListeners.length>0){
+        var registration =this._emListeners.shift();
+        this.eventEmitter.off(registration.event,registration.fn);
+      }
+    },
+    _eventEmitterChanged: function (newvalue, oldvalue) {
+      var self = this;
+      if(this.processedAttached!==true)
+        return;
+      if (newvalue.on === undefined)
+        return;
+      if (oldvalue === newvalue)
+        return;
+      this._registerBusListeners();
+    }
+  };
+}(window));
+</script>

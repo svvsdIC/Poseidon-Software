@@ -1,0 +1,171 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+<link rel="import" href="../ui-manager/orov-panel-behavior.html">
+<dom-module id="orov-newui-switches">
+  <style type="text/css">
+      #switchesContainer {
+        display: table;
+        border-collapse: collapse;
+      }
+      .switches-header-row {
+        display: table-row;
+        font-size: 1.1vw;
+        line-height: 1em;        
+      }
+      .switches-row {
+        display: table-row;
+        font-size: 1.1vw;
+        line-height: 1em;
+      }
+      .switches-switch-on,
+      .switches-switch-off {
+        display: table-cell;
+        width: 30%;
+        transition:all 1s ease;
+        -webkit-transition-delay:all .15s ease;
+        -moz-transition-delay:all .15s ease;
+        -ms-transition-delay:all .15s ease;
+        -o-transition-delay:all .15s ease;        
+      }
+      .switches-switch-on {
+        text-align: right;
+        padding-right: 0.4em;
+        border-right: solid 1px white;        
+      }
+      .
+      .switches-switch-off {
+        text-align: left;
+        padding-left: 0.4em;
+      }
+      .switches-header-row > div,
+      .switches-row > div {
+        padding-top: 0.1em;
+      }
+      .switches-header-row {
+        border-bottom: solid 1px #ffffff;
+        font-weight: bold;
+      }
+      .switch-on > .switches-switch-on { color: #ffffff }
+      .switch-on > .switches-switch-off { color: transparent }
+      .switch-off > .switches-switch-on { color: transparent }
+      .switch-off > .switches-switch-off { color: #ffffff }
+      .switchable { cursor: pointer }
+      .switch-off >.transitioning {color: red}
+      .switch-on >.transitioning {color: red}
+
+    </style>
+  <template>
+    <div id="switchesContainer" class="center">
+      <div class="switches-header-row">
+        <div class="switches-switch-on">{{__('ON')}}</div>
+        <div class="switches-switch-off">{{__('OFF')}}</div>
+      </div>
+      <template is="dom-repeat" items="{{_coveredControls}}">
+        <div id="{{item.shortName}}" class-name="{{_getClasses(item.switchState)}}" title="{{__(item.description)}}">
+          <div class="switches-switch-on" on-tap="_handleClick">{{__(item.shortName)}}</div>
+          <div class="switches-switch-off" on-tap="_handleClick">{{__(item.shortName)}}</div>
+        </div>
+      </template>
+    </div>
+        <content id="ctnt">
+        </content>
+  </template>
+  <script>
+    //Helper functions to cleanly register and unregister event listeners 
+    function registerEventListener(obj, params) {
+      if(typeof obj._eventListeners == 'undefined')
+      {
+        obj._eventListeners = [];
+      }
+
+      obj.addEventListener(params.event, params.callback);
+
+      var eventListeners = obj._eventListeners;
+      eventListeners.push(params);
+      obj._eventListeners = eventListeners;
+    }
+    function unRegisterAllEventListeners(obj) {
+      if(typeof obj._eventListeners == 'undefined' || obj._eventListeners.length == 0)
+      {
+        return;
+      }
+
+      for(var i = 0, len = obj._eventListeners.length; i < len; i++) 
+      {
+        var e = obj._eventListeners[i];
+        obj.removeEventListener(e.event, e.callback);
+      }
+
+      obj._eventListeners = [];
+    }
+    (function () {
+      Polymer({
+        is: 'orov-newui-switches',
+        properties: {
+          panelType:{type:String,value:function(){return "flight-switches"}},
+          _coveredControls:{type:Array}
+        },
+        behaviors: [namespace('behaviors').oROVStandard, namespace('behaviors').oROVPanel],
+        ready: function(){
+          this.listen(this, 'contentLoaded', '__oncontentLoaded');
+        },
+        __oncontentLoaded: function(){
+          var self=this;
+
+          this.set("_coveredControls",Polymer.dom(this).children.filter(function(item){return item.collectionDomElement==undefined}));          
+          Polymer.dom(self).children.forEach(function(control){
+
+            registerEventListener(control, {
+              event: 'switched',
+              callback: function(e) {
+                self._swapStateClasses(self.$$("#"+control.shortName),e.detail);
+              }
+            });
+            control.style.display="none";
+          });
+          
+        },
+        detached: function() {
+          var self=this;
+
+          Polymer.dom(self).children.forEach(function(control){
+            unRegisterAllEventListeners( control );
+          });
+        },
+        _getClasses:function(state){
+          switch(state){
+            case 'on':
+              return "switches-row switchable switch-on"
+            case 'off':
+              return "switches-row switchable switch-off"            
+          }
+        },
+        _swapStateClasses:function(element,state){
+          var elm = this.$$(".transitioning");
+          if (elm!==null){
+            elm.classList.remove("transitioning");
+          }
+          if(state=="on"){
+            element.classList.add("switch-on");            
+            element.classList.remove("switch-off");
+          } else {
+            element.classList.add("switch-off");
+            element.classList.remove("switch-on");                 
+          }
+        },
+        _handleClick:function(e){
+          if(e.currentTarget.parentElement.classList.contains("switch-off")){
+            e.model.item.on();
+         //   this._swapStateClasses( e.currentTarget.parentElement,"on")
+          } else {
+            e.model.item.off();  
+         //   this._swapStateClasses( e.currentTarget.parentElement,"off")                 
+          }
+          e.currentTarget.classList.add("transitioning");
+          var target = e.currentTarget;
+          setTimeout(function(){target.classList.remove("transitioning");},300);
+        }
+      });
+    }());
+  </script>
+</dom-module>

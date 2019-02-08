@@ -1,0 +1,184 @@
+
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="components/new-ui/time.html">
+<link rel="import" href="components/new-ui/time-slim.html">
+<link rel="import" href="components/new-ui/compass.html">
+<link rel="import" href="components/new-ui/depth.html">
+<link rel="import" href="components/new-ui/throttle.html">
+<link rel="import" href="components/new-ui/switches.html">
+<link rel="import" href="components/new-ui/switches.html">
+<link rel="import" href="components/new-ui/power.html">
+<link rel="import" href="components/new-ui/power-slim.html">
+<link rel="import" href="components/diagnostics/diagnostics.html">
+<link rel="import" href="components/video/orov-video.html">
+<link rel="import" href="components/navigation-data/orov-horizon.html">
+<link rel="import" href="components/navigation-data/attitude-indicator.html">
+<link rel="import" href="components/connection-health/orov-ping-graph.html">
+<link rel="import" href="components/internet-stream/orov-twitch-stream-status.html">
+<link rel="import" href="components/settings-manager/orov-settings-manager.html">
+<link rel="import" href="components/iron-media-query/iron-media-query.html">
+
+<!--script type='text/javascript' src="js/no-scroll-fullscreen-viewport.js"></script-->
+<style>
+    #time-item[short-layout] {
+        display: none;
+    }
+
+    fieldset {
+        display: block;
+        margin-left: 1.0em;
+        margin-right: 1.0em;
+        border: 2px solid white;
+	padding: 0.2em;
+    }
+
+    .widget {
+	font-size: 1.1vw;
+        color: black;
+        text-align: center;
+	}
+
+    legend {
+        display: table;
+        min-width: 0px;
+        max-width: 80%;
+        position: relative;
+        margin-bottom: 0em;
+        padding: .35em .35em;
+        font-size: 1.1vw;
+        color: white;
+        text-align: center;
+        border-bottom: 0px;
+    }
+
+    .cam {
+	background-color: black;
+	position: absolute;
+	top: 5px;
+	width:100%;
+	height:100%;
+    }
+    #cam1 {
+	left: 0px;
+	}
+    #cam2 {
+	right: 0px;
+	}
+
+</style>
+
+<div id="UI" class="full-height">
+    <div id="newuiBody" class="full-height">
+        <div id="newuiContainer">
+        </div>
+        <div id="mainContent" class="full-height">
+        <attitude-indicator id="horizon" style='position:absolute; top:0px; left:0px; z-index:33; width:100%; height:100%' event-emitter="{{cockpitEventEmitter}}"></attitude-indicator>
+
+	<div class="cam" id="cam"><img src="http://192.168.1.5:7070/stream/video.mjpeg" height="100%" width="1.77777*height"/>
+	<!-- div class="cam" id="cam2">
+	<object id="DHiMPlayer0" style="width:100%;height:100%;" type="application/x-shockwave-flash" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+          <param name="movie" value="http://192.168.0.11/swfs/StrobeMediaPlayback.swf">
+          <param name="quality" value="high">
+          <param name="bgcolor" value="#000000">
+          <param name="allowfullscreen" value="true">
+          <param name="flashvars" value="&amp;src=rtmp://192.168.0.11:1935/flash/11:admin:icart&amp;autoPlay=true&amp;autoHideControlBar=true&amp;streamType=live">
+          <embed id="DHiMPlayer0" style="width:100%;height:100%;" src="http://192.168.0.11/swfs/StrobeMediaPlayback.swf" quality="high" bgcolor="#000000" allowfullscreen="true" pluginspage="http://www.adobe.com/go/getflashplayer" flashvars="&amp;src=rtmp://192.168.0.11:1935/flash/11:admin:icart&amp;autoPlay=true&amp;autoHideControlBar=true&amp;streamType=live" type="application/x-shockwave-flash">
+        </object>
+	</div -->
+
+         <!-- div id="newuiVideo" class="full-height">
+                <orov-video id="camera1" border='1' style='width: 100%; height:100%; position:relative' location='forward' event-emitter="{{cockpitEventEmitter}}">
+                    <div id='twitchembed' style='position:absolute; top:0px; left:0px; z-index:33;'></div>
+                    <orov-twitch-stream-status style='position:absolute; top:0px; left:0px; z-index:33;' event-emitter="{{cockpitEventEmitter}}"></orov-twitch-stream-status>
+                    <attitude-indicator id="horizon" style='position:absolute; top:0px; left:0px; z-index:33; width:100%; height:100%' event-emitter="{{cockpitEventEmitter}}"></attitude-indicator>
+                    <div style='position:absolute; top:0px; left:0px; z-index:33; display:flex'>
+                        <orov-newui-time-slim id="time-item-collapsed" style="margin:5px" event-emitter="{{cockpitEventEmitter}}"></orov-newui-time-slim>
+                        <orov-newui-power-slim id="power-item-collapsed" style="margin:5px" event-emitter="{{cockpitEventEmitter}}"></orov-newui-power-slim>
+                    </div>
+                </orov-video>
+            </div -->
+	</div>
+            <div id="newuiControlpad">
+                <fieldset>
+                    <legend>{{__('Heading')}}</legend>
+                    <orov-newui-compass class="center" heading="0" event-emitter="{{cockpitEventEmitter}}"></orov-newui-compass>
+                </fieldset>
+                <fieldset>
+                    <legend>{{__('Depth')}}</legend>
+                    <orov-newui-depth id="newui-depth" style="margin-top: 2.0em;" class="center control" event-emitter="{{cockpitEventEmitter}}"></orov-newui-depth>
+                </fieldset>
+                <fieldset>
+                    <legend>{{__('Throttle')}}</legend>
+                    <orov-newui-throttle id="newui-throttle" class="center control" event-emitter="{{cockpitEventEmitter}}"></orov-newui-throttle>
+                </fieldset>
+                <fieldset>
+                    <legend>{{__('Switches')}}</legend>
+                    <orov-newui-switches class="center" event-emitter="{{cockpitEventEmitter}}"></orov-newui-switches>
+                </fieldset>
+            </div>
+
+            <div id="timeControlpad">
+                     <fieldset id="time-item" style="margin-bottom: 1em;">
+                         <legend>{{__('Time')}}</legend>
+                         <orov-newui-time event-emitter="{{cockpitEventEmitter}}"></orov-newui-time>
+                     </fieldset>
+            </div>
+
+	    <div id="batteryControlpad">
+                <fieldset id="power-item" style="margin-bottom: 1em;">
+                    <legend>{{__('Battery')}}</legend>
+                    <orov-newui-power id="power" event-emitter="{{cockpitEventEmitter}}"></orov-newui-power>
+                </fieldset>
+
+            </div>
+
+      <div id='newuiSensorPad'>            
+             <div id="sideBySideFieldset"> 
+         	    <fieldset>
+         		<legend>pH</legend>
+         		<orov-pH_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-pH_sensor>
+         	    </fieldset>
+             </div><!--
+             --> <div id="sideBySideFieldset"> 
+         	<fieldset>
+         	     <legend>Conduct.</legend>
+         	     <orov-conductivity_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-conductivity_sensor>
+         	</fieldset>
+             </div><!--
+             --> <div id="sideBySideFieldset"> 
+         	<fieldset>
+         	     <legend>ORP</legend>
+         	     <orov-ORP_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-ORP_sensor>
+         	</fieldset>
+             </div><!--
+             --> <div id="sideBySideFieldset"> 
+         	<fieldset>
+         	     <legend>Oxy Sat</legend>
+         	     <orov-disOxy_sensor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-disOxy_sensor>
+         	</fieldset>
+             </div><!--
+             --> <div id="sideBySideFieldset"> 
+         	<fieldset>
+         	    <legend>Temp.</legend>
+         	    <orov-surfaceTemp class="center widget" style="border:1px" event-emitter="{{cockpitEventEmitter}}"></orov-surfaceTemp>
+                    <orov-waterTemp class="center widget" style="border:1px" event-emitter="{{cockpitEventEmitter}}"></orov-waterTemp>
+         	</fieldset>
+             </div><!--
+             --> <div id="sideBySideFieldset">
+                <fieldset>
+                    <legend>Luminos.</legend>
+                    <orov-luminosity class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-luminosity>
+                </fieldset>
+                </div><!--
+             --> <div id="sideBySideFieldset">
+                <fieldset>
+                    <legend>Color</legend>
+                    <orov-surfaceColor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-surfaceColor>
+                    <orov-subColor class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-subColor>
+                </fieldset>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+

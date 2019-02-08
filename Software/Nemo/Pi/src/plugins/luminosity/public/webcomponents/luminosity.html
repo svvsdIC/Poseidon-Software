@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-luminosity">
+  <template>
+    <div>
+      <p style="color:white;">
+        <span color="white">{{luminosity}}</span><br> lux
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-luminosity",
+         properties: {
+          luminosity: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.luminosity.value', function( message )
+          {
+            self.luminosity = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>

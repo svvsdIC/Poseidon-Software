@@ -1,0 +1,27 @@
+{
+  "name": "settings-manager",
+  "version": "1.0.0",
+  "homepage": "https://github.com/BrianAdams/openrov-cockpit",
+  "authors": [
+    "brian@openrov.com"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "app-layout": "PolymerElements/app-layout#^0.10.0",
+    "json-editor": "https://github.com/BrianAdams/json-editor.git#patched",
+    "paper-toast": "PolymerElements/paper-toast#^1.2.2",
+    "webcomponentsjs": "^0.7.20",
+    "polymer": "^1.5.0"
+  },
+  "resolutions": {
+    "polymer": "^1.1.0"
+  }
+}

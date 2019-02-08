@@ -1,0 +1,64 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+<link rel="import" href="dual-thumbstick/dual-thumbstick.html">
+
+<dom-module id="orov-mobile-controls">
+	<style type="text/css">
+	</style>
+
+	<template>
+		<dual-thumbstick 
+			id="dualthumbstick" 
+			event-emitter="{{eventEmitter}}"
+			on-leftTrackX="handleYaw"
+			on-leftTrackY="handleThrottle"
+			on-righttracky="handleVertical"
+		>
+		</dual-thumbstick>
+	</template>
+
+	<script>
+		( function()
+		{
+			Polymer(
+			{
+				is: 'orov-mobile-controls',
+
+				properties:
+				{
+				},
+
+				behaviors: [namespace('behaviors').oROVStandard],
+
+				registerEmitterHandlers: function(emitter)
+				{
+				},
+
+				handleThrottle: function(e)
+				{
+					if( this.eventEmitter !== undefined )
+					{
+						this.eventEmitter.emit( 'plugin.rovpilot.setThrottle', e.detail.val );
+					}
+				},
+
+				handleYaw: function(e)
+				{
+        			if( this.eventEmitter !== undefined )
+					{
+						this.eventEmitter.emit( 'plugin.rovpilot.setYaw', e.detail.val );
+					}
+				},
+
+				handleVertical: function(e)
+				{
+        			if( this.eventEmitter !== undefined )
+					{
+						this.eventEmitter.emit( 'plugin.rovpilot.setLift', e.detail.val );
+					}
+				}
+			} );
+		}() );
+
+	</script>
+</dom-module>

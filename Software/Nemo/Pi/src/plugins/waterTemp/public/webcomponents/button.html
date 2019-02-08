@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+
+<dom-module name="orov-waterTemp">
+  <template>
+    <div>
+      <p style="color:white; margin-top:0px;">
+        <span color="white">{{count}}</span> &#186;C &darr;<br> 
+      </p>
+    </div>
+  </template>
+  <script>
+    (function() {
+      Polymer({
+        is: "orov-waterTemp",
+         properties: {
+          count: {
+            type: String,
+            value: '0'
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter){
+          var self = this;
+          emitter.withHistory.on('plugin.waterTemp.value', function( message )
+          {
+            self.count = message;
+          });
+        }
+      });
+    }());
+  </script>
+</dom-module>

@@ -1,0 +1,24 @@
+echo cd ~
+cd ~
+#echo git clone https://github.com/svvsdic/myRov
+#     git clone https://github.com/svvsdic/myRov
+echo cd ~/myRov
+     cd ~/myRov
+echo npm run deploy:prod
+     npm run deploy:prod
+echo cd ~/myRov/src
+     cd ~/myRov/src
+echo npm install pino pino-arborsculpture
+     npm install pino pino-arborsculpture
+echo cd ~/myRov/src/plugins/mjpeg-video
+     cd ~/myRov/src/plugins/mjpeg-video
+echo npm install mjpeg-video-server
+     npm install mjpeg-video-server
+echo cd ~/myRov/src/plugins/notifications
+     cd ~/myRov/src/plugins/notifications
+echo npm install nedb
+     npm install nedb
+echo cd ~/myRov/src/plugins/peer-view
+     cd ~/myRov/src/plugins/peer-view
+echo npm install simple-peer
+     npm install simple-peer msgpack-lite

@@ -1,0 +1,348 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../orov-behaviors/orov-behavior.html">
+<dom-module id="orov-newui-depth">
+  <style type="text/css">
+
+      .unit {
+        font-size: 0.95em;
+        margin-bottom: -0.5vw;
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+      .text-center { text-align: center;}
+      #depthContainer {
+        width: 100%;
+        margin-bottom: -1.3vw;
+        margin-top: -0.6vw;
+      }
+      #depth {
+        font-size: 1.85vw;
+        font-weight: bold;
+        text-align: center;
+      }
+      #depth.inverted {
+        color: black;
+        text-shadow:
+          1px 1px 0 #fff,
+         -1px -1px 0 #fff,
+          1px -1px 0 #fff,
+         -1px  1px 0 #fff,
+          1px  1px 0 #fff;
+      }
+      #depthTarget {
+        font-size: 1.0vw;
+        font-weight: bold;
+      }
+      #depthTarget.hidden {
+        opacity: 0;
+      }
+      #depth-footer  {
+        width: 100%;
+        margin-top: 0.75vw;
+
+        font-size: 0.9vw;
+      }
+      #water-type {
+        font-weight: bold;
+      }
+      #depth-unit {
+        float: right;
+
+        font-weight: bold;
+      }
+      #depth-unit:hover {
+        cursor: pointer;
+      }
+      .depth-line-container {
+        margin-top: 0.5vw;
+      }
+      #depth-change-container {
+        position: relative;
+        display:table;
+        width:100%;
+      }
+      .depth-line-container span,
+      #depth-change-container>div {
+        display:table-cell;
+        text-align:center;
+      }
+      .depth-line { width: 50%; height: 5px}
+      .depth-line-text {
+        padding-left: 4px;
+        padding-right: 4px;
+        font-size: 0.9em;
+      }
+      .depth-line hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 0.2em solid white;
+        margin: 0 0 .2em;
+        padding: 0;
+      }
+      #depthLock {
+        text-align: right;
+        font-weight:bold;
+        right: 10px;
+        margin-top: -0.2vw;
+      }
+      #numberContainer {
+        margin-top: -0.5vw;
+        padding-bottom: 14px;
+      }
+      #depthLock.hidden { opacity: 0; }
+
+
+      #depthChangeUp { padding-left: 1em }
+      #depthChangeDown { padding-right: 1em }
+      
+      #downPolygon {
+        fill: white;
+
+        /*Hardware acceleration*/
+        translate3d(0,0,0);
+
+        transition-duration: 0.4s;
+        transition-timing-function: ease-out;
+      }
+      #upPolygon {
+        fill: white;
+
+        /*Hardware acceleration*/
+        translate3d(0,0,0);
+
+        transition-duration: 0.4s;
+        transition-timing-function: ease-out;
+      }
+
+      #depth-change-value { 
+      
+        display: inline-block;
+        max-width: 55px;      
+        margin: auto;
+        font-size: 1.25vw;
+        vertical-align: middle; 
+      }
+      #depth-change-unit {
+        margin-top: -6px;
+        font-size: 0.85vw;
+      }
+      .depth-change-indicator { width: 15px; height: 15px }
+      svg { width: 100%; }
+    </style>
+  <template>
+    <div id="depthContainer" style="font-family: Sans">
+      
+      <div id="depthLock" class="unit hidden" style="">LK</div>
+      
+      <div id="numberContainer">
+        <div id="depth" class="center text-center">
+          <span>{{formatDepth(depth)}}</span>
+        </div>
+          <div id="depthTarget" title="Depthhold target depth" class="center text-center hidden">
+            <span>{{__('LK: ')}}</span>
+            <span style="text-align:center">{{target}}</span>
+          </div>
+        </div>
+        
+      </div>
+
+      <div id="depth-footer">
+        <span id="water-type">{{__(waterType)}}</span>
+        <span id="depth-unit"> {{depthUnit}} </span>
+      </div>
+      
+      <div class="depth-line-container">
+        <span class="depth-line"><hr></span>
+        <span class="depth-line-text">{{__('VSI')}}</span>
+        <span class="depth-line"><hr></span>
+      </div>
+      
+      <div id="depth-change-container">
+        <div id="depthChangeUp" class="depth-change-indicator">
+          <svg viewBox="0 0 100 100">
+            <polygon id="upPolygon" points="0,100 50,0 100,100" style="fill:black;stroke:black;stroke-width:0"></polygon>
+          </svg>
+        </div>
+        <div id="depth-change-value">{{ change }}</div>
+        <div id="depthChangeDown" class="depth-change-indicator">
+          <svg viewBox="0 0 100 100">
+            <polygon id="downPolygon" points="0,0 50,100 100,0 " style="fill:none;stroke:black;stroke-width:0"></polygon>
+          </svg>
+        </div>
+      </div>
+      
+      <div id="depth-change-unit" class="center text-center unit">{{depthUnit}}{{__('/s')}}</div>
+    
+    </div>
+  </template>
+  <script>
+    (function () {
+      var lastState = null;
+      var newState = null;
+
+      Polymer({
+        is: 'orov-newui-depth',
+        properties: {
+          change: {
+            type: String,
+            value: '0.0'
+          },
+          depth: {
+            type: Number,
+            value: function(){return 0;}
+          },
+          depthUnit: {
+            type: String,
+            value: function(){return 'm';}
+          },
+          options: {
+            type: Object,
+            value:  {
+                indicatorActive: '#ffffff',
+                indicatorInactive: '#000000',
+                strokeActive: '#ffffff',
+                strokeInactive: '#ffffff'
+            }
+          },
+          target: {
+            type: Number,
+            value: function(){return 0;}
+          },
+          waterType: {
+            type: String,
+            value: function(){return 'Salt';}
+          }
+        },
+        behaviors: [namespace('behaviors').oROVStandard],
+        registerEmitterHandlers: function(emitter) {
+          var self = this;
+          emitter.on('plugin.navigationData.data', function (data) {
+            newState = data;
+          });
+
+          emitter.withHistory.on('plugin.rovpilot.depthHold.state', function (state) {
+            if(state.enabled)
+            {
+              self.target = Number(state.targetDepth).toFixed(2);
+              //Format based on setting
+              if(self.depthUnit == "ft")
+              {
+                self.target = self.convertToFeet(state.targetDepth).toFixed(2);
+              }
+              $(self.$.depth).addClass('inverted');
+              $(self.$.depthTarget).removeClass('hidden');
+              $(self.$.depthLock).removeClass('hidden');
+
+            }
+            else
+            {
+              self.target = 0;
+              $(self.$.depth).removeClass('inverted');
+              $(self.$.depthTarget).addClass('hidden');
+              $(self.$.depthLock).addClass('hidden');
+            }
+          });
+          emitter.withHistory.on('plugin.diveProfile.waterType', function (waterType) {
+            self.waterType = waterType;
+          });
+        },
+        listeners: {
+          'depth-unit.tap': 'toggleDepthUnit',
+        },
+        attached: function(){
+          this._dataThrottleInterval=setInterval(function(){
+              if (newState == lastState){return;};
+              lastState = newState
+              var data = lastState;
+              if ('depth' in data) {
+                self.set('depth',Number(data.depth));//.toFixed(1);
+              }
+          },100);
+          var self = this;
+          var depthChangeUp = $(this.$.depthChangeUp).find('svg polygon');
+          var depthChangeDown = $(this.$.depthChangeDown).find('svg polygon');
+
+          var oldDepth = 0;
+          var update = function () {
+            var currentDepth = self.depth;
+
+            var difference = oldDepth - currentDepth;
+            
+            if (currentDepth > oldDepth) {
+              // descending, since this value
+              self.$.downPolygon.style.fill="white";
+              self.$.downPolygon.style.fillOpacity = Math.sqrt(Math.abs(difference));
+
+              self.$.upPolygon.style.fill="black";
+
+            } else if (currentDepth < oldDepth) {
+              // ascending
+              self.$.downPolygon.style.fill="black";
+
+              self.$.upPolygon.style.fill="white";
+              self.$.upPolygon.style.fillOpacity = Math.sqrt(Math.abs(difference));
+
+            } else {
+              // neutral
+              self.$.downPolygon.style.fill="black";
+              self.$.upPolygon.style.fill="black";
+            }
+
+            var changeText = '';
+
+            if (difference > 0) {
+              changeText = '+';
+            }
+            if(self.depthUnit == "ft")
+            {
+              difference = self.convertToFeet(difference);
+            }
+            changeText += difference.toFixed(2);
+            self.change = changeText;
+            oldDepth = currentDepth;
+          };
+          this._updateInterval=setInterval(update, 1000);
+          depthChangeUp.css({
+            fill: this.options.indicatorInactive,
+            stroke: this.options.strokeInactive
+          });
+          depthChangeDown.css({
+            fill: this.options.indicatorInactive,
+            stroke: this.options.strokeInactive
+          });
+        },
+        detached:function(){
+          clearInterval(this._dataThrottleInterval);
+          clearInterval(this._updateInterval);
+        },
+        formatDepth : function(depth){
+          var self = this;
+
+          //Format based on setting
+          if(self.depthUnit == "ft")
+          {
+            depth = self.convertToFeet(depth);
+          }
+          return depth.toFixed(2); 
+        },
+        convertToFeet(numberIn) {
+          return Number(numberIn * 3.28);
+        },
+        toggleDepthUnit: function(e) {
+          var self = this;
+          
+          if(self.depthUnit == "m")
+          {
+            self.set("depthUnit", "ft");
+          }
+          else
+          {
+            self.set("depthUnit", "m");
+          }
+          
+        }
+      });
+    }());
+  </script>
+</dom-module>
