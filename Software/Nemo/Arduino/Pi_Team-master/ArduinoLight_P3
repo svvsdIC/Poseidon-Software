@@ -1,0 +1,31 @@
+String inbyte;
+
+void setup() {
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
+  Serial.begin(115200);
+  Serial.println("starting...");
+
+}
+
+String variable;
+
+void loop() {
+ 
+  if (Serial.available() > 0) {
+    variable = Serial.readString();
+    if (variable == "lights_tpow") {
+      Serial.println("It works!");
+      analogWrite(8, 255);
+      analogWrite(7, 130);
+  }
+  
+    else if (variable == "Nolights_tpow") {
+      Serial.println("It works!");
+      digitalWrite(8, LOW);
+      digitalWrite(7, LOW);
+  }
+  
+  }
+
+}
