@@ -278,50 +278,14 @@ void calcPWM()
       //Calibration
       if(timeValue[i] > maxInMicros[i])
       {
-        changeMax[i] ++;
-        if(changeMax[i] >= 3)//If the Max has been greater 3 times in a row, change the value 
-        {
-          if((timeValue[i] - maxInMicros[i])>100)
-          {
-            changedFlag = true;
-            changeMax[i] = 0;
-          }
-          else
-          {
-            changedFlag = true;
-            maxInMicros[i] = timeValue[i];
-            changeMax[i] = 0;
-          }
-          
-        }
-        if(changeMax[i] > 0) //Make sure that the value greater than current max happens multiple times (otherwise it is an outlier and can be ignored)
-        {
-          changeMax[i] == 0;
-        }
+          changedFlag = true;
+          maxInMicros[i] = timeValue[i];
       }
       
       if(timeValue[i] < minInMicros[i])
       {
-        changeMin[i] ++;
-        if(changeMin[i] >= 3)//If the Min has been smaller 5 times in a row, change the value
-        {
-          if((timeValue[i]-minInMicros[i])>100)
-          {
-            changedFlag = true;
-            minInMicros[i] -= 100;
-            changeMin[i] = 0;
-          }
-          else
-          {
-            changedFlag = true;
-            minInMicros[i] = timeValue[i];
-            changeMin[i] = 0;
-          }
-        }
-        if(changeMin[i] > 0) //Make sure that the value smaller than current min happens multiple times (otherwise it is an outlier and can be ignored)
-        {
-          changeMin[i] == 0;
-        }
+          changedFlag = true;
+          minInMicros[i] = timeValue[i];
       }
       
       //Mapping:
