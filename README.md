@@ -1,5 +1,20 @@
-# Innovation Center repository for the raspberry pi code.
+# Poseidon-Master
+Contains all Poseidon related files. Please make sure to commit to your branch rather than to master.
 
-Look at the README-openrov.md to read the original message from the openROV repository.
+Note: all folders contain a README.md that can be edited by the respective teams using those folders to make them easy to navigate.
 
-Team members use this repository for saving their work in specific branches and we will occasionally push completed branches to this repository.
+File tree:<br/>
+* Mechanical<br/>
+* Electrical<br/>
+* Software<br/>
+  * Lulu<br/>
+    * Pi<br/>
+    * X-Mega<br/>
+  * Nemo<br/>
+    * Arduino<br/>
+    * Pi<br/>
+      * Open Rov<br/>
+    * X-Mega<br/>
+* Documentation<br/>
+  * Design Documents<br/>
+  * Operational Documentation<br/>
