@@ -6,13 +6,7 @@
     {
         constructor(name, deps)
         {
-		var os = require('os');
-		var addresses = [];
-		var interfaces = os.networkInterfaces();
-		console.log(`B0be waterTemperature: eth0[0]: ${interfaces['eth0'][0]['address']}`);
-		console.log(`B0be waterTemperature: eth0[1]: ${interfaces['eth0'][1]['address']}`);
-	
-			    deps.logger.debug('waterTemperature plugin loaded!');
+	    deps.logger.debug('waterTemperature plugin loaded!');
 
             this.globalBus  = deps.globalEventLoop;   // This is the server-side messaging bus. The MCU sends messages to server plugins over this
             this.cockpitBus = deps.cockpit;           // This is the server<->client messaging bus. This is how the server talks to the browser
