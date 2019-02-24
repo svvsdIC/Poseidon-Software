@@ -407,7 +407,7 @@ function Bridge()
     imu.pitch = 90 * Math.sin( imu.time * ( Math.PI / 10000 ) );
 
     // Generate roll -90:90 degrees
-    imu.roll = 90 * Math.sin( imu.time * ( Math.PI / 30000 ) );
+    imu.roll = 90 * Math.sin( imu.time * ( Math.PI / 5000 ) );
 
     // Generate yaw between -120:120 degrees
     var baseYaw = 120 * Math.sin( imu.time * ( Math.PI / 10000 ) );

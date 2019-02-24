@@ -47,7 +47,7 @@
         opacity: 0.6;
 
         translate3d(0,0,0);
-        transform-origin: center;
+        transform-origin: 97.7% 70.9%;
         transition-duration: 0.05s;
         transformation-timing-function: ease-in-out;
       }
@@ -468,7 +468,7 @@
         inkscape:label="Layer 1"
         inkscape:groupmode="layer"
         id="layer1"
-        transform="translate(-92.52822,-300.87297)">
+        >
         <circle
           style="display:inline;opacity:1;fill:#b71c1c;fill-opacity:1;stroke:#ffffff;stroke-width:1.9704386;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
           id="path8517"
@@ -476,7 +476,7 @@
           cx="187.11037"
           cy="306.52222"
           r="5.0147805"
-          transform="matrix(0.99999824,0.00187749,-0.00187749,0.99999824,0,0)" />
+          />
         <rect
           style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.34768012;stroke-linejoin:round;stroke-opacity:1"
           id="rect11102-5"
@@ -516,8 +516,7 @@
         {
           pitchIn = -90;
         }
-
-        var yPos = map(-pitchIn, -90, 90, -287, 112);
+        var yPos = map(-pitchIn, -90, 90, -290, 115) -2 ;
         element.style.transform = "translate3d(-117px," + yPos + "px, 0px) rotate(" + rollIn + "deg)";
        }
 
