@@ -1,0 +1,42 @@
+#define ELIGHT_LED 3
+#define DEBUG (0)
+
+
+void setup() {
+  pinMode(ELIGHT_LED, OUTPUT);
+  Serial.begin(115200);
+  if (DEBUG == 1) {
+    Serial.println("starting...");
+  }
+
+}
+
+String stringInput;
+String elightToken = "elights";
+int tokenLen = elightToken.length();
+int ledBrightness;
+String placeholder;
+
+void loop() {
+ 
+  if (Serial.available() > 0) {
+    stringInput = Serial.readString();
+    if (stringInput.startsWith(elightToken)) {
+      if (DEBUG == 1) {
+        Serial.println(stringInput);
+      }
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      if (DEBUG == 1) {
+        Serial.println(placeholder);
+      }
+      ledBrightness = placeholder.toInt();
+      if (DEBUG == 1) {
+        Serial.println(ledBrightness);
+      }
+      analogWrite(ELIGHT_LED, ledBrightness);
+    
+  }
+  
+  }
+
+}
