@@ -1,0 +1,46 @@
+#define ELIGHT_LED_f 3
+#define ELIGHT_LED_p 9
+#define ELIGHT_LED_s 5
+#define DEBUG (0)
+
+
+void setup() {
+  pinMode(ELIGHT_LED, OUTPUT);
+  pinMode(ELIGHT_LED_2, OUTPUT);
+  pinMode(ELIGHT_LED_3, OUTPUT);
+  Serial.begin(115200);
+
+}
+
+String stringInput;
+String elightToken_f = "elights_f";
+String elightToken_p = "elights_p";
+String elightToken_s = "elights_s";
+int tokenLen = elightToken_f.length();
+int ledBrightness;
+String placeholder;
+
+void loop() {
+ 
+  if (Serial.available() > 0) {
+    stringInput = Serial.readString();
+    if (stringInput.startsWith(elightToke_f)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      ledBrightness = placeholder.toInt();
+      analogWrite(ELIGHT_LED_f, ledBrightness);
+    }
+    if (stringInput.startsWith(elightToken_p)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      ledBrightness = placeholder.toInt();
+      analogWrite(ELIGHT_LED_p, ledBrightness);
+    }
+      if (stringInput.startsWith(elightToken_s)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      ledBrightness = placeholder.toInt();
+      analogWrite(ELIGHT_LED_s, ledBrightness);
+    }
+    
+  }
+  
+
+}

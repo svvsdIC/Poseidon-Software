@@ -1,0 +1,54 @@
+#define P_LASER_F (3)
+#define P_LASER_P (9)
+#define P_LASER_S (5)
+
+void setup() {
+  pinMode(P_LASER_F, OUTPUT);
+  pinMode(P_LASER_P, OUTPUT);
+  pinMode(P_LASER_S, OUTPUT);
+  Serial.begin(115200);
+}
+
+String stringInput;
+String pLaserToken_f = "pLaser_f";
+String pLaserToken_p = "pLaser_p";
+String pLaserToken_s = "pLaser_s";
+int tokenLen = pLaserToken_f.length();
+String placeholder;
+
+void loop() {
+ 
+  if (Serial.available() > 0) {
+    stringInput = Serial.readString();
+    if (stringInput.startsWith(pLaserToken_f)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      if (placeholder == "on") {
+        digitalWrite(P_LASER_F, HIGH);
+      }
+      if (placeholder == "off") {
+        digitalWrite(P_LASER_F, LOW);
+      }
+    }
+    if (stringInput.startsWith(pLaserToken_p)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      if (placeholder == "on") {
+        digitalWrite(P_LASER_P, HIGH);
+      }
+      if (placeholder == "off") {
+        digitalWrite(P_LASER_P, LOW);
+      }
+    }
+      if (stringInput.startsWith(pLaserToken_s)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      if (placeholder == "on") {
+        digitalWrite(P_LASER_S, HIGH);
+      }
+      if (placeholder == "off") {
+        digitalWrite(P_LASER_S, LOW);
+      }
+    }
+    
+  }
+  
+
+}
