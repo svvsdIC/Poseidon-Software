@@ -1,6 +1,6 @@
 /* Poseidon X-Drive prototype code 
  * Version 1.4
- * Released 3/27/17 Ben Gillett
+ * Released 4/11/19 X-Drive team, originally by Ben Gillet
  * 
  * OVERVIEW
  * This code is designed to run on an Sparkfun RedBoard, as part of the X-Drive prototype for project Poseidon.
@@ -85,7 +85,7 @@ const float motorConst[NUM_OUTPINS] = {0.8, 0.8, 0.8, 0.8, 1.0, 1.0};
 
 //Other
 //Program state booleans
-bool printingIn = false, printingOut = true, suspendOutput = false;
+bool printingIn = true, printingOut = true, suspendOutput = false;
 float controlPoints = 0.0; //global for easy debugging. See below for control point definition.
 int changeMax[6] = {0,0,0,0,0,0}; //change Maximum flag
 int changeMin[6] = {0,0,0,0,0,0}; //Change minimum flag
@@ -204,11 +204,11 @@ void outputTelemetry()
         Serial.println(controlValues.value[1]);
         Serial.println("vertical");
         Serial.println(controlValues.value[0]);
-//      Serial.print("Motor value:");
-//      Serial.print(motors[0]);
-//      Serial.print(motors[1]);
-//      Serial.print(motors[2]);
-//      Serial.print(motors[3]);
+      Serial.print("Motor value:");
+      Serial.println(motorValues.value[0]);
+      Serial.println(motorValues.value[1]);
+      Serial.println(motorValues.value[2]);
+      Serial.println(motorValues.value[3]);
     
   }
 }
