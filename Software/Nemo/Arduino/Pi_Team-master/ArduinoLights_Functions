@@ -1,0 +1,56 @@
+#define ELIGHT_LED 3
+#define ELIGHT_LED_2 9
+#define ELIGHT_LED_3 5
+
+
+void setup() {
+  pinMode(ELIGHT_LED, OUTPUT);
+  pinMode(ELIGHT_LED_2, OUTPUT);
+  pinMode(ELIGHT_LED_3, OUTPUT);
+  Serial.begin(115200);
+
+}
+
+String stringInput;
+String elightToken1 = "elights_1";
+String elightToken2 = "elights_2";
+String elightToken3 = "elights_3";
+int tokenLen = elightToken1.length();
+int ledBrightness;
+String placeholder;
+
+void elights_1(String stringInput) {
+  if (stringInput.startsWith(elightToken1)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      ledBrightness = placeholder.toInt();
+      analogWrite(ELIGHT_LED, ledBrightness);
+    }
+}
+
+void elights_2(String stringInput) {
+  if (stringInput.startsWith(elightToken2)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      ledBrightness = placeholder.toInt();
+      analogWrite(ELIGHT_LED_2, ledBrightness);
+    }
+}
+
+void elights_3(String stringInput) {
+  if (stringInput.startsWith(elightToken3)) {
+      placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+      ledBrightness = placeholder.toInt();
+      analogWrite(ELIGHT_LED_3, ledBrightness);
+    }
+}
+
+void loop() {
+ 
+  if (Serial.available() > 0) {
+    stringInput = Serial.readString();
+    elights_1(stringInput);
+    elights_2(stringInput);
+    elights_3(stringInput);
+    
+  }
+  
+}
