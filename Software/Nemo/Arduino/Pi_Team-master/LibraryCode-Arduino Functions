@@ -1,0 +1,21 @@
+if (stringInput.startsWith(elightToken1)) {
+    placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+    ledBrightness = placeholder.toInt();
+    analogWrite(ELIGHT_LED, ledBrightness);
+    }
+    
+if (stringInput.startsWith(elightToken2)) {
+    placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+    ledBrightness = placeholder.toInt();
+    analogWrite(ELIGHT_LED_2, ledBrightness);
+    }
+
+if (stringInput.startsWith(elightToken3)) {
+    placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+    ledBrightness = placeholder.toInt();
+    analogWrite(ELIGHT_LED_3, ledBrightness);
+    }
+    
+else {
+  Serial.print("Error: Unrecognized Input")
+}
