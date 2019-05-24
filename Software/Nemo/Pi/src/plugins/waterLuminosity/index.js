@@ -2,7 +2,7 @@
 {
     const Listener = require( 'Listener' );
 
-    class luminosity
+    class waterLuminosity
     {
         constructor(name, deps)
         {
@@ -10,7 +10,7 @@
 		var addresses = [];
 		var interfaces = os.networkInterfaces();
 	
-			    deps.logger.debug('luminosity plugin loaded!');
+			    deps.logger.debug('waterLuminosity plugin loaded!');
 
             this.globalBus  = deps.globalEventLoop;   // This is the server-side messaging bus. The MCU sends messages to server plugins over this
             this.cockpitBus = deps.cockpit;           // This is the server<->client messaging bus. This is how the server talks to the browser
@@ -25,13 +25,13 @@
                 mcuStatus: new Listener( self.globalBus, 'mcu.status', false, function( data )
                 {
                     // Check for the example field name in the MCU's status update
-                    if( 'luminosity' in data )
+                    if( 'waterLuminosity' in data )
                     {
                         // Get the message that the MCU sent to u
-                        var message = data.luminosity;
+                        var message = data.waterLuminosity;
                         // Re-emit the message on the cockpit messaging bus (talks to the browser)
 		        var util = require('util');
-	                self.cockpitBus.emit( 'plugin.luminosity.value', message );
+	                self.cockpitBus.emit( 'plugin.waterLuminosity.value', message );
                     }
                 })
             }
@@ -42,7 +42,7 @@
         {
           // Enable the listeners!
           this.listeners.mcuStatus.enable();
-          console.log("luminosity started!!");
+          console.log("waterLuminosity started!!");
         }
 
         // This is called when the plugin is disabled
@@ -55,6 +55,6 @@
 
     module.exports = function(name, deps)
     {
-        return new luminosity(name, deps);
+        return new waterLuminosity(name, deps);
     };
 }());

@@ -160,14 +160,15 @@
              --> <div id="sideBySideFieldset"> 
          	<fieldset>
          	    <legend>Temp.</legend>
-         	    <orov-surfaceTemp class="center widget" style="border:1px" event-emitter="{{cockpitEventEmitter}}"></orov-surfaceTemp>
-                    <orov-waterTemp class="center widget" style="border:1px" event-emitter="{{cockpitEventEmitter}}"></orov-waterTemp>
+         	    <orov-surfaceTemp class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-surfaceTemp>
+                    <orov-waterTemp class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-waterTemp>
          	</fieldset>
              </div><!--
              --> <div id="sideBySideFieldset">
                 <fieldset>
                     <legend>Luminos.</legend>
-                    <orov-luminosity class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-luminosity>
+		    <orov-surfaceLuminosity style="font-size: 1vw" class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-surfaceLuminosity>
+                    <orov-waterLuminosity style="font-size: 1vw" class="center widget" event-emitter="{{cockpitEventEmitter}}"></orov-waterLuminosity>
                 </fieldset>
                 </div><!--
              --> <div id="sideBySideFieldset">

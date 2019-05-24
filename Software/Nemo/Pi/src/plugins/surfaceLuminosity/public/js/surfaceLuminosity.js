@@ -1,11 +1,11 @@
 (function(window)
 {
     'use strict';
-    class luminosity
+    class surfaceLuminosity
     {
         constructor( cockpit )
         {
-            console.log('luminosity Plugin running');
+            console.log('surfaceLuminosity Plugin running');
             var self = this;
             self.cockpit = cockpit;
 
@@ -25,8 +25,8 @@
         getTelemetryDefinitions()
         {
             return [{
-                name: 'luminosity.value',
-                description: 'The luminosity value'
+                name: 'surfaceLuminosity.value',
+                description: 'The surfaceLuminosity value'
             }]
         };
 
@@ -36,16 +36,16 @@
         {
             var self = this;
             // Listen for response messages from the Node plugin
-            this.cockpit.rov.withHistory.on('plugin.luminosity.value', function( message )
+            this.cockpit.rov.withHistory.on('plugin.surfaceLuminosity.value', function( message )
             {
-                self.cockpit.emit('plugin.luminosity.value', message);
+                self.cockpit.emit('plugin.surfaceLuminosity.value', message);
             });
         };
     };
 
     // Add plugin to the window object and add it to the plugins list
     var plugins = namespace('plugins');
-    plugins.luminosity = luminosity;
-    window.Cockpit.plugins.push( plugins.luminosity);
+    plugins.surfaceLuminosity = surfaceLuminosity;
+    window.Cockpit.plugins.push( plugins.surfaceLuminosity);
 
 }(window));

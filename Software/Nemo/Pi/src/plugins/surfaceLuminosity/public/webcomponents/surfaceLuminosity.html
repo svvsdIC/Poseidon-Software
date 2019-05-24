@@ -1,20 +1,20 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../orov-behaviors/orov-behavior.html">
 
-<dom-module name="orov-luminosity">
+<dom-module name="orov-surfaceLuminosity">
   <template>
     <div>
-      <p style="color:white;">
-        <span color="white">{{luminosity}}</span><br> lux
+      <p style="color:white; margin-bottom:0.1vw;">
+        <span color="white">{{surfaceLuminosity}}</span> lux &uarr;
       </p>
     </div>
   </template>
   <script>
     (function() {
       Polymer({
-        is: "orov-luminosity",
+        is: "orov-surfaceLuminosity",
          properties: {
-          luminosity: {
+          surfaceLuminosity: {
             type: String,
             value: '0'
           }
@@ -22,9 +22,9 @@
         behaviors: [namespace('behaviors').oROVStandard],
         registerEmitterHandlers: function(emitter){
           var self = this;
-          emitter.withHistory.on('plugin.luminosity.value', function( message )
+          emitter.withHistory.on('plugin.surfaceLuminosity.value', function( message )
           {
-            self.luminosity = message;
+            self.surfaceLuminosity = message;
           });
         }
       });
