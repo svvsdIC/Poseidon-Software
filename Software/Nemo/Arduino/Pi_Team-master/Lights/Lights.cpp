@@ -14,8 +14,6 @@
 
 Lights::Lights(int value_1, int value_2, int value_3, String stringInput, String elightToken1, String elightToken2, String elightToken3, int tokenLen)
 {
-  // initialize this instance's variables
-  value = givenValue;
 
   // do whatever is required to initialize the library
   pinMode(value_1, OUTPUT);
