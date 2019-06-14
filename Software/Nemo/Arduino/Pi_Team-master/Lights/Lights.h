@@ -12,7 +12,7 @@ class Lights
 {
   // user-accessible "public" interface
   public:
-    Lights(String stringInput, String elightToken1, String elightToken2, String elightToken3, int tokenLen, int value_1, int value_2, int value_3);
+    Lights(String elightToken1, String elightToken2, String elightToken3, int tokenLen, int value_1, int value_2, int value_3);
     void elights(String stringInput);
 
   // library-accessible "private" interface

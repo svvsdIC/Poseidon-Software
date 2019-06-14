@@ -12,7 +12,7 @@
 // Constructor /////////////////////////////////////////////////////////////////
 // Function that handles the creation and setup of instances
 
-Lights::Lights(int value_1, int value_2, int value_3, String stringInput, String elightToken1, String elightToken2, String elightToken3, int tokenLen)
+Lights::Lights(int value_1, int value_2, int value_3, String elightToken1, String elightToken2, String elightToken3, int tokenLen)
 {
 
   // do whatever is required to initialize the library
