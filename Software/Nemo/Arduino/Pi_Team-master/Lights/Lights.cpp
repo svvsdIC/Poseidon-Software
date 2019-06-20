@@ -20,6 +20,10 @@ Lights::Lights(String elightToken1, String elightToken2, String elightToken3, in
   pinMode(value_2, OUTPUT);
   pinMode(value_3, OUTPUT);
   Serial.begin(115200);
+  elightToken1 = _elightToken1
+  elightToken2 = _elightToken2
+  elightToken3 = _elightToken3
+  tokenLen = _tokenLen
 
 }
 
@@ -28,20 +32,20 @@ Lights::Lights(String elightToken1, String elightToken2, String elightToken3, in
 
 void Lights::elights(String stringInput)
 {
-  if (stringInput.startsWith(elightToken1)) {
-    _placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+  if (stringInput.startsWith(_elightToken1)) {
+    _placeholder = stringInput.substring((_tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
     analogWrite(value_1, _ledBrightness);
     }
 
-if (stringInput.startsWith(elightToken2)) {
-    _placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+if (stringInput.startsWith(_elightToken2)) {
+    _placeholder = stringInput.substring((_tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
     analogWrite(value_2, _ledBrightness);
     }
 
-if (stringInput.startsWith(elightToken3)) {
-    _placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+if (stringInput.startsWith(_elightToken3)) {
+    _placeholder = stringInput.substring((_tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
     analogWrite(value_3, _ledBrightness);
     }

@@ -19,6 +19,10 @@ class Lights
   private:
     int _ledBrightness;
     String _placeholder;
+    String _elightToken1
+    String _elightToken2
+    String _elightToken3
+    String _tokenLen
 };
 
 #endif
