@@ -29,21 +29,21 @@ Lights::Lights(String elightToken1, String elightToken2, String elightToken3, in
 void Lights::elights(String stringInput)
 {
   if (stringInput.startsWith(elightToken1)) {
-    placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+    _placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
-    analogWrite(value_1, ledBrightness);
+    analogWrite(value_1, _ledBrightness);
     }
 
 if (stringInput.startsWith(elightToken2)) {
-    placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+    _placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
-    analogWrite(value_2, ledBrightness);
+    analogWrite(value_2, _ledBrightness);
     }
 
 if (stringInput.startsWith(elightToken3)) {
-    placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
+    _placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
-    analogWrite(value_3, ledBrightness);
+    analogWrite(value_3, _ledBrightness);
     }
 
 else {
