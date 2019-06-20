@@ -20,10 +20,10 @@ Lights::Lights(String elightToken1, String elightToken2, String elightToken3, in
   pinMode(value_2, OUTPUT);
   pinMode(value_3, OUTPUT);
   Serial.begin(115200);
-  elightToken1 = _elightToken1
-  elightToken2 = _elightToken2
-  elightToken3 = _elightToken3
-  tokenLen = _tokenLen
+  elightToken1 = _elightToken1;
+  elightToken2 = _elightToken2;
+  elightToken3 = _elightToken3;
+  tokenLen = _tokenLen;
 
 }
 
