@@ -22,7 +22,7 @@ class Lights
     String _elightToken1;
     String _elightToken2;
     String _elightToken3;
-    String _tokenLen;
+    int _tokenLen;
 };
 
 #endif
