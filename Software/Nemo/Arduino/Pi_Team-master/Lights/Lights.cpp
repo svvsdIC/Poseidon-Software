@@ -26,7 +26,7 @@ Lights::Lights(String elightToken1, String elightToken2, String elightToken3, in
 // Public Methods //////////////////////////////////////////////////////////////
 // Functions available in Wiring sketches, this library, and other libraries
 
-void Lights::elights(stringInput)
+void Lights::elights(String stringInput)
 {
   if (stringInput.startsWith(elightToken1)) {
     placeholder = stringInput.substring((tokenLen + 1)); //Account for separator
