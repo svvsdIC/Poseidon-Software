@@ -23,6 +23,9 @@ Lights::Lights(String elightToken1, String elightToken2, String elightToken3, in
   elightToken1 = _elightToken1;
   elightToken2 = _elightToken2;
   elightToken3 = _elightToken3;
+  value_1 = _value_1;
+  value_2 = _value_2;
+  value_3 = _value_3;
   tokenLen = _tokenLen;
 
 }

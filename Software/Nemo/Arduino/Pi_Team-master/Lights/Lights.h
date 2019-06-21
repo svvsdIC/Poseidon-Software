@@ -23,6 +23,9 @@ class Lights
     String _elightToken2;
     String _elightToken3;
     int _tokenLen;
+    int _value_1;
+    int _value_2;
+    int _value_3;
 };
 
 #endif
