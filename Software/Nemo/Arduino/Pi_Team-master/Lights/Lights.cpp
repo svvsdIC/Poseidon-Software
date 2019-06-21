@@ -54,7 +54,7 @@ if (stringInput.startsWith(_elightToken3)) {
     }
 
 else {
-  Serial.print("Error: Unrecognized Input")
+  Serial.print("Error: Unrecognized Input");
 }
 }
 
