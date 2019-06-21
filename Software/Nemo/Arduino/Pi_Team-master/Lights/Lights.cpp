@@ -38,19 +38,19 @@ void Lights::elights(String stringInput)
   if (stringInput.startsWith(_elightToken1)) {
     _placeholder = stringInput.substring((_tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
-    analogWrite(value_1, _ledBrightness);
+    analogWrite(_value_1, _ledBrightness);
     }
 
 if (stringInput.startsWith(_elightToken2)) {
     _placeholder = stringInput.substring((_tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
-    analogWrite(value_2, _ledBrightness);
+    analogWrite(_value_2, _ledBrightness);
     }
 
 if (stringInput.startsWith(_elightToken3)) {
     _placeholder = stringInput.substring((_tokenLen + 1)); //Account for separator
     _ledBrightness = _placeholder.toInt();
-    analogWrite(value_3, _ledBrightness);
+    analogWrite(_value_3, _ledBrightness);
     }
 
 else {
