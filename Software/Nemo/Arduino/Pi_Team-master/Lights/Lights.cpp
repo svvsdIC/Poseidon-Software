@@ -20,13 +20,13 @@ Lights::Lights(String elightToken1, String elightToken2, String elightToken3, in
   pinMode(value_2, OUTPUT);
   pinMode(value_3, OUTPUT);
   Serial.begin(115200);
-  elightToken1 = _elightToken1;
-  elightToken2 = _elightToken2;
-  elightToken3 = _elightToken3;
-  value_1 = _value_1;
-  value_2 = _value_2;
-  value_3 = _value_3;
-  tokenLen = _tokenLen;
+  _elightToken1 = elightToken1;
+  _elightToken2 = elightToken2;
+  _elightToken3 = elightToken3;
+  _value_1 = value_1;
+  _value_2 = value_2;
+  _value_3 = value_3;
+  _tokenLen = tokenLen;
 
 }
 
@@ -52,10 +52,6 @@ if (stringInput.startsWith(_elightToken3)) {
     _ledBrightness = _placeholder.toInt();
     analogWrite(_value_3, _ledBrightness);
     }
-
-else {
-  Serial.print("Error: Unrecognized Input");
-}
 }
 
 // Private Methods /////////////////////////////////////////////////////////////
