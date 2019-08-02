@@ -89,6 +89,7 @@ bool printingIn = true, printingOut = true, suspendOutput = false;
 float controlPoints = 0.0; //global for easy debugging. See below for control point definition.
 int changeMax[6] = {0,0,0,0,0,0}; //change Maximum flag
 int changeMin[6] = {0,0,0,0,0,0}; //Change minimum flag
+int vals[6];
 bool changedFlag = false;  //Change the value if the value changes 
 
 //MATH SUBROUTINES
@@ -196,20 +197,25 @@ void outputTelemetry()
         Serial.print(controlValues.value[0]);
         changedFlag = false;
       }
-        Serial.println("Transx");
-        Serial.println(controlValues.value[3]);
-        Serial.println("Transy");
-        Serial.println(controlValues.value[2]);
-        Serial.println("Rotation");
-        Serial.println(controlValues.value[1]);
-        Serial.println("vertical");
-        Serial.println(controlValues.value[0]);
+      Serial.println("Transx");
+      Serial.println(controlValues.value[3]);
+      Serial.println("Transy");
+      Serial.println(controlValues.value[2]);
+      Serial.println("Rotation");
+      Serial.println(controlValues.value[1]);
+      Serial.println("vertical");
+      Serial.println(controlValues.value[0]);
       Serial.print("Motor value:");
       Serial.println(motorValues.value[0]);
       Serial.println(motorValues.value[1]);
       Serial.println(motorValues.value[2]);
       Serial.println(motorValues.value[3]);
-    
+      Serial.print("sent to motors");
+      Serial.println(vals[0]);
+      Serial.println(vals[1]);
+      Serial.println(vals[2]);
+      Serial.println(vals[3]);
+      
   }
 }
 
@@ -269,25 +275,63 @@ boolean checkPWM()
   return false
 }*/
 
+void controllerCalibrate()
+{
+  for(int i = 0; i < NUM_INPINS; i++)
+  {
+      //Calibration - original routine
+    if(timeValue[i] > maxInMicros[i])
+    {
+        changedFlag = true;
+        maxInMicros[i] = timeValue[i];
+        Serial.println(maxInMicros[i]);
+    }
+    if(timeValue[i] < minInMicros[i])
+    {
+        changedFlag = true;
+        minInMicros[i] = timeValue[i];
+        Serial.println(minInMicros[i]);
+    }
+    //calibration - simplified (does not work well)
+//    maxInMicros[i] = maxOutMicros;
+//    minInMicros[i] = minOutMicros;
+  }
+}
+
+void runCalibration()
+{
+  int changing = 0;
+  changedFlag = true;
+  for(int i = 0; i < NUM_INPINS; i++)
+  {
+      minInMicros[i] = neutralValue;
+      maxInMicros[i] = neutralValue;
+  }
+  
+  while(changedFlag)
+  {
+    controllerCalibrate();
+    if(Serial.available() > 0)
+    {
+      if (Serial.readString().indexOf("stopCalibration") >= 0)
+      {
+        changedFlag = false;
+      }
+    }
+  }
+ /*    for(int i = 0; i < NUM_INPINS; i++)
+  {
+        maxInMicros[i] = maxInMicros[1];
+        minInMicros[i] = timeValue[1];
+  }*/
+}
+
 void calcPWM()
 {
   for(int i = 0; i < NUM_INPINS; i++)
   {
     if(timeValue[i] > 700 && timeValue[i] < 2100) //prevent out-of-range values from entering the algorithm completely was 700, 2100
     {
-      //Calibration
-      if(timeValue[i] > maxInMicros[i])
-      {
-          changedFlag = true;
-          maxInMicros[i] = timeValue[i];
-      }
-      
-      if(timeValue[i] < minInMicros[i])
-      {
-          changedFlag = true;
-          minInMicros[i] = timeValue[i];
-      }
-      
       //Mapping:
       //Fist, we map from -100 to 100:
       controlValues.value[i] = map(timeValue[i], minInMicros[i], maxInMicros[i], -100, 100);
@@ -447,6 +491,7 @@ void updateMotors()
     if(suspendOutput)
       val = neutralValue;
     motors[i].writeMicroseconds(val);
+    vals[i] = (int)val;
   }
 }
 
@@ -490,6 +535,8 @@ void setup()
   suspendOutput = false;
   Serial.println("Remember to calibrate (move sticks around) before turning on ESC's...");
 
+  runCalibration();
+
 }
 
 /* * * * * * * * * * * 
@@ -502,4 +549,12 @@ void loop()
   serialThread.check();
   outputThread.check();
   inputThread.check();
+  if(Serial.available() > 0)
+  {
+    if (Serial.readString().indexOf("runCalibration") >= 0)
+    {
+      runCalibration();
+    }
+  }
+  
 }
