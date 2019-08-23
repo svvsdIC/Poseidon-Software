@@ -1,3 +1,4 @@
+
 const Promise       = require( 'bluebird' );
 const fs            = Promise.promisifyAll( require('fs') );
 const path          = require('path');
@@ -23,9 +24,9 @@ var SetupBoardInterface = function(board)
     logger.debug( "Creating bridge" );
 
     // Decorate the MCU interface with board specific properties
-    console.log(`b0be: starting /dev/ttyUSB0`);
-    board.bridge = new SerialBridge( '/dev/ttyUSB0', 115200 );
-    console.log(`b0be: started /dev/ttyUSB0`);
+    console.log(`b0be: starting /dev/ttyACM0`);
+    board.bridge = new SerialBridge( '/dev/ttyACM0', 115200 );
+    console.log(`b0be: started /dev/ttyACM0`);
 
     board.statusdata = {};
 

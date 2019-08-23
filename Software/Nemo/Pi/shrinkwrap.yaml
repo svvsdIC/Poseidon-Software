@@ -36,7 +36,6 @@ dependencies:
   request@^2.69.0: registry.npmjs.org/request/2.80.0
   respawn@^2.3.0: registry.npmjs.org/respawn/2.5.0
   rimraf@^2.5.1: registry.npmjs.org/rimraf/2.6.1
-  serialport@5.0.0-beta1: registry.npmjs.org/serialport/5.0.0-beta1
   serve-favicon@^2.3.0: registry.npmjs.org/serve-favicon/2.4.1
   serve-index@^1.7.3: registry.npmjs.org/serve-index/1.8.0
   should@^11.0.0: registry.npmjs.org/should/11.2.0
@@ -6065,20 +6064,6 @@ packages:
     resolution:
       shasum: 90cff19d02e07027fd767f5ead3e7b95d1e7380c
       tarball: 'https://registry.npmjs.org/sequencify/-/sequencify-0.0.7.tgz'
-  registry.npmjs.org/serialport/5.0.0-beta1:
-    dependencies:
-      bindings: registry.npmjs.org/bindings/1.2.1
-      buffer-indexof: registry.npmjs.org/buffer-indexof/1.1.0
-      commander: registry.npmjs.org/commander/2.9.0
-      debug: registry.npmjs.org/debug/2.6.1
-      inherits: registry.npmjs.org/inherits/2.0.3
-      lie: registry.npmjs.org/lie/3.1.1
-      nan: registry.npmjs.org/nan/2.5.1
-      object.assign: registry.npmjs.org/object.assign/4.0.4
-      readable-stream: registry.npmjs.org/readable-stream/2.2.3
-    resolution:
-      shasum: c024205304f9d12e754979e3d52aac051bf36418
-      tarball: 'https://registry.npmjs.org/serialport/-/serialport-5.0.0-beta1.tgz'
   registry.npmjs.org/serve-favicon/2.4.1:
     dependencies:
       etag: registry.npmjs.org/etag/1.8.0
