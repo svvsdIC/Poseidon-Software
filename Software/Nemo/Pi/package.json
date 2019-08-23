@@ -37,7 +37,7 @@
     "jquery-file-upload-middleware": "",
     "json-schema-defaults": "^0.2.0",
     "lazy": ">= 1.0.11",
-    "method-override": "^2.3.5",
+    "method-override": "^2.3.10",
     "mkdirp": "",
     "moment": "",
     "multer": "^1.1.0",
