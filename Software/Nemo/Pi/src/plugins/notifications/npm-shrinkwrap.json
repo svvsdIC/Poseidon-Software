@@ -17,6 +17,19 @@
         "underscore": "~1.4.4"
       }
     },
+    "bluebird": {
+      "version": "3.5.5",
+      "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.5.5.tgz",
+      "integrity": "sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w=="
+    },
+    "debug": {
+      "version": "4.1.1",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-4.1.1.tgz",
+      "integrity": "sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==",
+      "requires": {
+        "ms": "^2.1.1"
+      }
+    },
     "immediate": {
       "version": "3.0.6",
       "resolved": "https://registry.npmjs.org/immediate/-/immediate-3.0.6.tgz",
@@ -42,6 +55,19 @@
       "version": "0.0.8",
       "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz",
       "integrity": "sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0="
+    },
+    "mkdirp": {
+      "version": "0.5.1",
+      "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz",
+      "integrity": "sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=",
+      "requires": {
+        "minimist": "0.0.8"
+      }
+    },
+    "ms": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz",
+      "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
     },
     "nedb": {
       "version": "1.8.0",
