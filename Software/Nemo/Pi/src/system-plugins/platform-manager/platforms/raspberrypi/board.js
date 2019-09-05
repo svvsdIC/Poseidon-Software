@@ -49,7 +49,6 @@ class BoardInterface
 
     //var eepromFileName = __dirname + '/boards/' + self.board.info.boardId + '/b0be-eeprom.json'; 
     var eepromFileName = __dirname + '/boards/rev10/b0be-eeprom.json'; 
-    console.log(`b0be-eepromFileName: ${eepromFileName}`);
     return fs.readFileAsync(path.resolve(eepromFileName ) )
 //    return fs.readFileAsync( path.resolve( '/sys/class/i2c-adapter/i2c-1/1-0054/eeprom' ) )
 //      .then( (data) => 
