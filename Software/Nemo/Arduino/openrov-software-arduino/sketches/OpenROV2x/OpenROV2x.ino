@@ -11,10 +11,10 @@
 void setup()
 {
 	// Initialize main subsystems
-	NArduinoManager::Initialize();
-	NCommManager::Initialize();
-	NVehicleManager::Initialize();
-	NModuleManager::Initialize();
+//	NArduinoManager::Initialize();
+//	NCommManager::Initialize();
+//	NVehicleManager::Initialize();
+//	NModuleManager::Initialize();
 	NDataManager::Initialize();
 
 	// Set timer 5 divisor to 8 for PWM frequency of 3921.16Hz (D44, D45, D46)
@@ -27,16 +27,16 @@ void setup()
 void loop()
 {
 	// Reset the watchdog timer
-	wdt_reset();
+//	wdt_reset();
 
 	// Attempt to read a current command off of the command line
-	NCommManager::GetCurrentCommand();
+//	NCommManager::GetCurrentCommand();
 
 	// Handle any config change requests
-	NVehicleManager::HandleMessages( NCommManager::m_currentCommand );
+//	NVehicleManager::HandleMessages( NCommManager::m_currentCommand );
 
 	// Handle update loops for each module
-	NModuleManager::HandleModuleUpdates( NCommManager::m_currentCommand );
+//	NModuleManager::HandleModuleUpdates( NCommManager::m_currentCommand );
 
 	// Handle update loops that send data back to the beaglebone
 	NDataManager::HandleOutputLoops();

@@ -1,9 +1,9 @@
 #include "NDataManager.h"
 
-#include "NModuleManager.h"
-#include "PinDefinitions.h"
+//#include "NModuleManager.h"
+//#include "PinDefinitions.h"
 
-#include <I2C.h>
+//#include <I2C.h>
 
 namespace NDataManager
 {
@@ -21,7 +21,7 @@ namespace NDataManager
 	// Called during Setup() to initialize any DataManager members to specific values
 	void Initialize()
 	{
-		m_thrusterData.MATC		= true;
+//		m_thrusterData.MATC		= true;
 	}
 
 	void OutputNavData()
@@ -45,9 +45,9 @@ namespace NDataManager
 		// Serial.print( F( "yaw:" ) );
 		// Serial.print( m_navData.YAW );
 		// Serial.print( ';' );
-		Serial.print( F( "fthr:" ) );
-		Serial.print( m_navData.FTHR );
-		Serial.println( ';' );
+//		Serial.print( F( "fthr:" ) );
+//		Serial.print( m_navData.FTHR );
+//		Serial.println( ';' );
 	}
 
 	void OutputSharedData()
@@ -55,10 +55,11 @@ namespace NDataManager
 		// Print all other shared data on the serial line
 
 		// Thruster Data
-		Serial.print( F( "motorAttached:" ) );
-		Serial.print( m_thrusterData.MATC );
-		Serial.println( ';' );
+//		Serial.print( F( "motorAttached:" ) );
+//		Serial.print( m_thrusterData.MATC );
+//		Serial.println( ';' );
 
+#IF 0
 		// Cape Data
 		Serial.print( F( "fmem:" ) );
 		Serial.print( m_capeData.FMEM );
@@ -83,12 +84,12 @@ namespace NDataManager
 		Serial.print( F( "temp:" ) );
 		Serial.print( m_environmentData.TEMP );
 		Serial.println( ';' );
-
+#ENDIF
 		// I2C Debugging
 		// -----------------------------------------------------------------
 		// RESULT_SUCCESS    	            = 0,   // Operation successful
         // RESULT_NACK,                            // Transaction was denied or there was no response
-
+#IF 0
         // // Errors
         // RESULT_ERR_TIMEOUT,                     // Operation timed out            
         // RESULT_ERR_FAILED,                      // Operation failed
@@ -122,7 +123,7 @@ namespace NDataManager
 		Serial.print( I2C0.GetResultCount( i2c::EI2CResult::RESULT_ERR_BAD_ADDRESS ) );
 		Serial.println( ';' );
 	}
-
+#ENDIF
 	void HandleOutputLoops()
 	{
 		++m_loopsPerSec;
@@ -146,7 +147,13 @@ namespace NDataManager
 		if( m_timer_10hz.HasElapsed( 100 ) )
 		{
 			// Send nav data to beaglebone
-			OutputNavData();
+//			OutputNavData();
+			outputMockData();
 		}
 	}
 }
+
+void outputMockData (){
+	Serial.print ("BT1I:2000;");
+
+};
