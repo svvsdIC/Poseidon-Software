@@ -59,7 +59,7 @@ namespace NDataManager
 //		Serial.print( m_thrusterData.MATC );
 //		Serial.println( ';' );
 
-#IF 0
+#if 0
 		// Cape Data
 		Serial.print( F( "fmem:" ) );
 		Serial.print( m_capeData.FMEM );
@@ -84,12 +84,10 @@ namespace NDataManager
 		Serial.print( F( "temp:" ) );
 		Serial.print( m_environmentData.TEMP );
 		Serial.println( ';' );
-#ENDIF
-		// I2C Debugging
+        // I2C Debugging
 		// -----------------------------------------------------------------
 		// RESULT_SUCCESS    	            = 0,   // Operation successful
         // RESULT_NACK,                            // Transaction was denied or there was no response
-#IF 0
         // // Errors
         // RESULT_ERR_TIMEOUT,                     // Operation timed out            
         // RESULT_ERR_FAILED,                      // Operation failed
@@ -122,8 +120,14 @@ namespace NDataManager
 		Serial.print( F( "i2c.BAD_ADDR:" ) );
 		Serial.print( I2C0.GetResultCount( i2c::EI2CResult::RESULT_ERR_BAD_ADDRESS ) );
 		Serial.println( ';' );
+#endif
 	}
-#ENDIF
+
+    void outputMockData (){
+        Serial.print ("BT1I:2000;");
+
+    };
+
 	void HandleOutputLoops()
 	{
 		++m_loopsPerSec;
@@ -153,7 +157,3 @@ namespace NDataManager
 	}
 }
 
-void outputMockData (){
-	Serial.print ("BT1I:2000;");
-
-};
