@@ -11,7 +11,7 @@
 void setup()
 {
 	// Initialize main subsystems
-//	NArduinoManager::Initialize();
+	NArduinoManager::Initialize();
 //	NCommManager::Initialize();
 //	NVehicleManager::Initialize();
 //	NModuleManager::Initialize();
