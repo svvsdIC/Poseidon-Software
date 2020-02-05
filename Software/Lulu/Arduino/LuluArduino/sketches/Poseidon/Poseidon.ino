@@ -1,37 +1,36 @@
-/*
-  Blink
+// Includes
+//#include <EEPROM.h>
 
-  Turns an LED on for one second, then off for one second, repeatedly.
+#include "NArduinoManager.h"
+#include "NDataManager.h"
+#include "NCommManager.h"
+#include "NModuleManager.h"
 
-  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
-  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
-  the correct LED pin independent of which board is used.
-  If you want to know what pin the on-board LED is connected to on your Arduino
-  model, check the Technical Specs of your board at:
-  https://www.arduino.cc/en/Main/Products
 
-  modified 8 May 2014
-  by Scott Fitzgerald
-  modified 2 Sep 2016
-  by Arturo Guadalupi
-  modified 8 Sep 2016
-  by Colby Newman
+void setup()
+{
+	// Initialize main subsystems
+	NArduinoManager::Initialize();
+	NCommManager::Initialize();
+	NModuleManager::Initialize();
+	NDataManager::Initialize();
 
-  This example code is in the public domain.
 
-  http://www.arduino.cc/en/Tutorial/Blink
-*/
-
-// the setup function runs once when you press reset or power the board
-void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+	// Boot complete
+	Serial.println( F( "boot:1;" ) );
 }
 
-// the loop function runs over and over again forever
-void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
+void loop()
+{
+	// Reset the watchdog timer
+	wdt_reset();
+
+	// Attempt to read a current command off of the command line
+	NCommManager::GetCurrentCommand();
+
+	// Handle update loops for each module
+	NModuleManager::HandleModuleUpdates( NCommManager::m_currentCommand );
+
+	// Handle update loops that send data back to the beaglebone
+	NDataManager::HandleOutputLoops();
 }
