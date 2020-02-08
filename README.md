@@ -10,9 +10,9 @@ File tree:<br/>
   * Lulu<br/>
     * Pi<br/>
     * Arduino<br/>
-	*NemoArduino<br/>
-          *Sketches<br/>
-            *Poseidon<br/>
+	* NemoArduino<br/>
+          * Sketches<br/>
+            * Poseidon<br/>
   * Nemo<br/>
     * Arduino<br/>
       * NemoArduino<br/>
