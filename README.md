@@ -8,11 +8,11 @@ File tree:<br/>
 * Electrical<br/>
 * Software<br/>
   * Lulu<br/>
-    * Pi<br/>
     * Arduino<br/>
-	* LuluArduino<br/>
-          * Sketches<br/>
-            * Poseidon<br/>
+      * LuluArduino<br/>
+        * Sketches<br/>
+          * Poseidon<br/>
+    * Pi<br/>
   * Nemo<br/>
     * Arduino<br/>
       * NemoArduino<br/>
