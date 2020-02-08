@@ -9,12 +9,16 @@ File tree:<br/>
 * Software<br/>
   * Lulu<br/>
     * Pi<br/>
-    * X-Mega<br/>
+    * Arduino<br/>
+	*NemoArduino<br/>
+          *Sketches<br/>
+            *Poseidon<br/>
   * Nemo<br/>
     * Arduino<br/>
+      * NemoArduino<br/>
+        * Sketches<br/>
+          * Poseidon<br/>
     * Pi<br/>
-      * Open Rov<br/>
-    * X-Mega<br/>
 * Documentation<br/>
   * Design Documents<br/>
   * Operational Documentation<br/>
