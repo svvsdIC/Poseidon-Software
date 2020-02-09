@@ -29,14 +29,14 @@ void CMock::Update( CCommand& commandIn )
 	if( m_fastTimer.HasElapsed( MOCK_STATUS_DELAY_MS ) )
 	{
         // Report results
-        Serial.print( F( "mock_cntr:" ) );Serial.println(++m_fastCounter);
+        Serial.print( F( "mock_cntr:" ) );Serial.println(++m_counter);
 
 	}
 
 	if( m_statusTimer.HasElapsed( MOCK_FAST_DELAY_MS ) )
 	{
         // Report results
-        Serial.print( F( "mock_fastCntr:" ) );Serial.println(++m_counter);
+        Serial.print( F( "mock_fastCntr:" ) );Serial.println(++m_fastCounter);
 
         //reset counter every 100
         if(m_fastCounter > 99)
