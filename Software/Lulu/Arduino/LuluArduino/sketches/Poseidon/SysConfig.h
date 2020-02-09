@@ -12,5 +12,9 @@
 #endif
 
 // Configuration
+
+// Mock
+#define HAS_MOCK (1) 
+
 // Some_module
 #define HAS_SOME_MODULE (1)
