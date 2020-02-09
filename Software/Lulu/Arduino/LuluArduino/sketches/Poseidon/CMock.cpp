@@ -31,17 +31,18 @@ void CMock::Update( CCommand& commandIn )
         // Report results
         Serial.print( F( "mock_cntr:" ) );Serial.println(++m_fastCounter);
 
-        //reset counter every 100
-        if(m_fastCounter > 99)
-        {
-            m_fastCounter = 0;
-        }
 	}
 
 	if( m_statusTimer.HasElapsed( MOCK_FAST_DELAY_MS ) )
 	{
         // Report results
         Serial.print( F( "mock_fastCntr:" ) );Serial.println(++m_counter);
+
+        //reset counter every 100
+        if(m_fastCounter > 99)
+        {
+            m_fastCounter = 0;
+        }
 	}
 }
 
