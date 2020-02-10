@@ -13,6 +13,16 @@
 // They can also be accessed individually as namespace members.
 // ---------------------------------------
 
+#if( HAS_MOCK )
+#include "CMock.h"
+CMock m_Mock;
+#endif
+
+#if( HAS_SOME_MODULE )
+#include "CSome_module.h"
+CSome_module m_Some_module;
+#endif
+
 #if( HAS_OROV_CONTROLLERBOARD_25 )
 #include "CControllerBoard.h"
 CControllerBoard m_controllerBoard;
