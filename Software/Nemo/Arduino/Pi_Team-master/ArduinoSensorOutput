@@ -1,9 +1,13 @@
-#include <Wire.h> // Used to establied serial communication on the I2C bus
+#include "Wire.h" // Used to establied serial communication on the I2C bus
 #include "SparkFunTMP102.h" // Used to send and recieve specific information from our sensor
-
-const int ALERT_PIN = A3;
+#include "SparkFunTSL2561.h"
 
 TMP102 sensor0(0x48);
+SFE_TSL2561 light;
+
+boolean gain;     
+unsigned int ms;
+//double lux;
 
 typedef struct imu_values_s {
     
@@ -17,15 +21,12 @@ void setup()
     Serial.begin(115200);
     delay(500);
     Serial.println( F( "boot:1;" ) );
-    pinMode(ALERT_PIN,INPUT);  // Declare alertPin as an input
     sensor0.begin();  // Join I2C bus
-    sensor0.setFault(0);  // Trigger alarm immediately
-    sensor0.setAlertPolarity(1); // Active HIGH
-    sensor0.setAlertMode(0); // Comparator Mode.
-    sensor0.setConversionRate(2);
-    sensor0.setExtendedMode(0);
-    sensor0.setHighTempF(100.0);  // set T_HIGH in F
-    sensor0.setLowTempF(84.0);  // set T_LOW in F
+    light.begin();
+    gain = 0;
+    unsigned char time = 2;
+    light.setTiming(gain,time,ms);
+    light.setPowerUp();
 }
 
 void loop()
@@ -41,14 +42,18 @@ void OutputSensorData(void) {
   imu.time += imu.timeDelta_ms;
   float val = imu.time;
   String sensorresult = "";
+
+  unsigned int data0, data1;
+  light.getData(data0,data1);
+  double lux;
+  light.getLux(gain,ms,data0,data1,lux);
   
   sensorresult += "ORP:" + String(round(1020 * sin(val * (PI / 10000)))) + ";";
   sensorresult += "conductivity:" + String(round(abs(500000 * sin(val * (PI /20000))))) + ";";
   sensorresult += "disOxy:" + String(round(abs(100 * sin(val * PI / 20000)))) + ";";
   sensorresult += "pH:" + String(round(abs(14 * sin(val * (PI / 10000))))) + ";";
-  sensorresult += "luminosity:" + String(round(abs(65535 * sin(val * (PI / 10000))) / 10)) + ";";
+  sensorresult += "luminosity:" + String(lux) + ";";
   sensorresult += "waterTemp:" + String(temperature) + ";";
-  //String(round(abs(100 * sin(val * (PI / 20000))) * 10) / 10)
   Serial.println(sensorresult);
   delay(1000);
 }
