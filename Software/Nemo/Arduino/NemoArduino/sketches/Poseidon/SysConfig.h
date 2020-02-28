@@ -21,8 +21,9 @@
 #define HAS_STD_AUTOPILOT (0)
 #define DEADMANSWITCH_ON (0)
 
-#define HAS_MOCK (1)
-#define HAS_SOME_MODULE (1)
+#define HAS_MOCK (0)
+#define HAS_SOME_MODULE (0)
+#define HAS_BLINK (1)
 
 // ---------------------------------------------------------
 // After Market Modules

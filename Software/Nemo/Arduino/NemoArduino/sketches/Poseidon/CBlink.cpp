@@ -1,5 +1,5 @@
 #include "SysConfig.h"
-#if(HAS_SOME_MODULE)
+#if(HAS_BLINK)
 #include "CBlink.h"
 #include "NCommManager.h"
 
