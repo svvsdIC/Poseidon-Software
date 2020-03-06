@@ -6,6 +6,7 @@
 
 CBlink::CBlink()
 {
+    pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void CBlink::Initialize()
@@ -16,6 +17,11 @@ void CBlink::Initialize()
 
 void CBlink::Update( CCommand& commandIn )
 {
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);
+/*  
 	// Handle commands
 	if( NCommManager::m_isCommandAvailable )
 	{
@@ -44,6 +50,7 @@ void CBlink::Update( CCommand& commandIn )
             m_fastCounter = 0;
         }
 	}
+ */
 }
 
 #endif
