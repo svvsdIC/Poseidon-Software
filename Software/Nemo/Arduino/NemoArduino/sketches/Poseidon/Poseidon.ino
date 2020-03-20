@@ -13,7 +13,6 @@ void setup()
 	NCommManager::Initialize();
 	NModuleManager::Initialize();
 
-
 	// Boot complete
 	Serial.println( F( "boot:1;" ) );
 }

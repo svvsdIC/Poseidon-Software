@@ -6,21 +6,28 @@
 
 CBlink::CBlink()
 {
-    pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void CBlink::Initialize()
 {
+	// Set built in LED pin to output pinMode
+	pinMode(LED_BUILTIN, OUTPUT);
+
+	// Notify that blink module is ready
 	Serial.println( F( "blink:1;" ) );
-	m_statusTimer.Reset();
+	m_statusTimer.Reset();	// TODO: do we need this?
 }
 
 void CBlink::Update( CCommand& commandIn )
 {
+	// TODO: remove delay functions
+
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   delay(1000);                       // wait for a second
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   delay(1000);
+
+//TODO: Comment these lines if plan to use them
 /*  
 	// Handle commands
 	if( NCommManager::m_isCommandAvailable )
@@ -53,4 +60,4 @@ void CBlink::Update( CCommand& commandIn )
  */
 }
 
-#endif
+#endif /* HAS_BLINK */
