@@ -20,4 +20,13 @@ class CBlink : public CModule
         orutil::CTimer m_fastTimer;
         #define BLINK_FAST_DELAY_MS 100
         int m_fastCounter;
+
+
+        // Blink state variables
+
+        static const int32_t BLINK_OFF = 0;
+        static const int32_t BLINK_ON  = 1;
+
+        int32_t m_blink_state;
+        int32_t m_blink_period;
 };

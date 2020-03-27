@@ -3,6 +3,18 @@
 #include "CBlink.h"
 #include "NCommManager.h"
 
+/*
+Module responsible for blinking the builtin LED on the Arduino
+
+Serial commands in
+
+	blink:0			- turn off blinking
+	blink:1,XXXX	- turn on blinking at XXX ms period
+
+	// TODO:
+	blink_status:
+		reply with 0 or 1,XXXX
+*/
 
 CBlink::CBlink()
 {
@@ -20,24 +32,40 @@ void CBlink::Initialize()
 
 void CBlink::Update( CCommand& commandIn )
 {
+
+	/* original code
 	// TODO: remove delay functions
+	digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+	delay(1000);                       // wait for a second
+	digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+	delay(1000);
+	*/
 
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);
+	// P1 ***** parse command if any ****
 
-//TODO: Comment these lines if plan to use them
-/*  
-	// Handle commands
+	// Handle commands (if there are any, otherwise this gets skipped)
 	if( NCommManager::m_isCommandAvailable )
 	{
-		if( commandIn.Equals( "blink:cmd" ) )
+		if( commandIn.Equals( "blink" ) )
 		{
-			Serial.println( F( "blink:cmd,1;" ) );
-		}
-	}
+			int32_t blink_new_state = commandIn.m_arguments[1];
 
+			// TODO: finish checking for valid values
+			switch (blink_new_state) {
+				case BLINK_OFF:
+					
+
+			}
+
+			// TODO: set up standard error codes -- logging is good!!!
+			// TODO: blink module implement error code or message?  initial implementation will iginore invalid input.
+		}
+
+		/*
+		Sma
+		*/
+	}
+/*  
     // Do other stuff 
 	if( m_fastTimer.HasElapsed( BLINK_STATUS_DELAY_MS ) )
 	{
@@ -58,6 +86,18 @@ void CBlink::Update( CCommand& commandIn )
         }
 	}
  */
+
+	// P2 ***********
+	/*
+		logic to implement a blink using timer values
+
+		pseudo code:
+			if blink is NOT enabled, then turn off the LED
+			return
+
+			if blink is enabled, then check timer agains period
+				if expired, toggle LED
+	*/
 }
 
 #endif /* HAS_BLINK */
