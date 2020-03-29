@@ -20,9 +20,9 @@ class CCommand
 	// Attributes
 public:
 	static int32_t m_arguments[ COMMAND_MAX_ARGUMENTS ];
+	static char m_text[ COMMAND_DATA_BUFFER_SIZE + 1 ];
 
 private:
-	static char m_text[ COMMAND_DATA_BUFFER_SIZE + 1 ];
 
 	// Methods
 public:

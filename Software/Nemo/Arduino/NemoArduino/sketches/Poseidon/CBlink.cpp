@@ -27,7 +27,7 @@ void CBlink::Initialize()
 
 	// Notify that blink module is ready
 	Serial.println( F( "blink:1;" ) );
-	m_statusTimer.Reset();	// TODO: do we need this?
+	m_blinkTimer.Reset();	// TODO: do we need this?
 }
 
 void CBlink::Update( CCommand& commandIn )
@@ -53,18 +53,53 @@ void CBlink::Update( CCommand& commandIn )
 			// TODO: finish checking for valid values
 			switch (blink_new_state) {
 				case BLINK_OFF:
-					
+					m_blinking = false;
+					digitalWrite(LED_BUILTIN, LOW);
+					break;
+				case BLINK_ON:
+					m_blinking = true;
+					m_blink_period = commandIn.m_arguments[2];
+					digitalWrite(LED_BUILTIN, HIGH);
+					m_blinkTimer.Reset();
+					break;
 
-			}
+				default:
+					Serial.println(F("blink:nack"));
+					break;
+				}
 
 			// TODO: set up standard error codes -- logging is good!!!
 			// TODO: blink module implement error code or message?  initial implementation will iginore invalid input.
 		}
 
-		/*
-		Sma
-		*/
 	}
+
+	// P2 ***********
+	if(m_blinking)
+	{
+		if( m_blinkTimer.HasElapsed(m_blink_period ))
+		{
+			Serial.println("blink period elapsed.");
+			if (digitalRead(LED_BUILTIN) == HIGH)
+			{
+				digitalWrite(LED_BUILTIN, LOW);
+			}
+			else
+			{
+				digitalWrite(LED_BUILTIN, HIGH);
+			}
+		}
+	}
+
+	/*	pseudo code:
+			if blink is NOT enabled, then turn off the LED
+			return
+
+			if blink is enabled, then check timer against period
+				if expired, toggle LED
+	*/
+	
+
 /*  
     // Do other stuff 
 	if( m_fastTimer.HasElapsed( BLINK_STATUS_DELAY_MS ) )
@@ -87,17 +122,5 @@ void CBlink::Update( CCommand& commandIn )
 	}
  */
 
-	// P2 ***********
-	/*
-		logic to implement a blink using timer values
-
-		pseudo code:
-			if blink is NOT enabled, then turn off the LED
-			return
-
-			if blink is enabled, then check timer agains period
-				if expired, toggle LED
-	*/
 }
-
 #endif /* HAS_BLINK */

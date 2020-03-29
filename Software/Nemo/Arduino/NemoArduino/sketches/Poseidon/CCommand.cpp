@@ -263,25 +263,25 @@ void CCommand::Parse()
 
 	Serial.println( ';' );
 
-	Serial.print( F( "crc:" ) );
-	uint8_t testcrc = dataBuffer[0];
-
-	if( crc == testcrc )
-	{
-		Serial.print( F( "pass;" ) );
-	}
-	else
-	{
-		Serial.print( F( "fail," ) );
-		Serial.print( crc, HEX );
-		Serial.print( "/" );
-		Serial.print( testcrc, HEX );
-		Serial.print( ';' );
-		return;
-	}
+//	Serial.print( F( "crc:" ) );
+//	uint8_t testcrc = dataBuffer[0];
+//
+//	if( crc == testcrc )
+//	{
+//		Serial.print( F( "pass;" ) );
+//	}
+//	else
+//	{
+//		Serial.print( F( "fail," ) );
+//		Serial.print( crc, HEX );
+//		Serial.print( "/" );
+//		Serial.print( testcrc, HEX );
+//		Serial.print( ';' );
+//		return;
+//	}
 
 	char* db2 = dataBuffer;
-	db2++;
+//	db2++;
 	pch = strtok( db2, " ,();" );
 
 	while( pch != NULL )
