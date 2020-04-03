@@ -8,13 +8,17 @@ Module responsible for blinking the builtin LED on the Arduino
 
 Serial commands in
 
-	blink:0			- turn off blinking
-	blink:1,XXXX	- turn on blinking at XXX ms period
+	blink(0);		- turn off blinking
+	blink(1,XXXX);	- turn on blinking at XXX ms period
 
 	// TODO:
 	blink_status:
 		reply with 0 or 1,XXXX
 */
+
+// TODO: set up standard error codes -- logging is good!!!
+// TODO: blink module implement error code or message?  initial implementation will iginore invalid input.
+
 
 CBlink::CBlink()
 {
@@ -26,14 +30,58 @@ void CBlink::Initialize()
 	pinMode(LED_BUILTIN, OUTPUT);
 
 	// Notify that blink module is ready
-	Serial.println( F( "blink:1;" ) );
-	m_statusTimer.Reset();	// TODO: do we need this?
+	Serial.println( F( "blink:1;" ) );		// TODO: revist how we notify the module is running
+	m_blinkTimer.reset();
 }
 
 void CBlink::Update( CCommand& commandIn )
 {
+	if( NCommManager::m_isCommandAvailable && commandIn.Equals( "blink" ))
+	{
+		parseCommand(commandIn);
+	}
 
-	/* original code
+	toggleLED();
+}
+
+void CBlink::parseCommand( CCommand &commandIn) {
+	// Handle commands (if there are any, otherwise this gets skipped)
+	int32_t blink_new_state = commandIn.m_arguments[1];
+
+	// TODO: finish checking for valid values
+	switch (blink_new_state) {
+		case BLINK_OFF:
+		//turn off blinking
+			digitalWrite(LED_BUILTIN, LOW); 
+			m_is_blinking = 0;
+			break;
+
+		case BLINK_ON:
+		//turn on blinking at a set rate
+			m_is_blinking = true;
+			m_blink_rate_ms = commandIn.m_arguments[2];	// potential bug if arg 2 is not defined by the user,  'blink(1)'
+			break;
+			
+		default:
+			Serial.println("blink:nack;"); //error message
+			break;
+	}
+}
+
+void CBlink::toggleLED() {
+	// Toggle the LED when the timer has elapsed
+	if(m_is_blinking && m_blinkTimer.HasElapsed(m_blink_rate_ms)){
+			bool current_led_state = digitalRead(LED_BUILTIN);
+			digitalWrite(LED_BUILTIN, !led_state);
+		}
+	}
+}
+
+#endif /* HAS_BLINK */
+
+// - --- original code - keep for reference -----
+
+/* original code
 	// TODO: remove delay functions
 	digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
 	delay(1000);                       // wait for a second
@@ -41,31 +89,20 @@ void CBlink::Update( CCommand& commandIn )
 	delay(1000);
 	*/
 
-	// P1 ***** parse command if any ****
+	/*
+		logic to implement a blink using timer values
 
-	// Handle commands (if there are any, otherwise this gets skipped)
-	if( NCommManager::m_isCommandAvailable )
-	{
-		if( commandIn.Equals( "blink" ) )
-		{
-			int32_t blink_new_state = commandIn.m_arguments[1];
+		pseudo code:
+			if blink is NOT enabled, then turn off the LED
+			return
 
-			// TODO: finish checking for valid values
-			switch (blink_new_state) {
-				case BLINK_OFF:
-					
+			if blink is enabled, then check timer agains period
+				if expired, toggle LED
+	*/
 
-			}
 
-			// TODO: set up standard error codes -- logging is good!!!
-			// TODO: blink module implement error code or message?  initial implementation will iginore invalid input.
-		}
+/*  OLD CODE - keep for reference, then delete
 
-		/*
-		Sma
-		*/
-	}
-/*  
     // Do other stuff 
 	if( m_fastTimer.HasElapsed( BLINK_STATUS_DELAY_MS ) )
 	{
@@ -86,18 +123,3 @@ void CBlink::Update( CCommand& commandIn )
         }
 	}
  */
-
-	// P2 ***********
-	/*
-		logic to implement a blink using timer values
-
-		pseudo code:
-			if blink is NOT enabled, then turn off the LED
-			return
-
-			if blink is enabled, then check timer agains period
-				if expired, toggle LED
-	*/
-}
-
-#endif /* HAS_BLINK */

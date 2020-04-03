@@ -12,21 +12,16 @@ class CBlink : public CModule
         void Update( CCommand& commandIn );//update, needed
 
     private:
-        // Timers
-        orutil::CTimer m_statusTimer;
-        #define BLINK_STATUS_DELAY_MS 1000
-        int m_counter;
-        
-        orutil::CTimer m_fastTimer;
-        #define BLINK_FAST_DELAY_MS 100
-        int m_fastCounter;
-
+        // Blink Timers variables
+        orutil::CTimer m_blinkTimer;
 
         // Blink state variables
-
         static const int32_t BLINK_OFF = 0;
         static const int32_t BLINK_ON  = 1;
 
-        int32_t m_blink_state;
-        int32_t m_blink_period;
+        bool m_is_blinking = false;
+        int32_t m_blink_rate_ms = 1000;
+
+        void parseCommand( CCommand & commandIn );
+        void toggleLED();
 };
