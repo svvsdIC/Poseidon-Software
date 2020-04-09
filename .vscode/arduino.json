@@ -1,5 +1,7 @@
 {
     "board": "arduino:avr:mega",
     "configuration": "cpu=atmega2560",
-    "port": "/dev/tty.usbmodem1434201"
+    "port": "/dev/tty.usbmodem1434201",
+    "programmer": "AVRISP mkII",
+    "sketch": "Software/Nemo/Arduino/NemoArduino/sketches/Poseidon/Poseidon.ino"
 }
