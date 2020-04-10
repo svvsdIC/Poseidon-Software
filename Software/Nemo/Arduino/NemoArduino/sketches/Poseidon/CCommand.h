@@ -21,7 +21,6 @@ class CCommand
 public:
 	static int32_t m_arguments[ COMMAND_MAX_ARGUMENTS ];
 
-private:
 	static char m_text[ COMMAND_DATA_BUFFER_SIZE + 1 ];
 
 	// Methods

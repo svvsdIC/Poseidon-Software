@@ -31,7 +31,7 @@ void CBlink::Initialize()
 
 	// Notify that blink module is ready
 	Serial.println( F( "blink:1;" ) );		// TODO: revist how we notify the module is running
-	m_blinkTimer.reset();
+	m_blinkTimer.Reset();
 }
 
 void CBlink::Update( CCommand& commandIn )
@@ -46,24 +46,40 @@ void CBlink::Update( CCommand& commandIn )
 
 void CBlink::parseCommand( CCommand &commandIn) {
 	// Handle commands (if there are any, otherwise this gets skipped)
+	Serial.println(commandIn.m_text);
+	for (int i=0; i <= commandIn.m_arguments[0]; i++){
+		Serial.println(commandIn.m_arguments[i]);
+	}
+	if(commandIn.m_arguments[0] == 0){
+		Serial.println("blink:no_args;"); //error message
+		return;
+	}
+	if(commandIn.m_arguments[0] > 2){
+		Serial.println("blink:too_many_args;"); //error message
+		return;
+	}
 	int32_t blink_new_state = commandIn.m_arguments[1];
-
 	// TODO: finish checking for valid values
 	switch (blink_new_state) {
 		case BLINK_OFF:
 		//turn off blinking
 			digitalWrite(LED_BUILTIN, LOW); 
-			m_is_blinking = 0;
+			m_is_blinking = false;
 			break;
 
 		case BLINK_ON:
 		//turn on blinking at a set rate
+			if(commandIn.m_arguments[0] == 1){
+				m_blink_rate_ms = DEFAULT_BLINK_RATE;	
+			}
+			else{
+				m_blink_rate_ms = commandIn.m_arguments[2];	
+			}
 			m_is_blinking = true;
-			m_blink_rate_ms = commandIn.m_arguments[2];	// potential bug if arg 2 is not defined by the user,  'blink(1)'
 			break;
 			
 		default:
-			Serial.println("blink:nack;"); //error message
+			Serial.println("blink:bad_command;"); //error message
 			break;
 	}
 }
@@ -72,9 +88,8 @@ void CBlink::toggleLED() {
 	// Toggle the LED when the timer has elapsed
 	if(m_is_blinking && m_blinkTimer.HasElapsed(m_blink_rate_ms)){
 			bool current_led_state = digitalRead(LED_BUILTIN);
-			digitalWrite(LED_BUILTIN, !led_state);
+			digitalWrite(LED_BUILTIN, !current_led_state);
 		}
-	}
 }
 
 #endif /* HAS_BLINK */

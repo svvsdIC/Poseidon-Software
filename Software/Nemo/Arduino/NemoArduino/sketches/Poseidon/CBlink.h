@@ -18,6 +18,7 @@ class CBlink : public CModule
         // Blink state variables
         static const int32_t BLINK_OFF = 0;
         static const int32_t BLINK_ON  = 1;
+        static const int32_t DEFAULT_BLINK_RATE = 1000;
 
         bool m_is_blinking = false;
         int32_t m_blink_rate_ms = 1000;

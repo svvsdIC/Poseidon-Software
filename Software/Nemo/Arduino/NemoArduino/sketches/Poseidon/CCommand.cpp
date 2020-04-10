@@ -263,7 +263,7 @@ void CCommand::Parse()
 
 	Serial.println( ';' );
 
-	Serial.print( F( "crc:" ) );
+	/*Serial.print( F( "crc:" ) );
 	uint8_t testcrc = dataBuffer[0];
 
 	if( crc == testcrc )
@@ -279,9 +279,9 @@ void CCommand::Parse()
 		Serial.print( ';' );
 		return;
 	}
-
+*/
 	char* db2 = dataBuffer;
-	db2++;
+	//db2++;
 	pch = strtok( db2, " ,();" );
 
 	while( pch != NULL )
