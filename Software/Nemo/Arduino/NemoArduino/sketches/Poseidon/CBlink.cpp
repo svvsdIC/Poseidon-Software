@@ -45,11 +45,10 @@ void CBlink::Update( CCommand& commandIn )
 }
 
 void CBlink::parseCommand( CCommand &commandIn) {
+	// Print command details for debugging
+	commandIn.PrintDebug();
+
 	// Handle commands (if there are any, otherwise this gets skipped)
-	Serial.println(commandIn.m_text);
-	for (int i=0; i <= commandIn.m_arguments[0]; i++){
-		Serial.println(commandIn.m_arguments[i]);
-	}
 	if(commandIn.m_arguments[0] == 0){
 		Serial.println("blink:no_args;"); //error message
 		return;
@@ -58,26 +57,20 @@ void CBlink::parseCommand( CCommand &commandIn) {
 		Serial.println("blink:too_many_args;"); //error message
 		return;
 	}
+	
 	int32_t blink_new_state = commandIn.m_arguments[1];
-	// TODO: finish checking for valid values
 	switch (blink_new_state) {
 		case BLINK_OFF:
 		//turn off blinking
-			digitalWrite(LED_BUILTIN, LOW); 
 			m_is_blinking = false;
 			break;
 
 		case BLINK_ON:
 		//turn on blinking at a set rate
-			if(commandIn.m_arguments[0] == 1){
-				m_blink_rate_ms = DEFAULT_BLINK_RATE;	
-			}
-			else{
-				m_blink_rate_ms = commandIn.m_arguments[2];	
-			}
 			m_is_blinking = true;
+			m_blink_rate_ms = (commandIn.m_arguments[0] == 1) ? DEFAULT_BLINK_RATE : commandIn.m_arguments[2];
 			break;
-			
+
 		default:
 			Serial.println("blink:bad_command;"); //error message
 			break;
@@ -85,11 +78,14 @@ void CBlink::parseCommand( CCommand &commandIn) {
 }
 
 void CBlink::toggleLED() {
-	// Toggle the LED when the timer has elapsed
-	if(m_is_blinking && m_blinkTimer.HasElapsed(m_blink_rate_ms)){
-			bool current_led_state = digitalRead(LED_BUILTIN);
-			digitalWrite(LED_BUILTIN, !current_led_state);
-		}
+	if (!m_is_blinking) {
+		// turn off led when not blinking
+		digitalWrite(LED_BUILTIN, LOW);
+	} else if (m_blinkTimer.HasElapsed(m_blink_rate_ms)) {
+		// toggle LED when time expired
+		bool current_led_state = digitalRead(LED_BUILTIN);
+		digitalWrite(LED_BUILTIN, !current_led_state);
+	}
 }
 
 #endif /* HAS_BLINK */
@@ -111,9 +107,7 @@ void CBlink::toggleLED() {
 			if blink is NOT enabled, then turn off the LED
 			return
 
-			if blink is enabled, then check timer agains period
-				if expired, toggle LED
-	*/
+			if blink is ened*/
 
 
 /*  OLD CODE - keep for reference, then delete

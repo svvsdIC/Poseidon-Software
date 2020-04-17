@@ -21,12 +21,15 @@ class CCommand
 public:
 	static int32_t m_arguments[ COMMAND_MAX_ARGUMENTS ];
 
+private:
 	static char m_text[ COMMAND_DATA_BUFFER_SIZE + 1 ];
 
 	// Methods
 public:
 	bool GetCommandString();
 	bool Equals( const char* commandStringIn );
+
+	void PrintDebug();
 
 	static void PushCommand( const char* textIn, int32_t argumentsIn[ COMMAND_MAX_ARGUMENTS ] );
 	static void Reset();

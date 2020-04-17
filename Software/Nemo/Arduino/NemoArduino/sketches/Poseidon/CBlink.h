@@ -21,7 +21,7 @@ class CBlink : public CModule
         static const int32_t DEFAULT_BLINK_RATE = 1000;
 
         bool m_is_blinking = false;
-        int32_t m_blink_rate_ms = 1000;
+        int32_t m_blink_rate_ms = DEFAULT_BLINK_RATE;
 
         void parseCommand( CCommand & commandIn );
         void toggleLED();
