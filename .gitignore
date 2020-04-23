@@ -53,3 +53,4 @@ src/plugins/telemetry/public/bower_components
 # Visual Studio Code generated files #
 ######################################
 .vscode/.browse*
+.vscode/c_cpp_properties.json
