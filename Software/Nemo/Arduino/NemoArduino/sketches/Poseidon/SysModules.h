@@ -23,6 +23,11 @@ CMock m_Mock;
 CSome_module m_Some_module;
 #endif
 
+#if( HAS_BLINK )
+#include "CBlink.h"
+CBlink m_blink_module;
+#endif
+
 #if( HAS_OROV_CONTROLLERBOARD_25 )
 #include "CControllerBoard.h"
 CControllerBoard m_controllerBoard;
@@ -89,5 +94,3 @@ CBNO055 m_bno055( &I2C0, bno055::EAddress::ADDRESS_A );
 #include "CMS5837_30BA.h"
 CMS5837_30BA m_ms5837( &I2C0, ms5837_30ba::EAddress::ADDRESS_A );
 #endif
-
-

@@ -29,6 +29,8 @@ public:
 	bool GetCommandString();
 	bool Equals( const char* commandStringIn );
 
+	void PrintDebug();
+
 	static void PushCommand( const char* textIn, int32_t argumentsIn[ COMMAND_MAX_ARGUMENTS ] );
 	static void Reset();
 

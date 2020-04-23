@@ -13,7 +13,6 @@ void setup()
 	NCommManager::Initialize();
 	NModuleManager::Initialize();
 
-
 	// Boot complete
 	Serial.println( F( "boot:1;" ) );
 }
@@ -41,9 +40,9 @@ void loop()
     {
 
         // Loops per sec
-        Serial.print( F( "nemo_lps:" ) );
-        Serial.print( m_loopsPerSec );
-        Serial.println( ';' );
+        //Serial.print( F( "nemo_lps:" ) );
+        //Serial.print( m_loopsPerSec );
+        //Serial.println( ';' );
 
         // Reset loop counter
         m_loopsPerSec = 0;
