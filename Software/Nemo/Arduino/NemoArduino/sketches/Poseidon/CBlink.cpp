@@ -11,7 +11,7 @@ Serial commands in
 	blink(0);		- turn off blinking
 	blink(1,XXXX);	- turn on blinking at XXX ms period
 
-	// TODO:
+	
 	blink_status:
 		reply with 0 or 1,XXXX
 */
