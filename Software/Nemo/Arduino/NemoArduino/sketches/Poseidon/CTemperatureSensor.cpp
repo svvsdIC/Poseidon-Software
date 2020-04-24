@@ -50,7 +50,7 @@ void CTemperatureSensor::Update( CCommand& commandIn )
 	{
 		{
 			// Report results
-			Serial.print( F( "TemperatureSensor_cntr:" ) );Serial.println(++m_counter);
+			Serial.print( F( "TemperatureSensor_cntr:" ) );Serial.print(++m_counter); Serial.println(";");
 		}
 	}
 }
