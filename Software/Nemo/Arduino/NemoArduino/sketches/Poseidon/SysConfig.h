@@ -23,7 +23,8 @@
 
 #define HAS_MOCK (0)
 #define HAS_SOME_MODULE (0)
-#define HAS_BLINK (1)
+#define HAS_BLINK (0)
+#define HAS_TEMPERATURE_SENSOR (1)
 
 // ---------------------------------------------------------
 // After Market Modules

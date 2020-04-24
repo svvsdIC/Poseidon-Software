@@ -1,9 +1,23 @@
 #include "SysConfig.h"
-#if(HAS_SOME_MODULE)
+#if(HAS_TEMPERATURE_SENSOR)
 #include <Arduino.h>
 #include "CTemperatureSensor.h"
 #include "NCommManager.h"
 
+
+/*
+Module responsible for reporting the Temperature from the TMP36 Temperature Sensor
+
+Serial commands in
+
+	We have no command input for this Module
+
+Serial commands out
+
+	Once a second report the Temperature in Celius
+	"TemperatureSensor:XXX;"
+
+*/
 
 CTemperatureSensor::CTemperatureSensor()
 {
@@ -21,6 +35,7 @@ void CTemperatureSensor::Update( CCommand& commandIn )
 
 
 	// Handle commands
+/*
 	if( NCommManager::m_isCommandAvailable )
 	{
 		if( commandIn.Equals( "TemperatureSensor:cmd" ) )
@@ -28,6 +43,7 @@ void CTemperatureSensor::Update( CCommand& commandIn )
 			Serial.println( F( "TemperatureSensor:cmd,1;" ) );
 		}
 	}
+*/
 
     // Do other stuff
 	if( m_statusTimer.HasElapsed( kStatusDelay_ms ) )
@@ -39,4 +55,4 @@ void CTemperatureSensor::Update( CCommand& commandIn )
 	}
 }
 
-#endif
+#endif /* HAS_TEMPERATURE_SENSOR */
