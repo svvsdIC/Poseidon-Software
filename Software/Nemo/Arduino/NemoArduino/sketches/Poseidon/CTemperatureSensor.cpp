@@ -14,8 +14,8 @@ Serial commands in
 
 Serial commands out
 
-	Once a second report the Temperature in Celius
-	"TemperatureSensor:XXX;"
+	Once a second report the Temperature in degrees Celsius as int * 1000
+	"TemperatureSensor:XXXXXX;"
 
 */
 
@@ -49,8 +49,12 @@ void CTemperatureSensor::Update( CCommand& commandIn )
 	if( m_statusTimer.HasElapsed( kStatusDelay_ms ) )
 	{
 		{
+			// Read voltage
+			float voltage = analogRead(A0) * 0.004882814;
+			int32_t tempC = Encode1K((voltage - 0.5) * 100.0);
+
 			// Report results
-			Serial.print( F( "TemperatureSensor_cntr:" ) );Serial.print(++m_counter); Serial.println(";");
+			Serial.print( F( "TemperatureSensor:" ) );Serial.print(tempC); Serial.println(";");
 		}
 	}
 }
