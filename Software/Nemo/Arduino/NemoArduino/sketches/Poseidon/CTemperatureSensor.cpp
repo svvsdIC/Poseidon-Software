@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "CTemperatureSensor.h"
 #include "NCommManager.h"
+#include <orutil.h>
 
 
 /*
@@ -51,7 +52,7 @@ void CTemperatureSensor::Update( CCommand& commandIn )
 		{
 			// Read voltage
 			float voltage = analogRead(A0) * 0.004882814;
-			int32_t tempC = Encode1K((voltage - 0.5) * 100.0);
+			int32_t tempC = orutil::Encode1K((voltage - 0.5) * 100.0);
 
 			// Report results
 			Serial.print( F( "TemperatureSensor:" ) );Serial.print(tempC); Serial.println(";");
