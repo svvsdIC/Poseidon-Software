@@ -118,8 +118,8 @@ def main():
     print(f'\tbaudrate: {baudrate}\n\tport: {port}\n\tuse_crc: {use_crc}')
     
     # setup and open serical port
-    serial_port.baudrate = 115200
-    serial_port.port = 'COM5'
+    serial_port.baudrate = baudrate
+    serial_port.port = port 
     serial_port.timeout = 0
     if serial_port.isOpen(): serial_port.close()
     serial_port.open()
