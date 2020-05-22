@@ -19,3 +19,9 @@ CMock m_mock_module;
 #include "CSome_module.h"
 CSome_module  m_some_module;
 #endif
+
+#if( HAS_BLINK_CTRL )
+#include "CBlinkCtrl.h"
+CBlinkCtrl m_blinkCtrl;
+#endif
+

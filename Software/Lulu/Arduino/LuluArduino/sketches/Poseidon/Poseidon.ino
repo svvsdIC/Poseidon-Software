@@ -41,9 +41,9 @@ void loop()
     {
 
         // Loops per sec
-        Serial.print( F( "lulu_lps:" ) );
-        Serial.print( m_loopsPerSec );
-        Serial.println( ';' );
+        //Serial.print( F( "lulu_lps:" ) );
+        //Serial.print( m_loopsPerSec );
+        //Serial.println( ';' );
 
         // Reset loop counter
         m_loopsPerSec = 0;
