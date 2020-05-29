@@ -52,7 +52,9 @@ function Bridge(uartPath,uartBaud) {
       serialConnected = false;
     });
     parser.on('data', function (data) {
+      //console.log('b0be-serial-received: ' + data);
       var status = reader.parseStatus(data);
+      //console.log('b0be-serial-received: ' + status);
       bridge.emit('status', status);
       if (emitRawSerial) {
         bridge.emit('serial-recieved', data + '\n');
@@ -79,7 +81,9 @@ function Bridge(uartPath,uartBaud) {
       lastWriteTime = now;
       lastWriteTime.setMilliseconds(lastWriteTime.getMilliseconds + delay);
       setTimeout(function () {
+        //console.log('b0be-serial-sending '+ command);
         serialPort.write(messagebuffer);
+        //console.log('b0be-serial-sent '+ command);
         if (emitRawSerial) {
           bridge.emit('serial-sent', command);
         }
