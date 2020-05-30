@@ -62,11 +62,11 @@ void CBlinkCtrl::Update( CCommand& commandIn )
 	{
     		String cmd = ""; 
 		if(m_offButton){
-			cmd = "blink:0;";
+			cmd = "blink(0);";
 		} else if(m_fastButton){
-			cmd = "blink:1,1500;";
+			cmd = "blink(1,1500);";
 		} else if(m_slowButton){
-			cmd = "blink:1,150;";
+			cmd = "blink(1,150);";
 	       	}
 
 		// Report results
