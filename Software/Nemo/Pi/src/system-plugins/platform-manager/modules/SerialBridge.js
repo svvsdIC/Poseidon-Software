@@ -52,9 +52,9 @@ function Bridge(uartPath,uartBaud) {
       serialConnected = false;
     });
     parser.on('data', function (data) {
-      //console.log('b0be-serial-received: ' + data);
+      //const util = require('util');
+      //console.log('b0be-serial-received-data: ' + data);
       var status = reader.parseStatus(data);
-      //console.log('b0be-serial-received: ' + status);
       bridge.emit('status', status);
       if (emitRawSerial) {
         bridge.emit('serial-recieved', data + '\n');

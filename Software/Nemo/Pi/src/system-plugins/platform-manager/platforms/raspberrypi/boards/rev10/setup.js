@@ -59,7 +59,6 @@ var SetupBoardInterface = function(board)
     // Setup bridge interface event handlers
     board.bridge.on('serial-recieved', function(data) 
     {
-        console.log('b0be-serial-received: ' + data);
         board.global.emit(board.interface + '.serialRecieved', data);
     });
 
