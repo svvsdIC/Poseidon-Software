@@ -10,43 +10,41 @@ function Bridge(uartPath,uartBaud) {
   var serialConnected = false;
   var serialPort = {};
   var lastWriteTime = new Date();
-  
+
  bridge.isConnected = function(){
    return serialConnected;
- }
+ };
   
  bridge.connect = function () {
+    serialConnected = true;
+
     serialPort = new SerialPort(uartPath, {
       baudRate: uartBaud,
       autoOpen: true
     });
-    
-    var Readline 
-    var parser 
+     
 
-    //Work around for influx serialport changes while we have the dependencies moving around a bit.
-    //Remove once the shrinkwrapped version matches the dev version api
-    if (SerialPort.parsers.Readline){
-      Readline= SerialPort.parsers.Readline; 
-      parser=serialPort.pipe(Readline({delimiter: '\r\n'}));   
-    }
-    if (SerialPort.parsers.ReadLine){
-      Readline= SerialPort.parsers.ReadLine; 
-      parser=serialPort.pipe(Readline({delimiter: '\r\n'}));   
-    }
-    if (SerialPort.parsers.readline){
-      Readline= SerialPort.parsers.readline; 
-      parser=serialPort.pipe(Readline({delimiter: '\r\n'}));   
-    }    
+    var Readline = require('@serialport/parser-readline');
 
+    parser = serialPort.pipe( new Readline() );
+
+    parser.on('data', function (data) {
+      var status = reader.parseStatus(data);
+      bridge.emit('status', status);
+      if (emitRawSerial) {
+        bridge.emit('serial-recieved', data + '\n');
+      };
+    });
 
     serialPort.on('open', function () {
       serialConnected = true;
       logger.debug('Serial port opened!');
     });
+
     serialPort.on('error',function(err){
       logger.debug('Serial error',err)
     })
+
     serialPort.on('close', function (data) {
       logger.debug('Serial port closed!');
       serialConnected = false;

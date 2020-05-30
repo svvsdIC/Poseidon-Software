@@ -10,9 +10,10 @@ String elightToken2 = "elights_2";
 String elightToken3 = "elights_3";
 int tokenLen = elightToken1.length();
 
-Lights Lights(ELIGHT_LED, ELIGHT_LED_2, ELIGHT_LED_3, elightToken1, elightToken2, elightToken3, tokenLen);
+Lights Lights(elightToken1, elightToken2, elightToken3, tokenLen, ELIGHT_LED, ELIGHT_LED_2, ELIGHT_LED_3);
 
 void setup() {
+  Serial.begin(115200);
 }
 
 void loop() {

@@ -1,0 +1,99 @@
+SOURCE MODULE			MESSAGE								      DESTINATION PLUGIN
+ ------------                   -------                                                               ------------------
+CAltServo			"asr.v"                                                               not found 
+CAutopilot_STD			"DISABLED"                                                            plugins/rovpilot-wire/index.js    plugins/rovpilog/index.js
+CAutopilot_STD			"dp_er"                                                               not found       
+CAutopilot_STD			"logdepth_hold_disabled"                                              not found 
+CAutopilot_STD			"logdepth_hold_enabled on="                                           not found 
+CAutopilot_STD			"logdhold pushing command"                                            not found 
+CAutopilot_STD			"logheading_hold_disabled"                                            not found 
+CAutopilot_STD			"logheading_hold_enabled on="                                         not found 
+CAutopilot_STD			"loghold pushing command"                                             not found 
+CAutopilot_STD			"logpilot setup complete"                                             not found 
+CAutopilot_STD			"p_er"                                                                not found 
+CAutopilot_STD			"targetDepth"                                                         not found 
+CAutopilot_STD			"targetHeading"                                                       not found 
+CBNO055				"bno055_cAcc"                                                         not found
+CBNO055				"bno055_cGyr"                                                         not found
+CBNO055				"bno055_cMag"                                                         not found
+CBNO055				"bno055_cSys"                                                         not found
+CBNO055				"bno055_disabled1"                                                    not found 
+CBNO055				"bno055_HardReset1"                                                   not found 
+CBNO055				"bno055_init1"                                                        not found 
+CCalibrationLaser	        "claser"                                                              plugins/lasers/index.js 
+CCameraServo          		"camServ_inv0"                                                        plugins/camera-servo/index.js
+CCameraServo                	"camServ_inv1"                                                        plugins/camera-servo/index.js
+CCameraServo        		"camServ_pos"                                                         plugins/camera-servo/index.js
+CCameraServo           	 	"camServ_spd"                                                         plugins/camera-servo/index.js
+CControllerBoard		"AVCC"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CControllerBoard		"BRDI"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CControllerBoard		"BRDT"                                                                plugins/controllerboard2x/public/js/systemEnvironment.js
+CControllerBoard		"BRDV"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CControllerBoard		"BT1I"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CControllerBoard		"BT2I"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CControllerBoard		"SC1I"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CControllerBoard		"SC2I"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CControllerBoard		"SC3I"                                                                plugins/controllerboard2x/public/js/systemPower.js
+CDeadManSwitch			"pong"                                                                plugins/connection-health/index.js
+CExternalLights			"elights_pow"                                                         plugins/externallights/index.js
+CExternalLights			"elights_tpow"                                                        plugins/externallights/index.js
+CLights				"lights_pow"                                                          plugins/lights/index.js
+CLights				"lights_tpow"                                                         plugins/lights/index.js
+CMPU9150			"imu_levelnack"                                                       
+CMPU9150			"imu_p"                                                                
+CMPU9150			"imu_poff"                                                             
+CMPU9150			"imu_r"                                                                
+CMPU9150			"imu_roff"                                                             
+CMPU9150			"imu_y"                                                                
+CMPU9150			"imu_zyawack"                                                         
+CMPU9150			"mpu9150_disabled1"                                                   not found
+CMPU9150			"mpu9150_init1"                                                       not found
+CMS5803_14BA			"ms5803_disabled1"                                                    not found
+CMS5803_14BA			"ms5803_HardReset1"                                                   not found
+CMS5803_14BA			"ms5803_init1"                                                        not found
+CMS5837_30BA			"depth_clroffack"                                                     plugins/diveprofile/index.js 
+CMS5837_30BA			"depth_d"                                                             plugins/diveprofile/index.js plugins/navigation-data/public/js/navigation-data.js 
+CMS5837_30BA			"depth_p"                                                             plugins/diveprofile/index.js 
+CMS5837_30BA			"depth_t"                                                             plugins/diveprofile/index.js 
+CMS5837_30BA			"depth_water"                                                         plugins/diveprofile/index.js 
+CMS5837_30BA			"depth_zeroack"                                                       plugins/diveprofile/index.js 
+CMS5837_30BA			"ms5837_disabled1"                                                    not found 
+CMS5837_30BA			"ms5837_HardReset1"                                                   not found 
+CMS5837_30BA			"ms5837_init1"                                                        not found 
+CThrusters_v2X1Xv2        	"logescpower="                                                         
+CThrusters_v2X1Xv2            	"motors"                                                               
+CThrusters_v2X1Xv2        	"mtarg"                                                                
+CThrusters_v2X1Xv2        	"mtrmod"                                                               
+CThrusters_v2X1Xv2        	"THRV2X1XV2.mhd"                                                       
+CThrusters_v2X1Xv2        	"THRV2X1XV2.pf0"                                                       
+CThrusters_v2X1Xv2        	"THRV2X1XV2.pf2"                                                       
+CThrusters_v2X1Xv2        	"THRV2X1XV2.sf0"                                                       
+CThrusters_v2X1Xv2        	"THRV2X1XV2.sf2"                                                       
+CThrusters_v2X1Xv2        	"THRV2X1XV2.st"                                                        
+NArduinoManager			"log"                                                                  
+NArduinoManager			"logWatchdog was triggered and the following was read from EEPROM    
+NDataManager			"alps"                                                               
+NDataManager			"btti"                                                                not found (sum of BTT1 and BTT2)
+NDataManager			"fmem"                                                                plugins/controllerboard2x/public/js/systemEnvironment.js
+NDataManager			"fthr"                                                                plugins/navigation-data/index.js  
+NDataManager			"i2c.AL_INIT"                                                          
+NDataManager			"i2c.BAD_ADDR"                                                         
+NDataManager			"i2c.BAD_BAUD"                                                         
+NDataManager			"i2c.FAILED"                                                           
+NDataManager			"i2c.LOST_ARB"                                                         
+NDataManager			"i2c.NACK"                                                             
+NDataManager			"i2c.OK"                                                               
+NDataManager			"i2c.TIMEOUT"                                                          
+NDataManager			"iout"                                                                 
+NDataManager			"motorAttached"                                                        
+NDataManager			"pres"                                                                 
+NDataManager			"temp"                                                                 
+NDataManager			"time"                                                                 
+NDataManager			"vout"                                                                 
+NModuleManager			"ERROR TOO MANY MODULES"                                              not found
+NVehicleManager			"awake"                                                                 
+NVehicleManager			"deadZone_max"                                                        not found 
+NVehicleManager			"deadZone_min"                                                        not found
+NVehicleManager			"*settings"                                                            
+NVehicleManager			"smoothingIncrement|"                                                   
+OpenROV2x			"boot1"                                                               system-plugins/platform-manager/platforms/beaglebone/boards/2x/setup.js 
