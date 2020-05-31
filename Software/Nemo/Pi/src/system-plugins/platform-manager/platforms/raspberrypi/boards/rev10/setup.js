@@ -10,6 +10,8 @@ var logger          = require('AppFramework.js').logger;
 
 var debug = {};
 
+//console.log('b0be-loaded .../rev10/setup.js');
+
 // I2C setup
 //b0be
 //var i2c       = require('i2c');
@@ -24,9 +26,7 @@ var SetupBoardInterface = function(board)
     logger.debug( "Creating bridge" );
 
     // Decorate the MCU interface with board specific properties
-    console.log(`b0be: starting /dev/ttyACM0`);
     board.bridge = new SerialBridge( '/dev/ttyACM0', 115200 );
-    console.log(`b0be: started /dev/ttyACM0`);
 
     board.statusdata = {};
 
