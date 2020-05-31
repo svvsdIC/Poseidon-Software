@@ -4,8 +4,8 @@
 #include "NCommManager.h"
 
 const uint8_t OFF_PIN = 4;
-const uint8_t SLOW_PIN = 3;
-const uint8_t FAST_PIN = 2;
+const uint8_t FAST_PIN = 3;
+const uint8_t SLOW_PIN = 2;
 const uint8_t BUTTON_PUSHED = LOW;
 
 
@@ -64,9 +64,9 @@ void CBlinkCtrl::Update( CCommand& commandIn )
 		if(m_offButton){
 			cmd = "blink(0);";
 		} else if(m_fastButton){
-			cmd = "blink(1,1500);";
-		} else if(m_slowButton){
 			cmd = "blink(1,150);";
+		} else if(m_slowButton){
+			cmd = "blink(1,1500);";
 	       	}
 
 		// Report results
