@@ -18,6 +18,11 @@
 CMock m_Mock;
 #endif
 
+#if( HAS_TEMPERATURE_SENSOR )
+#include "CTemperatureSensor.h"
+CTemperatureSensor m_temperature_module;
+#endif
+
 #if( HAS_SOME_MODULE )
 #include "CSome_module.h"
 CSome_module m_Some_module;
