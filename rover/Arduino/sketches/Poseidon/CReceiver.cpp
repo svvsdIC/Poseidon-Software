@@ -59,25 +59,43 @@ void CReceiver::Update( CCommand& commandIn )
     // Check if there are new values from the interrupt routines
 	for(unsigned int i=0; i<NUM_INPINS; ++i)
 	{
+		// None Zero values means that the PWM measurement is ready for that channel
 		if(timeValue[i] != 0)
 		{
-			// send measured PWM values for a channel when it is ready
+			if(timeValue[i] > 700 && timeValue[i] < 2100)
+			{
+				// Calculate control values and send tnem
+				controlValues.value[i] = map(timeValue[i], minInMicros[i], maxInMicros[i], -100, 100);
+				if(abs(controlValues.value[i]) < inCutoffConst)
+				{
+					//zero out values less than the allowed constant right here (to make it easier to "center" the sticks)
+					controlValues.value[i] = 0.0;
+				}
+				
+				// Send Control value
+				Serial.print( F( "CReceiver:" ) );
+				Serial.print(i);
+				Serial.print( ",");
+				Serial.print(controlValues.value[i]);
+				Serial.println(";");
 
-			// TODO: calculate control values and send tnem
-
-			// Report results
-			Serial.print( F( "CReceiver:" ) );
-			Serial.print(i);
-			Serial.print( ",");
-			Serial.print(timeValue[i]);	//TODO: Send control % values instead of PWM
-			Serial.println(";");
-
-			timeValue[i]=0;
+				// Prepare to read the next time value for this channel
+				timeValue[i]=0;
+			}
+			else
+			{
+				// If PWM signals are clear and no interupt overload, then we should NEVER BE HERE !!!
+				// TODO: report error using proper protocol  
+				Serial.println(i);
+				Serial.println(timeValue[i]);
+				Serial.println("Out of range!!!!!!!");
+			}
+				
 		}
 	}
-}
+	
 
-//RECIEVER INPUT ROUTINES
+//RECEIVER INPUT ROUTINES
 /*
 * The interrupt#() functions are bound to any pin change events on the pins specified in the inPins array.
 * They all call the same readPWM() subroutine with their channel number (index number of their pin value
