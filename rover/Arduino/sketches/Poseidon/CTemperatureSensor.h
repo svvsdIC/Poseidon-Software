@@ -4,10 +4,10 @@
 #include <orutil.h>
 #include "CModule.h"
 
-class CSome_module : public CModule
+class CTemperatureSensor : public CModule
 {
     public:
-        CSome_module();
+        CTemperatureSensor();
         void Initialize();
         void Update( CCommand& commandIn );
     private:
