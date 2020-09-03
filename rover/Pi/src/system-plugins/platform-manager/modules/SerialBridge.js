@@ -51,7 +51,6 @@ function Bridge(uartPath,uartBaud) {
     });
     parser.on('data', function (data) {
       //const util = require('util');
-      //console.log('b0be-serial-received-data: ' + data);
       var status = reader.parseStatus(data);
       bridge.emit('status', status);
       if (emitRawSerial) {
@@ -79,9 +78,7 @@ function Bridge(uartPath,uartBaud) {
       lastWriteTime = now;
       lastWriteTime.setMilliseconds(lastWriteTime.getMilliseconds + delay);
       setTimeout(function () {
-        //console.log('b0be-serial-sending '+ command);
         serialPort.write(messagebuffer);
-        //console.log('b0be-serial-sent '+ command);
         if (emitRawSerial) {
           bridge.emit('serial-sent', command);
         }
