@@ -1,47 +1,43 @@
+#! /usr/bin/python3
 '''
 Serial-Full-Duplex:  useful for talking to an Arduino running OpenRover code.
 
-Open a comm port for full duplex operations, using a concurrent thread for reading
+Open a comm port for full duplex operations, using a concurrent threads for
+reading and writing
 Print out any data read from the port
 Accept input from the console, and forward it to the port
 
 Conditionally prepend the data sent to the port with a CRC8 cyclic redundance check
 '''
 
-# there are some commented print statements that were helpful in debugging
-
-
 import serial
 import threading
 from time import sleep
 
+# some global variables for inter thread communication
 serial_port = serial.Serial()
 stop_threads = False
 use_crc = False
 
-def CRC8(data):
+
+def prependCRC8(data):
     ''' caclulate and return the CRC8 for the openROV, sames as used by nodeJS
     crc library.  Copied the code from CCommand.cpp in the openROV software
     You must pass the full commnd including the ';' termination character
     The string passed in must be bytes, ie. the input must be encoded.
     '''
 
-
     crc = 0
     for i in data:
         extract = i
-        #print(f'*** py:len:{len(data)} ex:{chr(extract)}')
         sum = (crc ^ extract ) & 1
         for j in range(8, 0,-1):
-            #print(f'py:tempI:{j} extract:{hex(extract)}')
             sum = (crc ^ extract) & 1
             crc >>= 1
-            #print(f'py:sum:{hex(sum)} crc:{hex(crc)}')
             if sum:
                 crc ^= 0x8C
             extract >>= 1
-    #print(f'final crc: {hex(crc)}')
-    return crc
+    return crc.to_bytes(1,"big") + data
 
 
 def write():
@@ -53,32 +49,24 @@ def write():
 
     global stop_threads
     global use_crc
+
     print('starting write thread...')
-    #serial_port.write(str(';;').encode())
-
-    # repeatedly get console input and send 
+    # repeatedly get console input and send while True: 
     while True:
-        if stop_threads:
+        if stop_threads: 
             print('write thread is stopping...')
-            break
-        try:
+            break 
+        try: 
             message = input().encode()
-            if len(message) == 0:
-                continue
-
-            #print('write(): message: ', [hex(i) for i in message])
-            crc = CRC8(message)
-            #print('write(): message', message)
-            #print('write(): crc:', hex(crc))
-            message = list(message)
-            message.insert(0,crc)
-            #print('write(): message: ', [hex(i) for i in message])
-            #print('----')
+            if len(message) == 0: continue
+            if use_crc: 
+                message = prependCRC8(message)
             serial_port.write(message)
+
         except Exception as e:
-            #print(f'write thread exception')
-            #print({e})
-            print(f'exception--write thread is stopping')
+            print('write thread exception')
+            print({e})
+            print('exception--write thread is stopping')
             stop_threads = True
             break
         sleep(.5)
@@ -105,17 +93,18 @@ def read():
 
 def main():
     global stop_threads
+    global use_crc
     # prompt for comm parameters
-    baudrate = input('baudrate: ')
+    baudrate = input('baudrate (default is 115200): ')
     baudrate = int(baudrate) if baudrate else 115200
     
-    port = input('Comm port (e.g. COM5 or /dev/ttyACM0 of /dev/ttyUSB0): ')
-    port = port if port else 'COM5'
+    port = input('Comm port (e.g./dev/ttyACM0(default) or /dev/ttyUSB0): or COM5 ')
+    port = port if port else '/dev/ttyACM0'
     
-    use_crc = input('Use CRC (y or n): ')
-    use_crc = True if use_crc.upper().startswith('Y') else False
+    use_crc = input('Use CRC (y(default) or n): ')
+    use_crc = False if use_crc.upper().startswith('N') else True
 
-    print(f'\tbaudrate: {baudrate}\n\tport: {port}\n\tuse_crc: {use_crc}')
+    print("\tbaudrate: " + str(baudrate) + "\n\tport: " + port + "\n\tuse_crc: " + str(use_crc))
     
     # setup and open serical port
     serial_port.baudrate = baudrate
