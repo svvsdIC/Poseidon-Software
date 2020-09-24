@@ -16,5 +16,8 @@
 // Mock
 #define HAS_MOCK (1) 
 
+// Recevier
+#define HAS_RECEIVER (1)
+
 // Some_module
 #define HAS_SOME_MODULE (1)
