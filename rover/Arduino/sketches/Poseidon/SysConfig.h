@@ -25,6 +25,7 @@
 #define HAS_SOME_MODULE (0)
 #define HAS_BLINK (0)
 #define HAS_TEMPERATURE_SENSOR (1)
+#define HAS_MOTOR_CONTROL (1)
 
 // ---------------------------------------------------------
 // After Market Modules
