@@ -191,6 +191,14 @@ bool CCommand::GetCommandString()
 	return false;
 }
 
+void CCommand::PrintDebug()
+{
+	Serial.println(m_text);
+	for (int i=0; i <= m_arguments[0]; i++){
+		Serial.println(m_arguments[i]);
+	}
+}
+
 void CCommand::PushCommand( const char* cmdtext, int32_t cmdargs[COMMAND_MAX_ARGUMENTS] )
 {
 	// If commands are not being processed in time we overwrite the oldest ones.  Technically we should probably
