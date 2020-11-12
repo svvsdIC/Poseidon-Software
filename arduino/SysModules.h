@@ -13,6 +13,26 @@
 // They can also be accessed individually as namespace members.
 // ---------------------------------------
 
+#if( HAS_MOCK )
+#include "CMock.h"
+CMock m_Mock;
+#endif
+
+#if( HAS_TEMPERATURE_SENSOR )
+#include "CTemperatureSensor.h"
+CTemperatureSensor m_temperature_module;
+#endif
+
+#if( HAS_SOME_MODULE )
+#include "CSome_module.h"
+CSome_module m_Some_module;
+#endif
+
+#if( HAS_BLINK )
+#include "CBlink.h"
+CBlink m_blink_module;
+#endif
+
 #if( HAS_OROV_CONTROLLERBOARD_25 )
 #include "CControllerBoard.h"
 CControllerBoard m_controllerBoard;
@@ -79,5 +99,3 @@ CBNO055 m_bno055( &I2C0, bno055::EAddress::ADDRESS_A );
 #include "CMS5837_30BA.h"
 CMS5837_30BA m_ms5837( &I2C0, ms5837_30ba::EAddress::ADDRESS_A );
 #endif
-
-
