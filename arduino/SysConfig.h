@@ -52,3 +52,9 @@
 
 // BNO055 IMU
 #define HAS_BNO055 (0)
+
+// Receiver
+#define HAS_RECEIVER (0)
+
+//Some_module
+#define HAS_SOME_MODULE (0)
