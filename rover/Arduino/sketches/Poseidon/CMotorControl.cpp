@@ -75,12 +75,12 @@ outputset CMotorControl::calcTransX()
 {
   outputset temporaryValues; 
   float val = controlValues.value[3]; //RX
-  temporaryValues.value[0] = val;
-  temporaryValues.value[1] = -val;
-  temporaryValues.value[2] = val;
-  temporaryValues.value[3] = -val;
-  temporaryValues.value[4] = 0;
-  temporaryValues.value[5] = 0;
+  temporaryValues.value[0] = val;         //front left
+  temporaryValues.value[1] = -val;        //front right
+  temporaryValues.value[2] = val;         //back  left
+  temporaryValues.value[3] = -val;        //back  right
+  temporaryValues.value[4] = 0;           //vertical A
+  temporaryValues.value[5] = 0;           //vertical B
   return temporaryValues;
 }
 
@@ -132,6 +132,7 @@ outputset CMotorControl::calcVertical()
  * subroutine builds a master outputset (temporaryValues) with those weights, one motor at a time. It then 
  * overwrites the global outputset with the new one.
  */
+// Notes: We do not believe that control points are positive.  Instead from code inspection, we see that the control point range should be [-100, 100]
 
 void CMotorControl::calcMotors()
 {
@@ -167,7 +168,7 @@ void CMotorControl::calcMotors()
     + (1 * vValues.value[i]))
     * motorConst[i] * motorConst[i];
     
-    //Bounds checking
+    //Bounds checking --     // TODO: line above might cause us to rotate (as per Pablo)
     temporaryValues.value[i] = constrain(temporaryValues.value[i], -100.0, 100.0);
     //Zeroing out and light behavior (if a motor is on, light is on)
     if(abs(temporaryValues.value[i]) < outCutoffConst)
