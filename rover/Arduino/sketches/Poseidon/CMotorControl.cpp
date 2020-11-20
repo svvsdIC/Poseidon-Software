@@ -33,9 +33,23 @@ void CMotorControl::Update( CCommand& commandIn )
 	// Handle commands
 	if( NCommManager::m_isCommandAvailable )
 	{
-		if( commandIn.Equals( "mtrCtrlVal" ) )
+    // TODO: extract the user inputs from commandIn object, assuming it is a user input command
+
+    // commands will look like:
+    //   mtrctl(channel,value);
+    //   channel values will be:  "TRANX, TRANY, TRANZ, YAW, ROLL, PITCH"
+    //   valuse are -100 to 100 as percentage of max forward/reverse thrust
+    //   
+    //   eg. mtrctl(TRANX,-75)   back at 75%    
+		//       mtrctl(TRANZ, 50)   down at 50%
+    //
+    // Body-Fixed coordinate system - X - forward, Y - right, Z - down, right-handed
+
+    
+    if( commandIn.Equals( "mtrCtrlVal" ) )
 		{
 			//handle the arguments
+      // put them into the controlValues inputset .
 		}
 	}
 
