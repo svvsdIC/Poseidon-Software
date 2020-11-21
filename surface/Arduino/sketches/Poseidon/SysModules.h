@@ -18,6 +18,11 @@ CMock m_mock_module;
 #if( HAS_SOME_MODULE )
 #include "CSome_module.h"
 CSome_module  m_some_module;
+#endif 
+
+#if( HAS_RECEIVER )
+#include "CReceiver.h"
+CReceiver m_receiver;
 #endif
 
 #if( HAS_BLINK_CTRL )
