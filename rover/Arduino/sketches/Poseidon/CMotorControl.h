@@ -45,6 +45,7 @@ class CMotorControl : public CModule
         outputset calcRotation();
         outputset calcVertical();
         void calcMotors();
+        void parseCommand( CCommand & commandIn );
 
     public:
         CMotorControl();

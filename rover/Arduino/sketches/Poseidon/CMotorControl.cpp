@@ -6,11 +6,16 @@
 
 /*
 Module responsible for driving the thrusters based on a diamond configuration
+Body-Fixed coordinate system - X - forward, Y - right, Z - down, right-handed
 
-Serial commands in
+Serial commands in:
 
-	mtrCtrlVal(i, value); // i=which joystick, value -100 to 100 
-
+      mtrctl(channel,value);
+      channel values will be:  "TRANX, TRANY, TRANZ, YAW, ROLL, PITCH"
+      valuse are -100 to 100 as percentage of max forward/reverse thrust
+      
+      eg. mtrctl(TRANX,-75)   back at 75%    
+		      mtrctl(TRANZ, 50)   down at 50%
 */
 
 CMotorControl::CMotorControl()
@@ -25,38 +30,37 @@ void CMotorControl::Initialize()
 	}
 	
 	// TODO: may change startup message
-	Serial.println(F("mtrCtrlVal:1;"));
+	Serial.println(F("mtrctl:1;"));
 }
 
 void CMotorControl::Update( CCommand& commandIn )
 {
 	// Handle commands
-	if( NCommManager::m_isCommandAvailable )
+	if( NCommManager::m_isCommandAvailable && commandIn.Equals( "mtrctl"))
 	{
-    // TODO: extract the user inputs from commandIn object, assuming it is a user input command
-
-    // commands will look like:
-    //   mtrctl(channel,value);
-    //   channel values will be:  "TRANX, TRANY, TRANZ, YAW, ROLL, PITCH"
-    //   valuse are -100 to 100 as percentage of max forward/reverse thrust
-    //   
-    //   eg. mtrctl(TRANX,-75)   back at 75%    
-		//       mtrctl(TRANZ, 50)   down at 50%
-    //
-    // Body-Fixed coordinate system - X - forward, Y - right, Z - down, right-handed
-
-    
-    if( commandIn.Equals( "mtrCtrlVal" ) )
-		{
-			//handle the arguments
-      // put them into the controlValues inputset .
-		}
+      parseCommand(commandIn);
 	}
-
-    // Do other stuff 
 
 	// TODO: may want to call less often than every time through the loop
 	updateMotors();
+}
+
+/*
+Parses in the commandIn to extract user supplied control values for
+TRANSX, TRANSY, TRANSZ, PITCH, ROLL, YAW.  Puts these values into the 
+controlValues inputset.
+*/
+void CMotorControl::parseCommand( CCommand &commandIn) {
+	// Print command details for debugging
+	commandIn.PrintDebug();
+
+	// Handle commands (if there are any, otherwise this gets skipped)
+	if(commandIn.m_arguments[0] != 2){
+		Serial.println("mtrctl:invalid_args;"); //error message
+		return;
+	}
+
+  // TODO: **** *** **** extract values
 }
 
 //MOTOR OUTPUT ROUTINE

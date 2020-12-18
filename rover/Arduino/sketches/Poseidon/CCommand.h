@@ -17,7 +17,7 @@ struct TInternalCommand
 
 class CCommand
 {
-	// Attributes
+	// Attributes	
 public:
 	static int32_t m_arguments[ COMMAND_MAX_ARGUMENTS ];
 
