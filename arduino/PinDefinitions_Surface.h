@@ -1,8 +1,5 @@
 #pragma once
 
-#include <Arduino.h>
-#include "SysConfig.h"
-
 // Pin definitions
 // ------------------------------
 // See your core's variant.cpp for full pinmuxing configuration for this board

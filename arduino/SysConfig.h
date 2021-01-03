@@ -1,5 +1,6 @@
 #pragma once
 
+#include "PinDefinitions.h"
 #include "CompileOptions.h"
 
 // TODO: The MCU ARCH and Board Type should eventually be passed in solely from the build script.
@@ -14,10 +15,8 @@
 
 // Configuration
 #ifdef BUILD_ROVER
-  #include "PinDefinitions_Rover.h"
   #include "SysConfig_Rover.h"
 #elif BUILD_SURFACE
-  #include "PinDefinitions_Surface.h"
   #include "SysConfig_Surface.h"
 #else
   #error "HI PABLO"
