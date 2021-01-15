@@ -4,6 +4,7 @@
 #include <orutil.h>
 #include <Servo.h>
 #include "CModule.h"
+#include "Common.h"
 
 /*
 TODO: 

@@ -11,7 +11,7 @@ Body-Fixed coordinate system - X - forward, Y - right, Z - down, right-handed
 Serial commands in:
 
       mtrctl(channel,value);
-      channel values will be:  "TRANX, TRANY, TRANZ, YAW, ROLL, PITCH"
+      channel values will be:  "TRANX, TRANY, TRANZ, YAW, (ROLL, PITCH)"
       valuse are -100 to 100 as percentage of max forward/reverse thrust
       
       eg. mtrctl(TRANX,-75)   back at 75%    
@@ -59,8 +59,33 @@ void CMotorControl::parseCommand( CCommand &commandIn) {
 		Serial.println("mtrctl:invalid_args;"); //error message
 		return;
 	}
+  // TODO:  change magic numbers (0,1,2,3) to enum values from Common.h
+  // Extract the motor command and motor value from the 
+  int32_t motor_command = commandIn.m_arguments[1];
+  int32_t motor_value   = commandIn.m_arguments[2];
+  switch (motor_command){
+    case TRANSX:
+      controlValues.value[3] = motor_value; //Joystick LX
+      break;
+      
+    case TRANSY:
+      controlValues.value[2] = motor_value; //Joystick LY
+      break;
 
-  // TODO: **** *** **** extract values
+    case TRANSZ:
+      controlValues.value[0] = motor_value; // Joystick RX
+      break;
+
+    case YAW:
+      controlValues.value[1] = motor_value; // Joystick RY
+      break;
+
+    case PITCH: 
+    case ROLL:
+    default:
+      /* error handling */
+      break;  
+  }
 }
 
 //MOTOR OUTPUT ROUTINE
