@@ -14,10 +14,10 @@
 #endif
 
 // Configuration
-#ifdef BUILD_ROVER
+#if defined(BUILD_ROVER)
   #include "SysConfig_Rover.h"
-#elif BUILD_SURFACE
+#elif defined(BUILD_SURFACE)
   #include "SysConfig_Surface.h"
 #else
-  #error "HI PABLO"
+  #error "HI PABLO SysConfig"
 #endif

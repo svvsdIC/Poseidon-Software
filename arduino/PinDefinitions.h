@@ -3,10 +3,10 @@
 #include <Arduino.h>
 #include "SysConfig.h"
 
-#ifdef BUILD_ROVER
+#if defined(BUILD_ROVER)
   #include "PinDefinitions_Rover.h"
-#elif BUILD_SURFACE
+#elif defined(BUILD_SURFACE)
   #include "PinDefinitions_Surface.h"
 #else
-  #error "HI PABLO"
+  #error "HI PABLO PinDefinitions"
 #endif
