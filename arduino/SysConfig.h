@@ -19,5 +19,5 @@
 #elif defined(BUILD_SURFACE)
   #include "SysConfig_Surface.h"
 #else
-  #error "HI PABLO SysConfig"
+  #include "BuildErrorMessage.h"
 #endif

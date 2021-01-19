@@ -8,5 +8,5 @@
 #elif defined(BUILD_SURFACE)
   #include "PinDefinitions_Surface.h"
 #else
-  #error "HI PABLO PinDefinitions"
+  #include "BuildErrorMessage.h"
 #endif
