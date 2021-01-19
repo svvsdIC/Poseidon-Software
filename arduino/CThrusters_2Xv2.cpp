@@ -1,4 +1,6 @@
+#include "ThrusterConfigDefs.h"
 #include "SysConfig.h"
+
 #if( THRUSTER_CONFIGURATION == THRUSTER_CONFIG_2Xv2 )
 
 // Includes
