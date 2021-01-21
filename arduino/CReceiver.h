@@ -14,7 +14,7 @@ class CReceiver : public CModule
         // other interesting variable
         float value[NUM_INPINS];
         int minInMicros[NUM_INPINS], maxInMicros[NUM_INPINS];//boundary variables for each channel      
-        int inPins[NUM_INPINS] = {4, 5, 2, 3}; //LY, LX, RY, RX
+        int inPins[NUM_INPINS] = {4, 5, 2, 3}; //LY receiver chan 4, LX receiver chan 3, RY receiver chan 2, RX receiver chan 1 
         
         // Input
         inputset controlValues; // the percentage values that are sent to the pi
