@@ -17,11 +17,12 @@ TODO:
 class CMotorControl : public CModule
 {
     private:
-        struct outputset { float value[NUM_OUTPINS]; };
-        struct inputset { float value[NUM_INPINS]; };
+        static const unsigned int NUM_INPINS = 4;
+        static const unsigned int NUM_OUTPINS = 6;
 
-        static const int NUM_INPINS = 4;
-        static const int NUM_OUTPINS = 6;
+        struct inputset { float value[NUM_INPINS]; };
+        struct outputset { float value[NUM_OUTPINS]; };
+
         //frontLeft, frontRight, backLeft, backRight, vertical thruster A, vertical thruster B
         static const int outPins[NUM_OUTPINS] = {9, 6, 8, 7, 10, 11};
         //Individual motor calibration constants to allow for balancing if we have a slightly slower motor, etc...
@@ -32,6 +33,12 @@ class CMotorControl : public CModule
         
         //Input
         inputset controlValues;
+        
+        //Constants for the range of the ESC's input
+        const int minOutMicros = 700;
+        const int maxOutMicros = 2000;
+        const int neutralValue = ((maxOutMicros - minOutMicros) / 2) + minOutMicros;//1350 is the middle, ie, 0% in [-100%, 100%]
+
         //Output
         outputset motorValues;
         // Other

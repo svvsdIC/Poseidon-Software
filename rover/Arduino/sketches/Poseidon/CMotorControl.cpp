@@ -2,7 +2,6 @@
 #if(HAS_MOTOR_CONTROL)
 #include "CMotorControl.h"
 #include "NCommManager.h"
-#include "joystick.h"
 
 /*
 Module responsible for driving the thrusters based on a diamond configuration
@@ -102,9 +101,15 @@ void CMotorControl::updateMotors()
   {
     val = map(motorValues.value[i], -100, 100, minOutMicros, maxOutMicros);
     if(val <= 0)
+    {
       //Serial.print(val);
+    }
+    
+    bool suspendOutput = false;
     if(suspendOutput)
+    {
       val = neutralValue;
+    }
     motors[i].writeMicroseconds(val);
   }
 }
@@ -114,7 +119,7 @@ void CMotorControl::updateMotors()
  * Those values are then weighted and combined in calcMotors(). See table in project documentation for further details.
  */
  
-outputset CMotorControl::calcTransX()
+CMotorControl::outputset CMotorControl::calcTransX()
 {
   outputset temporaryValues; 
   float val = controlValues.value[3]; //RX
@@ -127,7 +132,7 @@ outputset CMotorControl::calcTransX()
   return temporaryValues;
 }
 
-outputset CMotorControl::calcTransY()
+CMotorControl::outputset CMotorControl::calcTransY()
 {
   outputset temporaryValues; 
   float val = controlValues.value[2]; //RY
@@ -140,7 +145,7 @@ outputset CMotorControl::calcTransY()
   return temporaryValues;
 }
 
-outputset CMotorControl::calcRotation()
+CMotorControl::outputset CMotorControl::calcRotation()
 {
   outputset temporaryValues; 
   float val = controlValues.value[1]; //LX
@@ -153,7 +158,7 @@ outputset CMotorControl::calcRotation()
   return temporaryValues;
 }
 
-outputset CMotorControl::calcVertical()
+CMotorControl::outputset CMotorControl::calcVertical()
 {
   outputset temporaryValues; 
   float val = controlValues.value[0]; //LY
@@ -190,6 +195,13 @@ void CMotorControl::calcMotors()
   float Jx = abs(controlValues.value[3]);
   float cpR, cpX, cpY;
   controlPoints = Jr + Jx + Jy;
+  const float cX = 1.0;
+  //cX is for the x-translation algorithm weight in the main motor control algorithm. Default 1.0
+  const float cY = 1.0;
+  //cY is for the y-translation algorithm weight in the main motor control algorithm. Default 1.0
+  const float cR = 1.0;
+  //cR is for the rotation algorithm weight in the main motor control algorithm. Default 1.0
+
   if(abs(controlPoints) < 0.1)//Prevent divide by 0 (avoiding floating point comparison ( == 0))
   {
     cpR = cpX = cpY = 0.0;
@@ -204,7 +216,6 @@ void CMotorControl::calcMotors()
   for(int i = 0; i < NUM_OUTPINS; i++)
   {
     //Calculate the value
-    
     temporaryValues.value[i] = ((xValues.value[i] * cpX * cX)
     + (yValues.value[i] * cpY * cY)
     + (rValues.value[i] * cpR * cR)

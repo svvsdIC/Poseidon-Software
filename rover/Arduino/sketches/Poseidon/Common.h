@@ -10,3 +10,12 @@ communication.
 /* TODO: define enum for joystick commands:
     TRANSX, TRANSY, ... etc ...
 */
+
+enum inputChannels {
+    TRANSX, 
+    TRANSY,
+    TRANSZ,
+    YAW,
+    ROLL,
+    PITCH
+};
