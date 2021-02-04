@@ -10,7 +10,7 @@ When a new CThruster_XXX module is created, it will be necessary
 to add a new definition here.
 */
 
-#define THRUSTER_CONFIG_NONE    0
-#define THRUSTER_CONFIG_2X1     1
-#define THRUSTER_CONFIG_2Xv2    2
-#define THRUSTER_CONFIG_v2X1Xv2 3
+#define THRUSTER_CONFIG_NONE    (0)
+#define THRUSTER_CONFIG_2X1     (1)
+#define THRUSTER_CONFIG_2Xv2    (2)
+#define THRUSTER_CONFIG_v2X1Xv2 (3)
