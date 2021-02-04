@@ -17,8 +17,14 @@ void setup()
 	NModuleManager::Initialize();
 	NDataManager::Initialize();
 
+#ifdef ARDUINO_AVR_MEGA2560
+	/*
+        Not all arduinos have this timer register.  The Arduino Mega does.
+        Only compile this line when working on this platform.
+        */
 	// Set timer 5 divisor to 8 for PWM frequency of 3921.16Hz (D44, D45, D46)
 	TCCR5B = ( TCCR5B & B11111000 ) | B00000010;
+#endif
 
 	// Boot complete
 	Serial.println( F( "boot:1;" ) );
