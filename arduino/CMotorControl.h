@@ -24,9 +24,9 @@ class CMotorControl : public CModule
         struct outputset { float value[NUM_OUTPINS]; };
 
         //frontLeft, frontRight, backLeft, backRight, vertical thruster A, vertical thruster B
-        static const int outPins[NUM_OUTPINS] = {9, 6, 8, 7, 10, 11};
+        int outPins[NUM_OUTPINS] = {9, 6, 8, 7, 10, 11};
         //Individual motor calibration constants to allow for balancing if we have a slightly slower motor, etc...
-        static const float motorConst[NUM_OUTPINS] = {0.8, 0.8, 0.8, 0.8, 1.0, 1.0};
+        float motorConst[NUM_OUTPINS] = {0.8, 0.8, 0.8, 0.8, 1.0, 1.0};
         /* TODO: make motorConst configurable */
         //Zero out values in between +/- n% being sent to the motors (ie, don't ever give a motor 1.5% power (just give it 0%))
         static const float outCutoffConst = 4.0;

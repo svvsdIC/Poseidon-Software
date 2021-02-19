@@ -23,6 +23,11 @@ CMock m_Mock;
 CTemperatureSensor m_temperature_module;
 #endif
 
+#if( HAS_MOTOR_CONTROL )
+#include "CMotorControl.h"
+CMotorControl m_motorcontrol_module;
+#endif
+
 #if( HAS_SOME_MODULE )
 #include "CSome_module.h"
 CSome_module m_some_module;

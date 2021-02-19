@@ -45,5 +45,5 @@ void loop()
 	NModuleManager::HandleModuleUpdates( NCommManager::m_currentCommand );
 
 	// Handle update loops that send data back to the beaglebone
-	NDataManager::HandleOutputLoops();
+	//NDataManager::HandleOutputLoops();
 }
