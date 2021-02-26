@@ -5,21 +5,6 @@
 #include "NCommManager.h"
 #include <orutil.h>
 
-
-/*
-Module responsible for reporting the Temperature from the TMP36 Temperature Sensor
-
-Serial commands in
-
-	We have no command input for this Module
-
-Serial commands out
-
-	Once a second report the Temperature in degrees Celsius as int * 1000
-	"TemperatureSensor:XXXXXX;"
-
-*/
-
 CReceiver::CReceiver()
 {
 }
@@ -37,10 +22,10 @@ void CReceiver::Initialize()
 
     // attach pins to interrupt routines to catch level changes
 	//([whichPin], [handler routine], [listen for this]):
-	PCintPort::attachInterrupt(inPins[0], interrupt0, CHANGE);
-	PCintPort::attachInterrupt(inPins[1], interrupt1, CHANGE);
-	PCintPort::attachInterrupt(inPins[2], interrupt2, CHANGE);
-	PCintPort::attachInterrupt(inPins[3], interrupt3, CHANGE);
+	PCintPort::attachInterrupt(inPins[TRANSX], interruptTRANSX, CHANGE);
+	PCintPort::attachInterrupt(inPins[TRANSY], interruptTRANSY, CHANGE);
+	PCintPort::attachInterrupt(inPins[TRANSZ], interruptTRANSZ, CHANGE);
+	PCintPort::attachInterrupt(inPins[YAW], interruptYAW, CHANGE);
 }
 
 void CReceiver::Update( CCommand& commandIn )
@@ -101,17 +86,17 @@ void CReceiver::Update( CCommand& commandIn )
 * They all call the same readPWM() subroutine with their channel number (index number of their pin value
 * in the inPins array.
 */
-void interrupt0(){
-	readPWM(0);
+void interruptTRANSX(){
+	readPWM(TRANSX);
 }
-void interrupt1(){
-	readPWM(1);
+void interruptTRANSY(){
+	readPWM(TRANSY);
 }
-void interrupt2(){
-	readPWM(2);
+void interruptTRANSZ(){
+	readPWM(TRANSZ);
 }
-void interrupt3(){
-	readPWM(3);
+void interruptYAW(){
+	readPWM(TRANSY);
 }
 
 /*

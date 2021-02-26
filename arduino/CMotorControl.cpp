@@ -63,20 +63,22 @@ void CMotorControl::parseCommand( CCommand &commandIn) {
   int32_t motor_command = commandIn.m_arguments[1];
   int32_t motor_value   = commandIn.m_arguments[2];
   switch (motor_command){
+    // TODO: Do we want to replace this with 
+    // controlValues.value[motor_command] = motor_value;
     case TRANSX:
-      controlValues.value[3] = motor_value; //Joystick LX
+      controlValues.value[TRANSX] = motor_value; //Joystick LX
       break;
       
     case TRANSY:
-      controlValues.value[2] = motor_value; //Joystick LY
+      controlValues.value[TRANSY] = motor_value; //Joystick LY
       break;
 
     case TRANSZ:
-      controlValues.value[0] = motor_value; // Joystick RX
+      controlValues.value[TRANSZ] = motor_value; // Joystick RX
       break;
 
     case YAW:
-      controlValues.value[1] = motor_value; // Joystick RY
+      controlValues.value[YAW] = motor_value; // Joystick RY
       break;
 
     case PITCH: 
