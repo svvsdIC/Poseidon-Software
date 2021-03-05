@@ -55,6 +55,9 @@
 #define PIN_STAR_AFT_MOTOR			PIN_SERVO_3
 // Not used						    PIN_SERVO_6
 
+// CMotor control
+#define PIN_PORT_AFT                PIN_SERVO_1
+#define PIN 
 // Other Servos
 #define PIN_CAMERA_MOUNT		    PIN_SERVO_6
 #define PIN_ALTSERVO			    PIN_SERVO_4

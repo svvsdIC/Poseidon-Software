@@ -8,9 +8,11 @@
 
 /*
 TODO: 
-    * Give better variable names for RX,RY,LX,LY
-    * Consider using an enum
+
 */
+enum escPins {
+    PORT_AFT
+}
 
 
 

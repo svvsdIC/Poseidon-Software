@@ -14,12 +14,12 @@
 #define PIN_LED_1                   49
 
 // Servo Pins (also digital outputs)
-#define PIN_SERVO_1                 6
-#define PIN_SERVO_2                 7
-#define PIN_SERVO_3                 8
-#define PIN_SERVO_4                 9
-#define PIN_SERVO_5                 10
-#define PIN_SERVO_6                 11
+#define PIN_SERVO_1                 11
+#define PIN_SERVO_2                 8
+#define PIN_SERVO_3                 9
+#define PIN_SERVO_4                 12
+#define PIN_SERVO_5                 7
+#define PIN_SERVO_6                 6
     
 // PWM Pins
 #define PIN_PWM_1                   44
@@ -31,29 +31,14 @@
 #define PIN_ENABLE_ESC              16
 #define PIN_ENABLE_I2C          	48
 
-// Standard Motor pin setup
-#define PIN_PORT_MOTOR			    PIN_SERVO_1
-#define PIN_STARBOARD_MOTOR		    PIN_SERVO_3
-#define PIN_VERTICAL_MOTOR		    PIN_SERVO_2
-// Not used						    PIN_SERVO_4
-// Not used						    PIN_SERVO_5
-// Not used							PIN_SERVO_6
 
-// 2xV2 alternative pin setup
-// PIN_PORT_MOTOR					PIN_SERVO_1
-// PIN_STARBOARD_MOTOR			    PIN_SERVO_3
-#define PIN_PORT_VERTICAL_MOTOR		PIN_SERVO_2
-#define PIN_STAR_VERTICAL_MOTOR		PIN_SERVO_4
-// Not used						    PIN_SERVO_5
-// Not used						    PIN_SERVO_6
-
-// V2x1xV2 alternative pin setup
-#define PIN_PORT_FORWARD_MOTOR		PIN_SERVO_4
-#define PIN_STAR_FORWARD_MOTOR		PIN_SERVO_5
-// PIN_VERTICAL_MOTOR				PIN_SERVO_2
-#define PIN_PORT_AFT_MOTOR			PIN_SERVO_1
-#define PIN_STAR_AFT_MOTOR			PIN_SERVO_3
-// Not used						    PIN_SERVO_6
+// CMotor Controller pins
+#define PIN_PORT_AFT                PIN_SERVO_4
+#define PIN_PORT_FORWARD            PIN_SERVO_2
+#define PIN_STARBOARD_AFT           PIN_SERVO_3
+#define PIN_STARBOARD_FORWARD       PIN_SERVO_1
+#define PIN_STARBOARD_VERTICAL      PIN_SERVO_5
+#define PIN_PORT_VERTICAL           PIN_SERVO_6
 
 // Other Servos
 #define PIN_CAMERA_MOUNT		    PIN_SERVO_6

@@ -13,8 +13,8 @@ Serial commands in:
       channel values will be:  "TRANX, TRANY, TRANZ, YAW, (ROLL, PITCH)"
       valuse are -100 to 100 as percentage of max forward/reverse thrust
       
-      eg. mtrctl(TRANX,-75)   back at 75%    
-		      mtrctl(TRANZ, 50)   down at 50%
+      eg. mtrctl(TRANX,-75);   back at 75%    
+		      mtrctl(TRANZ, 50);   down at 50%
 */
 
 CMotorControl::CMotorControl()
@@ -124,7 +124,7 @@ void CMotorControl::updateMotors()
 CMotorControl::outputset CMotorControl::calcTransX()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[3]; //RX
+  float val = controlValues.value[TRANSX]; //RX
   temporaryValues.value[0] = val;         //front left
   temporaryValues.value[1] = -val;        //front right
   temporaryValues.value[2] = val;         //back  left
@@ -137,7 +137,7 @@ CMotorControl::outputset CMotorControl::calcTransX()
 CMotorControl::outputset CMotorControl::calcTransY()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[2]; //RY
+  float val = controlValues.value[TRANSY]; //RY
   temporaryValues.value[0] = -val;
   temporaryValues.value[1] = -val;
   temporaryValues.value[2] = val;
@@ -150,7 +150,7 @@ CMotorControl::outputset CMotorControl::calcTransY()
 CMotorControl::outputset CMotorControl::calcRotation()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[1]; //LX
+  float val = controlValues.value[YAW]; //LX
   temporaryValues.value[0] = -val;
   temporaryValues.value[1] = val;
   temporaryValues.value[2] = val;
@@ -163,7 +163,7 @@ CMotorControl::outputset CMotorControl::calcRotation()
 CMotorControl::outputset CMotorControl::calcVertical()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[0]; //LY
+  float val = controlValues.value[TRANSZ]; //LY
   temporaryValues.value[0] = 0;
   temporaryValues.value[1] = 0;
   temporaryValues.value[2] = 0;
@@ -192,9 +192,9 @@ void CMotorControl::calcMotors()
   outputset yValues = calcTransY();
   outputset rValues = calcRotation();
   outputset vValues = calcVertical();
-  float Jr = abs(controlValues.value[1]);
-  float Jy = abs(controlValues.value[2]);
-  float Jx = abs(controlValues.value[3]);
+  float Jr = abs(controlValues.value[YAW]);
+  float Jy = abs(controlValues.value[TRANSY]);
+  float Jx = abs(controlValues.value[TRANSX]);
   float cpR, cpX, cpY;
   controlPoints = Jr + Jx + Jy;
   const float cX = 1.0;

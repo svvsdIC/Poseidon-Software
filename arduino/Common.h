@@ -6,13 +6,11 @@ both use a single common definition of values used for
 communication.
 */
 
-
-/* TODO: define enum for joystick commands:
-    TRANSX, TRANSY, ... etc ...
+/*
+Input channels for surface and rover 
 */
-
 enum inputChannels {
-    TRANSX, 
+    TRANSX = 0, 
     TRANSY,
     TRANSZ,
     YAW,
