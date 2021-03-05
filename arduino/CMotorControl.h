@@ -6,16 +6,6 @@
 #include "CModule.h"
 #include "Common.h"
 
-/*
-TODO: 
-
-*/
-enum escPins {
-    PORT_AFT
-}
-
-
-
 class CMotorControl : public CModule
 {
     private:
