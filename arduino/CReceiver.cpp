@@ -60,39 +60,43 @@ void CReceiver::Update( CCommand& commandIn )
 	for(unsigned int i=0; i<NUM_INPINS; ++i)
 	{
 		// None Zero values means that the PWM measurement is ready for that channel
-		if(timeValue[i] != 0)
+		if(timeValue[i] != 0 && timeValue[i] > 700 && timeValue[i] < 2100)
 		{
-			if(timeValue[i] > 700 && timeValue[i] < 2100)
+			// Calculate control values and send them
+			controlValues.value[i] = map(timeValue[i], minInMicros[i], maxInMicros[i], -100, 100);	// TODO: may want to revist rage.  Lost resolution
+			if(abs(controlValues.value[i]) < inCutoffConst)
 			{
-				// Calculate control values and send tnem
-				controlValues.value[i] = map(timeValue[i], minInMicros[i], maxInMicros[i], -100, 100);
-				if(abs(controlValues.value[i]) < inCutoffConst)
-				{
-					//zero out values less than the allowed constant right here (to make it easier to "center" the sticks)
-					controlValues.value[i] = 0.0;
-				}
-				
-				// Send Control value
-				Serial.print( F( "CReceiver:" ) );
-				Serial.print(i);
-				Serial.print( ",");
-				Serial.print(controlValues.value[i]);
-				Serial.println(";");
+				//zero out values less than the allowed constant right here (to make it easier to "center" the sticks)
+				controlValues.value[i] = 0;
+			}
 
-				// Prepare to read the next time value for this channel
-				timeValue[i]=0;
-			}
-			else
-			{
-				// If PWM signals are clear and no interupt overload, then we should NEVER BE HERE !!!
-				// TODO: report error using proper protocol  
-				Serial.println(i);
-				Serial.println(timeValue[i]);
-				Serial.println("Out of range!!!!!!!");
-			}
-				
+			// Prepare to read the next time value for this channel
+			timeValue[i]=0;
 		}
 	}
+	// Send Control value
+	Serial.print( F( "CReceiver:" ) );
+	Serial.print(controlValues.value[0]);
+	for(unsigned int i=1; i<NUM_INPINS; ++i)
+	{
+		Serial.print( ",");
+		Serial.print(controlValues.value[i]);
+	}
+	Serial.println(";");
+	//CReceiver:value,value,value;
+/*
+	// TODO: how do deal with error handling when a value is out of range?
+	else
+	{
+		// If PWM signals are clear and no interupt overload, then we should NEVER BE HERE !!!
+		// TODO: report error using proper protocol  
+		Serial.println(i);
+		Serial.println(timeValue[i]);
+		Serial.println("Out of range!!!!!!!");
+	}
+*/
+	}
+}
 	
 
 //RECEIVER INPUT ROUTINES
