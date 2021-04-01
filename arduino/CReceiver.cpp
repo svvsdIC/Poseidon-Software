@@ -37,10 +37,10 @@ void CReceiver::Initialize()
 
     // attach pins to interrupt routines to catch level changes
 	//([whichPin], [handler routine], [listen for this]):
-	PCintPort::attachInterrupt(inPins[0], interrupt0, CHANGE);
-	PCintPort::attachInterrupt(inPins[1], interrupt1, CHANGE);
-	PCintPort::attachInterrupt(inPins[2], interrupt2, CHANGE);
-	PCintPort::attachInterrupt(inPins[3], interrupt3, CHANGE);
+	PCintPort::attachInterrupt(inPins[TRANSX], interruptTRANSX, CHANGE);
+	PCintPort::attachInterrupt(inPins[TRANSY], interruptTRANSY, CHANGE);
+	PCintPort::attachInterrupt(inPins[TRANSZ], interruptTRANSZ, CHANGE);
+	PCintPort::attachInterrupt(inPins[YAW], interruptYAW, CHANGE);
 }
 
 void CReceiver::Update( CCommand& commandIn )
@@ -56,6 +56,7 @@ void CReceiver::Update( CCommand& commandIn )
 	}
 	*/
 
+	static bool update_ready = false;
     // Check if there are new values from the interrupt routines
 	for(unsigned int i=0; i<NUM_INPINS; ++i)
 	{
@@ -72,29 +73,24 @@ void CReceiver::Update( CCommand& commandIn )
 
 			// Prepare to read the next time value for this channel
 			timeValue[i]=0;
+			update_ready = true;
 		}
 	}
+
+
+
 	// Send Control value
-	Serial.print( F( "CReceiver:" ) );
-	Serial.print(controlValues.value[0]);
-	for(unsigned int i=1; i<NUM_INPINS; ++i)
-	{
-		Serial.print( ",");
-		Serial.print(controlValues.value[i]);
-	}
-	Serial.println(";");
-	//CReceiver:value,value,value;
-/*
-	// TODO: how do deal with error handling when a value is out of range?
-	else
-	{
-		// If PWM signals are clear and no interupt overload, then we should NEVER BE HERE !!!
-		// TODO: report error using proper protocol  
-		Serial.println(i);
-		Serial.println(timeValue[i]);
-		Serial.println("Out of range!!!!!!!");
-	}
-*/
+	// CReceiver:1,2,3,4;
+	if (update_ready) {
+		Serial.print( F( "CReceiver:" ) );
+		Serial.print(controlValues.value[0]);
+		for(unsigned int i=1; i<NUM_INPINS; ++i)
+		{
+			Serial.print( ",");
+			Serial.print(controlValues.value[i]);
+		}
+		Serial.println(";");
+		update_ready = false;
 	}
 }
 	
@@ -105,17 +101,17 @@ void CReceiver::Update( CCommand& commandIn )
 * They all call the same readPWM() subroutine with their channel number (index number of their pin value
 * in the inPins array.
 */
-void interrupt0(){
-	readPWM(0);
+void interruptTRANSX(){
+	readPWM(TRANSX);
 }
-void interrupt1(){
-	readPWM(1);
+void interruptTRANSY(){
+	readPWM(TRANSY);
 }
-void interrupt2(){
-	readPWM(2);
+void interruptTRANSZ(){
+	readPWM(TRANSZ);
 }
-void interrupt3(){
-	readPWM(3);
+void interruptYAW(){
+	readPWM(TRANSY);
 }
 
 /*
