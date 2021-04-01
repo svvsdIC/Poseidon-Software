@@ -82,7 +82,7 @@ void CReceiver::Update( CCommand& commandIn )
 	// Send Control value
 	// CReceiver:1,2,3,4;
 	if (update_ready) {
-		Serial.print( F( "CReceiver:" ) );
+		Serial.print( F( "mtrctl:" ) );
 		Serial.print(controlValues.value[0]);
 		for(unsigned int i=1; i<NUM_INPINS; ++i)
 		{
