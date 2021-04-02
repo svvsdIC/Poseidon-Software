@@ -80,7 +80,7 @@ void CReceiver::Update( CCommand& commandIn )
 
 
 	// Send Control value
-	// CReceiver:1,2,3,4;
+	// mtrctl:1,2,3,4;
 	if (update_ready) {
 		Serial.print( F( "mtrctl:" ) );
 		Serial.print(controlValues.value[0]);

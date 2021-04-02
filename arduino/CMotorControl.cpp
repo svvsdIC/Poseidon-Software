@@ -54,38 +54,18 @@ void CMotorControl::parseCommand( CCommand &commandIn) {
 	commandIn.PrintDebug();
 
 	// Handle commands (if there are any, otherwise this gets skipped)
-	if(commandIn.m_arguments[0] != 2){
+	if(commandIn.m_arguments[0] != 4){
 		Serial.println("mtrctl:invalid_args;"); //error message
 		return;
 	}
 
   // TODO:  change magic numbers (0,1,2,3) to enum values from Common.h
   // Extract the motor command and motor value from the 
-  int32_t motor_command = commandIn.m_arguments[1];
-  int32_t motor_value   = commandIn.m_arguments[2];
-  switch (motor_command){
-    case TRANSX:
-      controlValues.value[3] = motor_value; //Joystick LX
-      break;
-      
-    case TRANSY:
-      controlValues.value[2] = motor_value; //Joystick LY
-      break;
-
-    case TRANSZ:
-      controlValues.value[0] = motor_value; // Joystick RX
-      break;
-
-    case YAW:
-      controlValues.value[1] = motor_value; // Joystick RY
-      break;
-
-    case PITCH: 
-    case ROLL:
-    default:
-      /* error handling */
-      break;  
-  }
+  controlValues.value[TRANSX] = commandIn.m_arguments[1]; //Joystick LX
+  controlValues.value[TRANSY] = commandIn.m_arguments[2]; //Joystick LY
+  controlValues.value[TRANSZ] = commandIn.m_arguments[3]; // Joystick RX
+  controlValues.value[YAW] = commandIn.m_arguments[4]; // Joystick RY
+  
 }
 
 //MOTOR OUTPUT ROUTINE
@@ -123,7 +103,7 @@ void CMotorControl::updateMotors()
 CMotorControl::outputset CMotorControl::calcTransX()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[3]; //RX
+  float val = controlValues.value[TRANSX]; //RX
   temporaryValues.value[0] = val;         //front left
   temporaryValues.value[1] = -val;        //front right
   temporaryValues.value[2] = val;         //back  left
@@ -136,7 +116,7 @@ CMotorControl::outputset CMotorControl::calcTransX()
 CMotorControl::outputset CMotorControl::calcTransY()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[2]; //RY
+  float val = controlValues.value[TRANSY]; //RY
   temporaryValues.value[0] = -val;
   temporaryValues.value[1] = -val;
   temporaryValues.value[2] = val;
@@ -149,7 +129,7 @@ CMotorControl::outputset CMotorControl::calcTransY()
 CMotorControl::outputset CMotorControl::calcRotation()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[1]; //LX
+  float val = controlValues.value[YAW]; //LX
   temporaryValues.value[0] = -val;
   temporaryValues.value[1] = val;
   temporaryValues.value[2] = val;
@@ -162,7 +142,7 @@ CMotorControl::outputset CMotorControl::calcRotation()
 CMotorControl::outputset CMotorControl::calcVertical()
 {
   outputset temporaryValues; 
-  float val = controlValues.value[0]; //LY
+  float val = controlValues.value[TRANSZ]; //LY
   temporaryValues.value[0] = 0;
   temporaryValues.value[1] = 0;
   temporaryValues.value[2] = 0;
