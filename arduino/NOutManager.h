@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include <orutil.h>
 
+#if(HAS_OUT_MAN)
+
 // Commands
 #define COMMAND_MAX_ARGUMENTS			10
 #define COMMAND_MAX_STRING_LENGTH		40
@@ -27,3 +29,5 @@ class OutManager
     void Parse();
 
 }
+
+#endif /* HAS_OUT_MAN */

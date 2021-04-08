@@ -6,6 +6,8 @@
 #include <orutil.h>
 #include "NOutManager.h"
 
+#if(HAS_OUT_MAN)
+
 
 OutManager::OutManager( const char* moduleName ) // if we had access to strings this would be so much easier!
 {
@@ -48,3 +50,5 @@ void OutManager::Parse() // do we need this? lets find out!
 {
 
 }
+
+#endif /* HAS_OUT_MAN */

@@ -1,1 +1,1 @@
-For information on installing libraries, see: http://www.arduino.cc/en/Guide/Libraries
+When using ardCLI to build, put libs in /libraries folder

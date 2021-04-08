@@ -10,8 +10,12 @@ class CReceiver : public CModule
         CReceiver();
         void Initialize();
         void Update( CCommand& commandIn );
+        void readPWM(int channel);
     private:
         // other interesting variable
+        static const unsigned int NUM_INPINS = 4;
+        struct inputset { float value[NUM_INPINS]; };
+
         long value[NUM_INPINS];
         int minInMicros[NUM_INPINS], maxInMicros[NUM_INPINS];//boundary variables for each channel      
         int inPins[NUM_INPINS] = {4, 5, 2, 3}; //LY receiver chan 4, LX receiver chan 3, RY receiver chan 2, RX receiver chan 1 
